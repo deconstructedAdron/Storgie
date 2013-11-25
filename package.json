@@ -1,0 +1,30 @@
+{
+  "name": "Storgie",
+  "version": "0.0.0",
+  "description": "This is the storage engine layer API.",
+  "main": "decon_data.js",
+  "dependencies": {
+    "restify": "~2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Adron/Storgie.git"
+  },
+  "keywords": [
+    "data",
+    "keyvalue",
+    "graph",
+    "deconstructed",
+    "api"
+  ],
+  "author": "Adron Hall",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/Adron/Storgie/issues"
+  },
+  "homepage": "https://github.com/Adron/Storgie"
+}
