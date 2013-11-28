@@ -4,7 +4,9 @@
   "description": "This is the storage engine layer API.",
   "main": "decon_data.js",
   "dependencies": {
-    "restify": "~2.6.0"
+    "restify": "~2.6.0",
+    "assert": "~1.0.0",
+    "orchestrate": "0.0.2"
   },
   "devDependencies": {},
   "scripts": {
