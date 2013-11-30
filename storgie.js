@@ -1,23 +1,25 @@
-var restify = require('restify');
+var restify = require('restify'),
+    orchestrator = require('orchestrate')("01233006-eaa7-4e3a-94d5-bb27cfc809cd"),
+    collection = 'listz',
+    server = restify.createServer({
+        name: 'deconstructed',
+        version: '1.0.0'
+    });
 
-function send(req, res, next) {
-    res.send('hello ' + req.params.name);
-    return next();
-}
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
 
-var server = restify.createServer();
-server.post('/hello', function create(req, res, next) {
-    res.send(201, Math.random().toString(36).substr(3, 8));
-    return next();
-});
-server.put('/hello', send);
-server.get('/hello/:name', send);
-server.head('/hello/:name', send);
-server.del('hello/:name', function rm(req, res, next) {
-    res.send(204);
+server.get('/stat/:device', function (req, res, next) {
+    res.send(req.params);
     return next();
 });
 
-server.listen(8080, function() {
+server.put('/:ident', function(req,res,next){
+    console.log(req.params);
+    return next();
+});
+
+server.listen(8080, function () {
     console.log('%s listening at %s', server.name, server.url);
 });
