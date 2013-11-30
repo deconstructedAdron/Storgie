@@ -1,5 +1,6 @@
 {
-    "name": "application-name",
+    "name": "storgie",
+    "description": "This is the storage engine layer API.",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -7,6 +8,31 @@
     },
     "dependencies": {
         "express": "3.4.4",
-        "jade": "*"
-    }
+        "jade": "*",
+        "restify": "~2.6.0",
+        "assert": "~1.0.0",
+        "orchestrate": "0.0.2",
+        "chance": "~0.5.3"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "mocha test/*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Adron/Storgie.git"
+    },
+    "keywords": [
+        "data",
+        "keyvalue",
+        "graph",
+        "deconstructed",
+        "api"
+    ],
+    "author": "Adron Hall",
+    "license": "Apache 2.0",
+    "bugs": {
+        "url": "https://github.com/Adron/Storgie/issues"
+    },
+    "homepage": "http://deconstructed.github.io/Storgie/"
 }
