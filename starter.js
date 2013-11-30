@@ -1,5 +1,7 @@
 var restify = require('restify'),
-    storage = require('orchestrate');
+    Chance = require('chance'),
+    chance = new Chance(),
+    orchestrator = require('orchestrate')("01233006-eaa7-4e3a-94d5-bb27cfc809cd");
 
 var server = restify.createServer({
     name: 'storgie'
@@ -13,10 +15,47 @@ server.get('/echo/:name', function (req, res, next) {
     return next();
 });
 
+
 server.put('/echo/:name', function(req,res,next){
-    res.send(req.params);
+
+    var key = "deleteThisJunk"
+    //var key = chance.guid();
+    var inputData = {
+        "First": chance.first(),
+        "Last": chance.last(),
+        "Number": chance.d20() * chance.d10()
+    };
+    var collection = 'listz';
+
+    console.log('start');
+    doThis(collection, key, inputData);
+    console.log('done');
+
+    res.send('boom');
     return next();
 });
+
+function displayIt(theDataToDisplay) {
+    console.log('    ' + theDataToDisplay + '\r\n');
+}
+
+
+function doThis(collection, key, inputData){
+
+    displayIt('Writing key ' + key);
+
+
+    displayIt('...with value of ' + JSON.stringify(inputData));
+
+    orchestrator.put(collection, key, inputData)
+        .then(function(result){
+            displayIt('success!!');
+        })
+        .fail(function(err){
+            displayIt('Brutal, fail a lot eh!')
+        });
+
+}
 
 function send(req, res, next) {
     res.send('hello ' + req.params.name);
@@ -35,6 +74,10 @@ server.del('hello/:name', function rm(req, res, next) {
     res.send(204);
     return next();
 });
+
+function rm(req, res, next){
+    console.log("cool.");
+}
 
 server.listen(8080, function () {
     console.log('%s listening at %s', server.name, server.url);

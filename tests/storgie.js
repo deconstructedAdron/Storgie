@@ -5,7 +5,7 @@ var client = restify.createJsonClient({
     url: 'http://localhost:8080'
 });
 
-client.put('/Android', function(err, req, res, obj){
+client.put('/echo/Android', function(err, req, res, obj){
     assert.ifError(err);
     console.log('Server returned: %j', obj);
 });
