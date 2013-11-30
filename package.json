@@ -6,7 +6,8 @@
   "dependencies": {
     "restify": "~2.6.0",
     "assert": "~1.0.0",
-    "orchestrate": "0.0.2"
+    "orchestrate": "0.0.2",
+    "chance": "~0.5.3"
   },
   "devDependencies": {},
   "scripts": {
