@@ -25,6 +25,11 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+app.get('/api', routes.storgie_stat);
+
+app.post('/ident/create', routes.ident_create);
+
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
