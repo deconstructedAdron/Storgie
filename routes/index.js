@@ -11,6 +11,10 @@ exports.ident_create = function (req, res) {
     console.log("POST: ");
     console.log(req.body);
 
-    return res.send('posted');
+    return res.send(res);
 };
 
+exports.ident_by_id = function (req, res) {
+    console.log("Blurgh");
+    return res.send(res);
+};
