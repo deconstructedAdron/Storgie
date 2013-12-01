@@ -23,12 +23,13 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+// storgie server information
 app.get('/', routes.index);
-
 app.get('/api', routes.storgie_stat);
 
-app.post('/ident/create', routes.ident_create);
-
+// ident
+app.post('/ident', routes.ident_create);
+app.get('/ident/:id', routes.ident_by_id);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
