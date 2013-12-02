@@ -18,3 +18,11 @@ exports.ident_by_id = function (req, res) {
     console.log("Blurgh");
     return res.send(res);
 };
+
+exports.convergence = function (req, res) {
+    console.log('convergence status');
+
+    //Convergence Status Goes Here.
+
+    return res.send(res);
+};

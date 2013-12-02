@@ -31,6 +31,9 @@ app.get('/api', routes.storgie_stat);
 app.post('/ident', routes.ident_create);
 app.get('/ident/:id', routes.ident_by_id);
 
+app.get('/convergence', routes.convergence);
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
+
