@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "node app.js"
+        "test": "mocha test/*"
     },
     "dependencies": {
         "express": "3.4.4",
@@ -15,9 +15,6 @@
         "chance": "~0.5.3"
     },
     "devDependencies": {},
-    "scripts": {
-        "test": "mocha test/*"
-    },
     "repository": {
         "type": "git",
         "url": "git@github.com:Adron/Storgie.git"
