@@ -11,7 +11,15 @@ exports.ident_create = function (req, res) {
     console.log("POST: ");
     console.log(req.body);
 
-    return res.send(res);
+//            orchestrator.put(collection, key, inputData)
+//                .then(function(result){
+//                    console.log('success!!');
+//                })
+//                .fail(function(err){
+//                    console.log('An error ' + err);
+//                });
+
+    return res.send('the body if I can find it.');
 };
 
 exports.ident_by_id = function (req, res) {
