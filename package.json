@@ -31,5 +31,11 @@
     "bugs": {
         "url": "https://github.com/Adron/Storgie/issues"
     },
-    "homepage": "http://deconstructed.github.io/Storgie/"
+    "homepage": "http://deconstructed.github.io/Storgie/",
+    "engines": {
+        "node": "0.10.x"
+    },
+    "scripts": {"start": "node app.js"}
 }
+
+
