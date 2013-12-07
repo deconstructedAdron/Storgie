@@ -25,9 +25,13 @@ if ('development' == app.get('env')) {
 
 // storgie server information
 app.get('/', routes.index);
+app.get('/login', routes.login);
+app.get('/signup', routes.signup);
+
+// storgie status api information.
 app.get('/api', routes.storgie_stat);
 
-// ident
+// ident operations for storgie.
 app.post('/ident', routes.ident_create);
 app.get('/ident/:id', routes.ident_by_id);
 

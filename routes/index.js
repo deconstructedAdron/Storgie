@@ -1,6 +1,14 @@
 exports.index = function (req, res) {
-    res.render('index', { title: 'storgie' });
+    res.render('index', { title: 'Storgie' });
 };
+
+exports.login = function(req, res){
+    res.render('login', {title: "Login to Storgie."});
+}
+
+exports.signup = function(req, res){
+    res.render('signup', {title: "Sign Up For Storgie."});
+}
 
 exports.storgie_stat = function (req, res) {
     res.send('Storgie API is running!');
