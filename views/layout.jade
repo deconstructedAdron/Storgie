@@ -1,7 +1,219 @@
-doctype 5
+!!! 5
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/bootstrap.min.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/font-awesome.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/se7en-font.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/isotope.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/jquery.fancybox.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/fullcalendar.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/wizard.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/select2.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/morris.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/datatables.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/datepicker.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/timepicker.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/colorpicker.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/bootstrap-switch.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/daterange-picker.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/typeahead.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/summernote.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/pygments.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/style.css', media='all', rel='stylesheet', type='text/css')
+    link(href='stylesheets/color/green.css', media='all', rel='alternate stylesheet', title='green-theme', type='text/css')
+    link(href='stylesheets/color/orange.css', media='all', rel='alternate stylesheet', title='orange-theme', type='text/css')
+    link(href='stylesheets/color/magenta.css', media='all', rel='alternate stylesheet', title='magenta-theme', type='text/css')
+    link(href='stylesheets/color/gray.css', media='all', rel='alternate stylesheet', title='gray-theme', type='text/css')
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js', type='text/javascript')
+    script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js', type='text/javascript')
+    script(src='javascripts/bootstrap.min.js', type='text/javascript')
+    script(src='javascripts/raphael.min.js', type='text/javascript')
+    script(src='javascripts/selectivizr-min.js', type='text/javascript')
+    script(src='javascripts/jquery.mousewheel.js', type='text/javascript')
+    script(src='javascripts/jquery.vmap.min.js', type='text/javascript')
+    script(src='javascripts/jquery.vmap.sampledata.js', type='text/javascript')
+    script(src='javascripts/jquery.vmap.world.js', type='text/javascript')
+    script(src='javascripts/jquery.bootstrap.wizard.js', type='text/javascript')
+    script(src='javascripts/fullcalendar.min.js', type='text/javascript')
+    script(src='javascripts/gcal.js', type='text/javascript')
+    script(src='javascripts/jquery.dataTables.min.js', type='text/javascript')
+    script(src='javascripts/datatable-editable.js', type='text/javascript')
+    script(src='javascripts/jquery.easy-pie-chart.js', type='text/javascript')
+    script(src='javascripts/excanvas.min.js', type='text/javascript')
+    script(src='javascripts/jquery.isotope.min.js', type='text/javascript')
+    script(src='javascripts/isotope_extras.js', type='text/javascript')
+    script(src='javascripts/modernizr.custom.js', type='text/javascript')
+    script(src='javascripts/jquery.fancybox.pack.js', type='text/javascript')
+    script(src='javascripts/select2.js', type='text/javascript')
+    script(src='javascripts/styleswitcher.js', type='text/javascript')
+    script(src='javascripts/wysiwyg.js', type='text/javascript')
+    script(src='javascripts/summernote.min.js', type='text/javascript')
+    script(src='javascripts/jquery.inputmask.min.js', type='text/javascript')
+    script(src='javascripts/jquery.validate.js', type='text/javascript')
+    script(src='javascripts/bootstrap-fileupload.js', type='text/javascript')
+    script(src='javascripts/bootstrap-datepicker.js', type='text/javascript')
+    script(src='javascripts/bootstrap-timepicker.js', type='text/javascript')
+    script(src='javascripts/bootstrap-colorpicker.js', type='text/javascript')
+    script(src='javascripts/bootstrap-switch.min.js', type='text/javascript')
+    script(src='javascripts/typeahead.js', type='text/javascript')
+    script(src='javascripts/daterange-picker.js', type='text/javascript')
+    script(src='javascripts/date.js', type='text/javascript')
+    script(src='javascripts/morris.min.js', type='text/javascript')
+    script(src='javascripts/skycons.js', type='text/javascript')
+    script(src='javascripts/fitvids.js', type='text/javascript')
+    script(src='javascripts/jquery.sparkline.min.js', type='text/javascript')
+    script(src='javascripts/main.js', type='text/javascript')
+    script(src='javascripts/respond.js', type='text/javascript')
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
   body
+          .modal-shiftfix
+              //
+                 Navigation
+              .navbar.navbar-fixed-top.scroll-hide
+                  .container-fluid.top-bar
+                      .pull-right
+                          ul.nav.navbar-nav.pull-right
+                              li.dropdown.notifications.hidden-xs
+                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                      span.se7en-flag(aria-hidden='true')
+                                      .sr-only
+                                          | Notifications
+                                      p.counter
+                                          | 4
+                                  ul.dropdown-menu
+                                      li
+                                          a(href='#')
+                                              .notifications.label.label-info
+                                                  | New
+                                              p
+                                                  | New user added: Jane Smith
+                                      li
+                                          a(href='#')
+                                              .notifications.label.label-info
+                                                  | New
+                                              p
+                                                  | Sales targets available
+                                      li
+                                          a(href='#')
+                                              .notifications.label.label-info
+                                                  | New
+                                              p
+                                                  | New performance metric added
+                                      li
+                                          a(href='#')
+                                              .notifications.label.label-info
+                                                  | New
+                                              p
+                                                  | New growth data available
+                              li.dropdown.messages.hidden-xs
+                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                      span.se7en-envelope(aria-hidden='true')
+                                      .sr-only
+                                          | Messages
+                                      p.counter
+                                          | 3
+                                  ul.dropdown-menu.messages
+                                      li
+                                          a(href='#')
+                                              img(width='34', height='34', src='images/avatar-male2.png')
+                                              | Could we meet today? I wanted...
+                                      li
+                                          a(href='#')
+                                              img(width='34', height='34', src='images/avatar-female.png')
+                                              | Important data needs your
+                                              | analysis...
+                                      li
+                                          a(href='#')
+                                              img(width='34', height='34', src='images/avatar-male2.png')
+                                              | Buy Se7en today, it's a great
+                                              | theme...
+                              li.dropdown.settings.hidden-xs
+                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                      span.se7en-gear(aria-hidden='true')
+                                      .sr-only
+                                          | Settings
+                                  ul.dropdown-menu
+                                      li
+                                          a.settings-link.blue(href='javascript:chooseStyle(\'none\', 30)')
+                                              span
+                                              | Blue
+                                      li
+                                          a.settings-link.green(href='javascript:chooseStyle(\'green-theme\', 30)')
+                                              span
+                                              | Green
+                                      li
+                                          a.settings-link.orange(href='javascript:chooseStyle(\'orange-theme\', 30)')
+                                              span
+                                              | Orange
+                                      li
+                                          a.settings-link.magenta(href='javascript:chooseStyle(\'magenta-theme\', 30)')
+                                              span
+                                              | Magenta
+                                      li
+                                          a.settings-link.gray(href='javascript:chooseStyle(\'gray-theme\', 30)')
+                                              span
+                                              | Gray
+                              li.dropdown.user.hidden-xs
+                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                      img(width='34', height='34', src='images/avatar-male.jpg')
+                                      | John Smith
+                                      b.caret
+                                  ul.dropdown-menu
+                                      li
+                                          a(href='#')
+                                              i.icon-user
+                                              | My Account
+                                      li
+                                          a(href='#')
+                                              i.icon-gear
+                                              | Account Settings
+                                      li
+                                          a(href='login1.html')
+                                              i.icon-signout
+                                              | Logout
+                      button.navbar-toggle
+                          span.icon-bar
+                          span.icon-bar
+                          span.icon-bar
+                      a.logo(href='index.html') se7en
+                      form.navbar-form.form-inline.col-lg-2.hidden-xs
+                          input.form-control(placeholder='Search', type='text')
+                  .container-fluid.main-nav.clearfix
+                      .nav-collapse
+                          ul.nav
+                              li
+                                  a.current(href='index.html')
+                                      span.se7en-home(aria-hidden='true')
+                                      | Dashboard
+                              li.dropdown
+                                  a(data-toggle='dropdown', href='#')
+                                      span.se7en-forms(aria-hidden='true')
+                                      | Forms
+                                      b.caret
+                                  ul.dropdown-menu
+                                      li
+                                          a(href='form-components.html')
+                                              span.notifications.label.label-warning New
+                                              p
+                                                  | Form Components
+                                      li
+                                          a(href='form-advanced.html') Advanced Forms
+                              li.dropdown
+                                  a(data-toggle='dropdown', href='#')
+                                      span.se7en-tables(aria-hidden='true')
+                                      | Data
+                                      b.caret
+                                  ul.dropdown-menu
+                                      li
+                                          a(href='tables.html') Data
+                                      li
+                                          a(href='datatables.html') Query
+                              li
+                                  a(href='charts.html')
+                                      span.se7en-charts(aria-hidden='true')
+                                      | Charts
+              //
+                 End Navigation
     block content
