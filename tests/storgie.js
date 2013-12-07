@@ -10,6 +10,10 @@ client.put('/ident/', function (err, req, res, obj) {
     console.log('Server returned: %j', obj);
 });
 
+client.post('ident', function(){
+
+});
+
 
 //client.get('/echo/Adron', function (err, req, res, obj) {
 //    assert.ifError(err);

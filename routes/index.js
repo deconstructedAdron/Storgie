@@ -7,9 +7,11 @@ exports.storgie_stat = function (req, res) {
 };
 
 exports.ident_create = function (req, res) {
+    var resultMessage = 'saved';
 
-    console.log("POST: ");
     console.log(req.body);
+
+
 
 //            orchestrator.put(collection, key, inputData)
 //                .then(function(result){
@@ -19,7 +21,7 @@ exports.ident_create = function (req, res) {
 //                    console.log('An error ' + err);
 //                });
 
-    return res.send('the body if I can find it.');
+    return res.send('data saved.');
 };
 
 exports.ident_by_id = function (req, res) {

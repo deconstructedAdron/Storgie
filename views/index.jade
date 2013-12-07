@@ -1,6 +1,717 @@
-extends layout
-
-block content
-    h1= title
-        | server
-    p If you're viewing this site, your #{title} server up and running. Cheers!
+!!! 5
+html
+    head
+        title
+            | Deconstructed Dashboard
+        link(href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/bootstrap.min.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/font-awesome.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/se7en-font.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/isotope.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/jquery.fancybox.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/fullcalendar.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/wizard.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/select2.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/morris.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/datatables.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/datepicker.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/timepicker.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/colorpicker.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/bootstrap-switch.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/daterange-picker.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/typeahead.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/summernote.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/pygments.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/style.css', media='all', rel='stylesheet', type='text/css')
+        link(href='stylesheets/color/green.css', media='all', rel='alternate stylesheet', title='green-theme', type='text/css')
+        link(href='stylesheets/color/orange.css', media='all', rel='alternate stylesheet', title='orange-theme', type='text/css')
+        link(href='stylesheets/color/magenta.css', media='all', rel='alternate stylesheet', title='magenta-theme', type='text/css')
+        link(href='stylesheets/color/gray.css', media='all', rel='alternate stylesheet', title='gray-theme', type='text/css')
+        script(src='http://code.jquery.com/jquery-1.10.2.min.js', type='text/javascript')
+        script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js', type='text/javascript')
+        script(src='javascripts/bootstrap.min.js', type='text/javascript')
+        script(src='javascripts/raphael.min.js', type='text/javascript')
+        script(src='javascripts/selectivizr-min.js', type='text/javascript')
+        script(src='javascripts/jquery.mousewheel.js', type='text/javascript')
+        script(src='javascripts/jquery.vmap.min.js', type='text/javascript')
+        script(src='javascripts/jquery.vmap.sampledata.js', type='text/javascript')
+        script(src='javascripts/jquery.vmap.world.js', type='text/javascript')
+        script(src='javascripts/jquery.bootstrap.wizard.js', type='text/javascript')
+        script(src='javascripts/fullcalendar.min.js', type='text/javascript')
+        script(src='javascripts/gcal.js', type='text/javascript')
+        script(src='javascripts/jquery.dataTables.min.js', type='text/javascript')
+        script(src='javascripts/datatable-editable.js', type='text/javascript')
+        script(src='javascripts/jquery.easy-pie-chart.js', type='text/javascript')
+        script(src='javascripts/excanvas.min.js', type='text/javascript')
+        script(src='javascripts/jquery.isotope.min.js', type='text/javascript')
+        script(src='javascripts/isotope_extras.js', type='text/javascript')
+        script(src='javascripts/modernizr.custom.js', type='text/javascript')
+        script(src='javascripts/jquery.fancybox.pack.js', type='text/javascript')
+        script(src='javascripts/select2.js', type='text/javascript')
+        script(src='javascripts/styleswitcher.js', type='text/javascript')
+        script(src='javascripts/wysiwyg.js', type='text/javascript')
+        script(src='javascripts/summernote.min.js', type='text/javascript')
+        script(src='javascripts/jquery.inputmask.min.js', type='text/javascript')
+        script(src='javascripts/jquery.validate.js', type='text/javascript')
+        script(src='javascripts/bootstrap-fileupload.js', type='text/javascript')
+        script(src='javascripts/bootstrap-datepicker.js', type='text/javascript')
+        script(src='javascripts/bootstrap-timepicker.js', type='text/javascript')
+        script(src='javascripts/bootstrap-colorpicker.js', type='text/javascript')
+        script(src='javascripts/bootstrap-switch.min.js', type='text/javascript')
+        script(src='javascripts/typeahead.js', type='text/javascript')
+        script(src='javascripts/daterange-picker.js', type='text/javascript')
+        script(src='javascripts/date.js', type='text/javascript')
+        script(src='javascripts/morris.min.js', type='text/javascript')
+        script(src='javascripts/skycons.js', type='text/javascript')
+        script(src='javascripts/fitvids.js', type='text/javascript')
+        script(src='javascripts/jquery.sparkline.min.js', type='text/javascript')
+        script(src='javascripts/main.js', type='text/javascript')
+        script(src='javascripts/respond.js', type='text/javascript')
+        meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
+    body
+        .modal-shiftfix
+            //
+               Navigation
+            .navbar.navbar-fixed-top.scroll-hide
+                .container-fluid.top-bar
+                    .pull-right
+                        ul.nav.navbar-nav.pull-right
+                            li.dropdown.notifications.hidden-xs
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    span.se7en-flag(aria-hidden='true')
+                                    .sr-only
+                                        | Notifications
+                                    p.counter
+                                        | 4
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#')
+                                            .notifications.label.label-info
+                                                | New
+                                            p
+                                                | New user added: Jane Smith
+                                    li
+                                        a(href='#')
+                                            .notifications.label.label-info
+                                                | New
+                                            p
+                                                | Sales targets available
+                                    li
+                                        a(href='#')
+                                            .notifications.label.label-info
+                                                | New
+                                            p
+                                                | New performance metric added
+                                    li
+                                        a(href='#')
+                                            .notifications.label.label-info
+                                                | New
+                                            p
+                                                | New growth data available
+                            li.dropdown.messages.hidden-xs
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    span.se7en-envelope(aria-hidden='true')
+                                    .sr-only
+                                        | Messages
+                                    p.counter
+                                        | 3
+                                ul.dropdown-menu.messages
+                                    li
+                                        a(href='#')
+                                            img(width='34', height='34', src='images/avatar-male2.png')
+                                            | Could we meet today? I wanted...
+                                    li
+                                        a(href='#')
+                                            img(width='34', height='34', src='images/avatar-female.png')
+                                            | Important data needs your
+                                            | analysis...
+                                    li
+                                        a(href='#')
+                                            img(width='34', height='34', src='images/avatar-male2.png')
+                                            | Buy Se7en today, it's a great
+                                            | theme...
+                            li.dropdown.settings.hidden-xs
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    span.se7en-gear(aria-hidden='true')
+                                    .sr-only
+                                        | Settings
+                                ul.dropdown-menu
+                                    li
+                                        a.settings-link.blue(href='javascript:chooseStyle(\'none\', 30)')
+                                            span
+                                            | Blue
+                                    li
+                                        a.settings-link.green(href='javascript:chooseStyle(\'green-theme\', 30)')
+                                            span
+                                            | Green
+                                    li
+                                        a.settings-link.orange(href='javascript:chooseStyle(\'orange-theme\', 30)')
+                                            span
+                                            | Orange
+                                    li
+                                        a.settings-link.magenta(href='javascript:chooseStyle(\'magenta-theme\', 30)')
+                                            span
+                                            | Magenta
+                                    li
+                                        a.settings-link.gray(href='javascript:chooseStyle(\'gray-theme\', 30)')
+                                            span
+                                            | Gray
+                            li.dropdown.user.hidden-xs
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    img(width='34', height='34', src='images/avatar-male.jpg')
+                                    | John Smith
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#')
+                                            i.icon-user
+                                            | My Account
+                                    li
+                                        a(href='#')
+                                            i.icon-gear
+                                            | Account Settings
+                                    li
+                                        a(href='login1.html')
+                                            i.icon-signout
+                                            | Logout
+                    button.navbar-toggle
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.logo(href='index.html') se7en
+                    form.navbar-form.form-inline.col-lg-2.hidden-xs
+                        input.form-control(placeholder='Search', type='text')
+                .container-fluid.main-nav.clearfix
+                    .nav-collapse
+                        ul.nav
+                            li
+                                a.current(href='index.html')
+                                    span.se7en-home(aria-hidden='true')
+                                    | Dashboard
+                            li.dropdown
+                                a(data-toggle='dropdown', href='#')
+                                    span.se7en-forms(aria-hidden='true')
+                                    | Forms
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='form-components.html')
+                                            span.notifications.label.label-warning New
+                                            p
+                                                | Form Components
+                                    li
+                                        a(href='form-advanced.html') Advanced Forms
+                            li.dropdown
+                                a(data-toggle='dropdown', href='#')
+                                    span.se7en-tables(aria-hidden='true')
+                                    | Data
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='tables.html') Data
+                                    li
+                                        a(href='datatables.html') Query
+                            li
+                                a(href='charts.html')
+                                    span.se7en-charts(aria-hidden='true')
+                                    | Charts
+            //
+               End Navigation
+            .container-fluid.main-content
+                //
+                   Statistics
+                .row
+                    .col-lg-12
+                        .widget-container.stats-container
+                            .col-md-3
+                                .number
+                                    .icon.globe
+                                    | 86
+                                    small %
+                                .text
+                                    | Overall growth
+                            .col-md-3
+                                .number
+                                    .icon.visitors
+                                    | 613
+                                .text
+                                    | Unique visitors
+                            .col-md-3
+                                .number
+                                    .icon.money
+                                    small $
+                                    | 924
+                                .text
+                                    | Sales
+                            .col-md-3
+                                .number
+                                    .icon.chat-bubbles
+                                    | 325
+                                .text
+                                    | New followers
+                //
+                   End Statistics
+                .row
+                    //
+                       Weather
+                    .col-md-8
+                        .widget-container.weather
+                            .widget-content.padded
+                                .row.text-center
+                                    .col-sm-6.col-md-6.col-lg-4.today
+                                        p
+                                            | TODAY
+                                        canvas#rain.skycons-element(data-skycons='RAIN', height='100', width='100')
+                                        .number
+                                            | 52
+                                            small °
+                                        p.location
+                                            | Portland, OR
+                                    .col-sm-2.hidden-xs
+                                        p
+                                            | MON
+                                        canvas#clear-day.skycons-element(data-skycons='CLEAR_DAY', height='60', width='60')
+                                        .number
+                                            | 56
+                                            small °
+                                    .col-sm-2.hidden-xs
+                                        p
+                                            | TUE
+                                        canvas#cloudy.skycons-element(data-skycons='RAIN', height='60', width='60')
+                                        .number
+                                            | 55
+                                            small °
+                                    .col-sm-2.hidden-xs
+                                        p
+                                            | WED
+                                        canvas#partly-cloudy-day.skycons-element(data-skycons='PARTLY_CLOUDY_DAY', height='60', width='60')
+                                        .number
+                                            | 42
+                                            small °
+                                    .col-sm-2.hidden-md.hidden-sm.hidden-xs
+                                        p
+                                            | THU
+                                        canvas#sleet.skycons-element(data-skycons='SLEET', height='60', width='60')
+                                        .number
+                                            | 54
+                                            small °
+                    //
+                       end Weather
+                    //
+                       Bar Graph
+                    .col-md-4
+                        .widget-container.small
+                            .heading
+                                i.icon-signal
+                                | New Idents
+                                i.icon-list.pull-right
+                                i.icon-refresh.pull-right
+                            .widget-content.padded
+                                .bar-chart-widget
+                                    .chart-graph
+                                        #barcharts
+                                            | Loading...
+                                        ul.chart-text-axis
+                                            li
+                                                | 1
+                                            li
+                                                | 2
+                                            li
+                                                | 3
+                                            li
+                                                | 4
+                                            li
+                                                | 5
+                                            li
+                                                | 6
+                                            li
+                                                | 7
+                                            li
+                                                | 8
+                                            li
+                                                | 9
+                                            li
+                                                | 10
+                                            li
+                                                | 11
+                                            li
+                                                | 12
+                                            li
+                                                | 13
+                                            li
+                                                | 14
+                    //
+                       End Bar Graph
+                .row
+                    //
+                       Area Charts:Morris
+                    .col-md-6
+                        .widget-container.fluid-height
+                            .heading
+                                i.icon-bar-chart
+                                | Single Ident Tracks, Multiple Tracks, Multiple and Anonymous Tracks
+                            .widget-content.padded.text-center
+                                .graph-container
+                                    .caption
+                                    #hero-area.graph
+                    //
+                       Area Charts:Morris
+                    //
+                       Chat
+                    .col-md-6
+                        .widget-container.scrollable.timeline(style='height: 427px;')
+                            .heading
+                                i.icon-comments
+                                | User Trending Timeline
+                                i.icon-smile.pull-right
+                            .widget-content.padded
+                                .container-fluid.main-content
+                                    ul.timeline.animated
+                                        li
+                                            .timeline-time
+                                                strong Oct 3
+                                                | 4:53 PM
+                                            .timeline-icon
+                                                .bg-primary
+                                                    i.icon-pencil
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 5
+                                                | 6:14 PM
+                                            .timeline-icon
+                                                .bg-warning
+                                                    i.icon-quote-right
+                                            .timeline-content
+                                                blockquote
+                                                    p
+                                                        | Lorem ipsum velit ullamco anim pariatur proident eu deserunt laborum. Lorem ipsum ad in nostrud
+                                                        | adipisicing cupidatat anim officia ad id cupidatat veniam quis elit ullamco.
+                                                    small John Smith
+                                        li
+                                            .timeline-time
+                                                strong Oct 6
+                                                | 9:00 AM
+                                            .timeline-icon
+                                                .bg-info
+                                                    i.icon-camera
+                                            .timeline-content.image
+                                                h2
+                                                    | This is an image posted on my timeline
+                                                img(src='images/img-coast.jpg')
+                                                p
+                                                    | Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu
+                                                    | nibh. Nullam mollis. Ut justo. Suspendisse potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 8
+                                                | 2:01 PM
+                                            .timeline-icon
+                                                .bg-danger
+                                                    i.icon-pencil
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                                p
+                                                    | Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+                                                    | purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit
+                                                    | tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu
+                                                    | pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+                                                p
+                                                    | Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu
+                                                    | pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius,
+                                                    | adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus
+                                                    | ante.
+                                        li
+                                            .timeline-time
+                                                strong Oct 11
+                                                | 10:33 AM
+                                            .timeline-icon
+                                                .bg-success
+                                                    i.icon-camera
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 12
+                                                | 1:14 PM
+                                            .timeline-icon
+                                                .bg-primary
+                                                    i.icon-facetime-video
+                                            .timeline-content.video
+                                                h2
+                                                    | This is a title for this timeline post
+                                                iframe(allowfullscreen='', frameborder='0', mozallowfullscreen='', src='http://player.vimeo.com/video/16202331?title=0&byline=0&portrait=0', webkitallowfullscreen='')
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 18
+                                                | 8:45 AM
+                                            .timeline-icon
+                                                .bg-warning
+                                                    i.icon-pencil
+                                            .timeline-content
+                                                h2
+                                                    | Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+                                                    | purus libero, faucibus adipiscing
+                                                p
+                                                    | Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu
+                                                    | pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius,
+                                                    | adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus
+                                                    | ante.
+                                        li
+                                            .timeline-time
+                                                strong Oct 21
+                                                | 9:55 AM
+                                            .timeline-icon
+                                                .bg-success
+                                                    i.icon-time
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 6
+                                                | 9:00 AM
+                                            .timeline-icon
+                                                .bg-info
+                                                    i.icon-camera
+                                            .timeline-content.image
+                                                h2
+                                                    | This is an image posted on my timeline
+                                                img(src='images/img-coast.jpg')
+                                                p
+                                                    | Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu
+                                                    | nibh. Nullam mollis. Ut justo. Suspendisse potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 8
+                                                | 2:01 PM
+                                            .timeline-icon
+                                                .bg-danger
+                                                    i.icon-pencil
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                                p
+                                                    | Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+                                                    | purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit
+                                                    | tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu
+                                                    | pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+                                                p
+                                                    | Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu
+                                                    | pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius,
+                                                    | adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus
+                                                    | ante.
+                                        li
+                                            .timeline-time
+                                                strong Oct 11
+                                                | 10:33 AM
+                                            .timeline-icon
+                                                .bg-success
+                                                    i.icon-camera
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 12
+                                                | 1:14 PM
+                                            .timeline-icon
+                                                .bg-primary
+                                                    i.icon-facetime-video
+                                            .timeline-content.video
+                                                h2
+                                                    | This is a title for this timeline post
+                                                iframe(allowfullscreen='', frameborder='0', mozallowfullscreen='', src='http://player.vimeo.com/video/16202331?title=0&byline=0&portrait=0', webkitallowfullscreen='')
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                                        li
+                                            .timeline-time
+                                                strong Oct 18
+                                                | 8:45 AM
+                                            .timeline-icon
+                                                .bg-warning
+                                                    i.icon-pencil
+                                            .timeline-content
+                                                h2
+                                                    | Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+                                                    | purus libero, faucibus adipiscing
+                                                p
+                                                    | Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu
+                                                    | pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius,
+                                                    | adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus
+                                                    | ante.
+                                        li
+                                            .timeline-time
+                                                strong Oct 21
+                                                | 9:55 AM
+                                            .timeline-icon
+                                                .bg-success
+                                                    i.icon-time
+                                            .timeline-content
+                                                h2
+                                                    | This is a title for this timeline post
+                                                p
+                                                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+                                                    | urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+                                                    | viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+                                                    | potenti.
+                        //
+                          <div class="heading">
+                        //
+                          <i class="icon-comments"></i>Chat Widget<i class="icon-smile pull-right"></i>
+                        //
+                          </div>
+                        //
+                          <div class="widget-content padded">
+                    //
+                       End Chat
+                .row
+                    //
+                       Pie Graph 1
+                    .col-lg-5
+                        .widget-container.fluid-height
+                            .heading
+                                i.icon-bar-chart
+                                | Donut Charts
+                            .widget-content.clearfix
+                                .col-sm-6
+                                    .pie-chart1.pie-chart.pie-number(data-percent='87')
+                                        | 87%
+                                .col-sm-6
+                                    .pie-chart2.pie-chart.pie-number(data-percent='26')
+                                        | 26%
+                    .col-lg-7
+                        .widget-container.fluid-height
+                            //
+                               Table
+                            table.table.table-filters
+                                tbody
+                                    tr
+                                        td.filter-category.blue
+                                            .arrow-left
+                                            i.icon-stethoscope
+                                        td
+                                            | National Distribution Co.
+                                        td
+                                            | $9204
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 50,55,60,40,30,35,30,20,25,30,40,20,15
+                                        td
+                                            .danger
+                                                | -4%
+                                    tr
+                                        td.filter-category.green
+                                            .arrow-left
+                                            i.icon-coffee
+                                        td
+                                            | Star Organization Co.
+                                        td
+                                            | $23,890
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 5,10,15,50,80,50,40,30,50,60,70,75,75
+                                        td
+                                            .success
+                                                | +12%
+                                    tr
+                                        td.filter-category.orange
+                                            .arrow-left
+                                            i.icon-gamepad
+                                        td
+                                            | Companysoft, LLC
+                                        td
+                                            | $10,995
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 100,100,80,70,40,20,20,40,50,60,70
+                                        td
+                                            .success
+                                                | +5%
+                                    tr
+                                        td.filter-category.red
+                                            .arrow-left
+                                            i.icon-gift
+                                        td
+                                            | Craft Co.
+                                        td
+                                            | $6,790
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 5,10,15,20,30,40,80,100,120,120,140
+                                        td
+                                            .success
+                                                | +26%
+                                    tr
+                                        td.filter-category.blue
+                                            .arrow-left
+                                            i.icon-stethoscope
+                                        td
+                                            | National Distribution Co.
+                                        td
+                                            | $9204
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 50,55,60,40,30,35,30,20,25,30,40,20,15
+                                        td
+                                            .danger
+                                                | -4%
+                                    tr
+                                        td.filter-category.magenta
+                                            .arrow-left
+                                            i.icon-trophy
+                                        td
+                                            | Fastnation Co.
+                                        td
+                                            | $22,156
+                                        td.hidden-xs
+                                            .sparkslim
+                                                | 20,40,50,60,70,80,90,95,100,80,70,60
+                                        td
+                                            .danger
+                                                | -4%
+                    //
+                       End Pie Graph 1
+                       
