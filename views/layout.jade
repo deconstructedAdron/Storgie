@@ -68,152 +68,139 @@ html
     script(src='javascripts/respond.js', type='text/javascript')
     meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
   body
-          .modal-shiftfix
-              //
-                 Navigation
-              .navbar.navbar-fixed-top.scroll-hide
-                  .container-fluid.top-bar
-                      .pull-right
-                          ul.nav.navbar-nav.pull-right
-                              li.dropdown.notifications.hidden-xs
-                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
-                                      span.se7en-flag(aria-hidden='true')
-                                      .sr-only
-                                          | Notifications
-                                      p.counter
-                                          | 4
-                                  ul.dropdown-menu
-                                      li
-                                          a(href='#')
-                                              .notifications.label.label-info
-                                                  | New
-                                              p
-                                                  | New user added: Jane Smith
-                                      li
-                                          a(href='#')
-                                              .notifications.label.label-info
-                                                  | New
-                                              p
-                                                  | Sales targets available
-                                      li
-                                          a(href='#')
-                                              .notifications.label.label-info
-                                                  | New
-                                              p
-                                                  | New performance metric added
-                                      li
-                                          a(href='#')
-                                              .notifications.label.label-info
-                                                  | New
-                                              p
-                                                  | New growth data available
-                              li.dropdown.messages.hidden-xs
-                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
-                                      span.se7en-envelope(aria-hidden='true')
-                                      .sr-only
-                                          | Messages
-                                      p.counter
-                                          | 3
-                                  ul.dropdown-menu.messages
-                                      li
-                                          a(href='#')
-                                              img(width='34', height='34', src='images/avatar-male2.png')
-                                              | Could we meet today? I wanted...
-                                      li
-                                          a(href='#')
-                                              img(width='34', height='34', src='images/avatar-female.png')
-                                              | Important data needs your
-                                              | analysis...
-                                      li
-                                          a(href='#')
-                                              img(width='34', height='34', src='images/avatar-male2.png')
-                                              | Buy Se7en today, it's a great
-                                              | theme...
-                              li.dropdown.settings.hidden-xs
-                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
-                                      span.se7en-gear(aria-hidden='true')
-                                      .sr-only
-                                          | Settings
-                                  ul.dropdown-menu
-                                      li
-                                          a.settings-link.blue(href='javascript:chooseStyle(\'none\', 30)')
-                                              span
-                                              | Blue
-                                      li
-                                          a.settings-link.green(href='javascript:chooseStyle(\'green-theme\', 30)')
-                                              span
-                                              | Green
-                                      li
-                                          a.settings-link.orange(href='javascript:chooseStyle(\'orange-theme\', 30)')
-                                              span
-                                              | Orange
-                                      li
-                                          a.settings-link.magenta(href='javascript:chooseStyle(\'magenta-theme\', 30)')
-                                              span
-                                              | Magenta
-                                      li
-                                          a.settings-link.gray(href='javascript:chooseStyle(\'gray-theme\', 30)')
-                                              span
-                                              | Gray
-                              li.dropdown.user.hidden-xs
-                                  a.dropdown-toggle(data-toggle='dropdown', href='#')
-                                      img(width='34', height='34', src='images/avatar-male.jpg')
-                                      | John Smith
-                                      b.caret
-                                  ul.dropdown-menu
-                                      li
-                                          a(href='#')
-                                              i.icon-user
-                                              | My Account
-                                      li
-                                          a(href='#')
-                                              i.icon-gear
-                                              | Account Settings
-                                      li
-                                          a(href='login1.html')
-                                              i.icon-signout
-                                              | Logout
-                      button.navbar-toggle
-                          span.icon-bar
-                          span.icon-bar
-                          span.icon-bar
-                      a.logo(href='index.html') se7en
-                      form.navbar-form.form-inline.col-lg-2.hidden-xs
-                          input.form-control(placeholder='Search', type='text')
-                  .container-fluid.main-nav.clearfix
-                      .nav-collapse
-                          ul.nav
-                              li
-                                  a.current(href='index.html')
-                                      span.se7en-home(aria-hidden='true')
-                                      | Dashboard
-                              li.dropdown
-                                  a(data-toggle='dropdown', href='#')
-                                      span.se7en-forms(aria-hidden='true')
-                                      | Forms
-                                      b.caret
-                                  ul.dropdown-menu
-                                      li
-                                          a(href='form-components.html')
-                                              span.notifications.label.label-warning New
-                                              p
-                                                  | Form Components
-                                      li
-                                          a(href='form-advanced.html') Advanced Forms
-                              li.dropdown
-                                  a(data-toggle='dropdown', href='#')
-                                      span.se7en-tables(aria-hidden='true')
-                                      | Data
-                                      b.caret
-                                  ul.dropdown-menu
-                                      li
-                                          a(href='tables.html') Data
-                                      li
-                                          a(href='datatables.html') Query
-                              li
-                                  a(href='charts.html')
-                                      span.se7en-charts(aria-hidden='true')
-                                      | Charts
-              //
-                 End Navigation
+    .modal-shiftfix
+        //
+           Navigation
+        .navbar.navbar-fixed-top.scroll-hide
+            .container-fluid.top-bar
+                .pull-right
+                    ul.nav.navbar-nav.pull-right
+                        li.dropdown.notifications.hidden-xs
+                            a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                span.se7en-flag(aria-hidden='true')
+                                .sr-only
+                                    | Notifications
+                                p.counter
+                                    | 4
+                            ul.dropdown-menu
+                                li
+                                    a(href='#')
+                                        .notifications.label.label-info
+                                            | New
+                                        p
+                                            | New user added: Jane Smith
+                                li
+                                    a(href='#')
+                                        .notifications.label.label-info
+                                            | New
+                                        p
+                                            | Sales targets available
+                                li
+                                    a(href='#')
+                                        .notifications.label.label-info
+                                            | New
+                                        p
+                                            | New performance metric added
+                                li
+                                    a(href='#')
+                                        .notifications.label.label-info
+                                            | New
+                                        p
+                                            | New growth data available
+                        li.dropdown.messages.hidden-xs
+                            a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                span.se7en-envelope(aria-hidden='true')
+                                .sr-only
+                                    | Messages
+                                p.counter
+                                    | 3
+                            ul.dropdown-menu.messages
+                                li
+                                    a(href='#')
+                                        img(width='34', height='34', src='images/avatar-male2.png')
+                                        | Could we meet today? I wanted...
+                                li
+                                    a(href='#')
+                                        img(width='34', height='34', src='images/avatar-female.png')
+                                        | Important data needs your
+                                        | analysis...
+                                li
+                                    a(href='#')
+                                        img(width='34', height='34', src='images/avatar-male2.png')
+                                        | Buy Se7en today, it's a great
+                                        | theme...
+                        li.dropdown.settings.hidden-xs
+                            a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                span.se7en-gear(aria-hidden='true')
+                                .sr-only
+                                    | Settings
+                            ul.dropdown-menu
+                                li
+                                    a.settings-link.blue(href='javascript:chooseStyle(\'none\', 30)')
+                                        span
+                                        | Blue
+                                li
+                                    a.settings-link.green(href='javascript:chooseStyle(\'green-theme\', 30)')
+                                        span
+                                        | Green
+                                li
+                                    a.settings-link.orange(href='javascript:chooseStyle(\'orange-theme\', 30)')
+                                        span
+                                        | Orange
+                                li
+                                    a.settings-link.magenta(href='javascript:chooseStyle(\'magenta-theme\', 30)')
+                                        span
+                                        | Magenta
+                                li
+                                    a.settings-link.gray(href='javascript:chooseStyle(\'gray-theme\', 30)')
+                                        span
+                                        | Gray
+                        li.dropdown.user.hidden-xs
+                            a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                img(width='34', height='34', src='images/avatar-male.jpg')
+                                | John Smith
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href='#')
+                                        i.icon-user
+                                        | My Account
+                                li
+                                    a(href='#')
+                                        i.icon-gear
+                                        | Account Settings
+                                li
+                                    a(href='login1.html')
+                                        i.icon-signout
+                                        | Logout
+                button.navbar-toggle
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.logo(href='index.html') se7en
+                form.navbar-form.form-inline.col-lg-2.hidden-xs
+                    input.form-control(placeholder='Search', type='text')
+            .container-fluid.main-nav.clearfix
+                .nav-collapse
+                    ul.nav
+                        li
+                            a.current(href='index.html')
+                                span.se7en-home(aria-hidden='true')
+                                | Dashboard
+                        li.dropdown
+                            a(data-toggle='dropdown', href='#')
+                                span.se7en-tables(aria-hidden='true')
+                                | Data
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href='tables.html') Data
+                                li
+                                    a(href='datatables.html') Query
+                        li
+                            a(href='charts.html')
+                                span.se7en-charts(aria-hidden='true')
+                                | Charts
+        //
+           End Navigation
     block content
