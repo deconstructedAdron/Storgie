@@ -27,6 +27,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/login', routes.login);
 app.get('/signup', routes.signup);
+app.get('/status', routes.status);
 
 // storgie status api information.
 app.get('/api', routes.storgie_stat);
