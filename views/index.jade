@@ -1,0 +1,65 @@
+extends layout
+block content
+    .container-fluid.main-content
+        //
+           Statistics
+        .row
+            .col-lg-12
+                .widget-container.stats-container
+                    .col-md-3
+                        .number
+                            .icon.globe
+                            | 99.995
+                            small %
+                        .text
+                            | Server Uptime
+                    .col-md-3
+                        .number
+                            .icon.visitors
+                            | 2.253+ billion
+                        .text
+                            | Idents Made Today
+                    .col-md-3
+                        .number
+                            .icon.globe
+                            small $
+                            | 924+ million
+                        .text
+                            | Convergences
+                    .col-md-3
+                        .number
+                            .icon.chat-bubbles
+                            | 94+ million
+                        .text
+                            | Known Devices
+        //
+           End Statistics
+        .row
+            //
+               Area Charts:Morris
+            .col-md-6
+                .widget-container.fluid-height
+                    .heading
+                        i.icon-bar-chart
+                        | Single Ident Tracks, Multiple Tracks, Multiple and Anonymous Tracks
+                    .widget-content.padded.text-center
+                        .graph-container
+                            .caption
+                            #hero-area.graph
+            //
+               Area Charts:Morris
+            //
+               Chat
+            .col-md-6
+                .widget-container.fluid-height
+                    .heading
+                        i.icon-bar-chart
+                        | Tertiary Convergence Risk, Primary Convergence Risk
+                    .widget-content.clearfix
+                        .col-sm-6
+                            .pie-chart1.pie-chart.pie-number(data-percent='21')
+                                | 21%
+                        .col-sm-6
+                            .pie-chart2.pie-chart.pie-number(data-percent='1.1')
+                                | 1%
+        .row

@@ -1,0 +1,13 @@
+extends layout
+block content
+    h1= title
+    p Welcome to #{title}
+        div#result ...posting
+        script.
+            var dataToWrite = {"uuid":"79E5591A-1E54-4562-A276-AFC266F54390","webid":"56E62C3A-D6BC-4F4F-B72A-E6CE081190B6"};
+
+            //alert(dataToWrite.uuid);
+
+            $.post( "/ident/", function( dataToWrite ) {
+                $( "#result" ).empty().append( "Data loaded: " + dataToWrite );
+            });
