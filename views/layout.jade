@@ -47,47 +47,47 @@ html
         script(src='javascripts/respond.js', type='text/javascript')
         meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
     body
-.modal-shiftfix
-    //
-       Navigation
-    .navbar.navbar-fixed-top.scroll-hide
-        .container-fluid.top-bar
-            .pull-right
-                ul.nav.navbar-nav.pull-right
-                    li.dropdown.user.hidden-xs
-                        a.dropdown-toggle(data-toggle='dropdown', href='#')
-                            img(width='34', height='34', src='images/avatar-male.jpg')
-                            | Adron Hall
-                            b.caret
-                        ul.dropdown-menu
+        .modal-shiftfix
+            //
+               Navigation
+            .navbar.navbar-fixed-top.scroll-hide
+                .container-fluid.top-bar
+                    .pull-right
+                        ul.nav.navbar-nav.pull-right
+                            li.dropdown.user.hidden-xs
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    img(width='34', height='34', src='images/avatar-male.jpg')
+                                    | Adron Hall
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='/account')
+                                            i.icon-user
+                                            | My Account
+                                    li
+                                        a(href='/settings')
+                                            i.icon-gear
+                                            | Account Settings
+                                    li
+                                        a(href='/login')
+                                            i.icon-signout
+                                            | Logout
+                    button.navbar-toggle
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.logo(href='/') se7en
+                .container-fluid.main-nav.clearfix
+                    .nav-collapse
+                        ul.nav
                             li
-                                a(href='/account')
-                                    i.icon-user
-                                    | My Account
+                                a.current(href='/')
+                                    span.se7en-home(aria-hidden='true')
+                                    | Dashboard
                             li
-                                a(href='/settings')
-                                    i.icon-gear
-                                    | Account Settings
-                            li
-                                a(href='/login')
-                                    i.icon-signout
-                                    | Logout
-            button.navbar-toggle
-                span.icon-bar
-                span.icon-bar
-                span.icon-bar
-            a.logo(href='/') se7en
-        .container-fluid.main-nav.clearfix
-            .nav-collapse
-                ul.nav
-                    li
-                        a.current(href='/')
-                            span.se7en-home(aria-hidden='true')
-                            | Dashboard
-                    li
-                        a.current(href='/status')
-                            span.se7en-gear(aria-hidden='true')
-                            | Ecosystem Stats
-    //
-       End Navigation
-    block content
+                                a.current(href='/status')
+                                    span.se7en-gear(aria-hidden='true')
+                                    | Ecosystem Stats
+            //
+               End Navigation
+            block content

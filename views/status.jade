@@ -30,12 +30,13 @@ block content
                         .widget-content.padded
                             p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
                             p Phasellus et odio sed ligula blandit semper. Curabitur feugiat lectus nec leo suscipit tristique. Nulla vestibulum risus eget egestas pretium. Sed ut justo nibh. Duis blandit eleifend sem ut venenatis. Pellentesque eget sem justo. Mauris condimentum, dolor sed blandit ultricies, lacus dui convallis dolor, vitae vehicula enim nibh ut libero.
+    script.
+        var dataToWrite = {"uuid":"79E5591A-1E54-4562-A276-AFC266F54390","webid":"56E62C3A-D6BC-4F4F-B72A-E6CE081190B6"};
 
-script.
-    var dataToWrite = {"uuid":"79E5591A-1E54-4562-A276-AFC266F54390","webid":"56E62C3A-D6BC-4F4F-B72A-E6CE081190B6"};
+        //$("#result").html(dataToWrite.uuid + dataToWrite.webid);
 
-    //alert(dataToWrite.uuid);
+        $.post( "/ident", function( dataToWrite ) {
+          $( "#result" ).html( dataToWrite.uuid );
+        });
 
-    $.post( "/ident/", function( dataToWrite ) {
-        $( "#result" ).empty().append( "Data loaded: " + dataToWrite );
-    });
+
