@@ -40,6 +40,8 @@ app.post('/ident', routes.ident_create);
 app.get('/ident/:id', routes.ident_by_id);
 app.get('/convergence', routes.convergence);
 
+app.post('/scenario', routes.scenario_create);
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
