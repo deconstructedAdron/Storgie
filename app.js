@@ -38,6 +38,7 @@ app.get('/api', routes.storgie_stat);
 // storgie api services.
 app.post('/ident', routes.ident_create);
 app.get('/ident/:id', routes.ident_by_id);
+app.get('/')
 app.get('/convergence', routes.convergence);
 
 app.post('/scenario', routes.scenario_create);
