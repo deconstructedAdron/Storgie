@@ -1,5 +1,5 @@
-var orchestrator = require('orchestrate')("01233006-eaa7-4e3a-94d5-bb27cfc809cd"),
-    collection = 'listz',
+var orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803"),
+    collection = 'idents',
     Chance = require('chance'),
     chance = new Chance();
 
@@ -43,14 +43,14 @@ exports.ident_create = function (req, res) {
     console.log(req.body.value);
 
     orchestrator.put(collection, req.body.key, req.body.value)
-        .then(function (result) {
+        .then(function (res) {
             var result = req.body.key + 'written.';
             console.log(result);
             res.send(result);
-
         })
         .fail(function (err) {
             console.log('An error ' + err);
+            res.send(err);
         });
 };
 
@@ -60,36 +60,44 @@ exports.scenario_create = function (req, res) {
         return res.send('Error 400: Post syntax incorrect.');
     }
 
+    // Create
     var matched = chance.guid();
 
-    var identifier = new Object();
-    identifier.guid = matched;
-    identifier.something = req.body.rowgen;
-    identifier.first = chance.first();
-    identifier.last = chance.last();
-    identifier.cell = chance.phone();
-    identifier.work = chance.phone();
-    identifier.birthday = chance.birthday();
-    identifier.gender = chance.gender();
-    identifier.long = chance.longitude();
-    identifier.lat = chance.latitude();
-    identifier.CFUUID = chance.guid();
-    identifier.convergence = 'green';
+    var data_iOS = new Object();
+    data_iOS.AdId = chance.guid();
+    data_iOS.VendorId = chance.guid();
+    data_iOS.UUID = matched;
+    data_iOS.DevId = chance.guid();
+    data_iOS.IP = chance.guid();
+    data_iOS.WebId = chance.guid();
+    data_iOS.Cookie = chance.guid();
+    data_iOS.AppId = chance.guid();
+    data_iOS.HashEmail = chance.guid();
+    data_iOS.HashIdent = chance.guid();
 
-    var identifier = JSON.stringify(identifier);
+    var data_Android = new Object();
+    data_Android.
+
+
+        var
+    valueData = JSON.stringify(data_iOS);
 
     var keyValue = new Object();
     keyValue.key = 'test'; //chance.guid();
-    keyValue.value = identifier;
+    keyValue.value = valueData;
 
-    orchestrator.put(collection, keyValue.key, keyValue.value)
-        .then(function (result) {
-            var returnThis = keyValue.key + ' written.';
-            console.log(returnThis);
-            res.send(returnThis);
+    function extracted() {
+        orchestrator.put(collection, keyValue.key, keyValue.value)
+            .then(function (result) {
+                var returnThis = keyValue.key + ' written.';
+                console.log(returnThis);
+                res.send(returnThis);
 
-        })
-        .fail(function (err) {
-            console.log('An error ' + err);
-        });
+            })
+            .fail(function (err) {
+                console.log('An error ' + err);
+            });
+    }
+
+    extracted();
 };
