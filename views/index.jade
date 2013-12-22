@@ -1,6 +1,8 @@
 extends layout
 block content
     .container-fluid.main-content
+    .page-title
+        h1 Storgie Ecosystem
         //
            Statistics
         .row
@@ -9,57 +11,49 @@ block content
                     .col-md-3
                         .number
                             .icon.globe
-                            | 99.995
+                            | 100
                             small %
                         .text
-                            | Server Uptime
+                            | Storgie Uptime
                     .col-md-3
                         .number
                             .icon.visitors
-                            | 2.253+ billion
+                            | 2.253+
                         .text
-                            | Idents Made Today
-                    .col-md-3
-                        .number
-                            .icon.globe
-                            small $
-                            | 924+ million
-                        .text
-                            | Convergences
+                            | Billion Ident Visitors
                     .col-md-3
                         .number
                             .icon.chat-bubbles
-                            | 94+ million
+                            | 924+
                         .text
-                            | Known Devices
+                            | Million Convergences
+                    .col-md-3
+                        .number
+                            .icon.visitors
+                            | 924+
+                        .text
+                            | Million Known Idents
         //
            End Statistics
         .row
-            //
-               Area Charts:Morris
-            .col-md-6
-                .widget-container.fluid-height
-                    .heading
-                        i.icon-bar-chart
-                        | Single Ident Tracks, Multiple Tracks, Multiple and Anonymous Tracks
-                    .widget-content.padded.text-center
-                        .graph-container
-                            .caption
-                            #hero-area.graph
-            //
-               Area Charts:Morris
-            //
-               Chat
-            .col-md-6
-                .widget-container.fluid-height
-                    .heading
-                        i.icon-bar-chart
-                        | Tertiary Convergence Risk, Primary Convergence Risk
-                    .widget-content.clearfix
-                        .col-sm-6
-                            .pie-chart1.pie-chart.pie-number(data-percent='21')
-                                | 21%
-                        .col-sm-6
-                            .pie-chart2.pie-chart.pie-number(data-percent='1.1')
-                                | 1%
-        .row
+            .col-lg-12
+                .widget-container.fluid-height.clearfix
+                    .col-md-4
+                        .heading
+                            i.icon-book Sample Lead
+                        .widget-content.padded
+                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec ullamcorper mauris. Pellentesque ligula justo, imperdiet sit amet vehicula id, lobortis eu ligula. Vestibulum vel massa a turpis scelerisque scelerisque. Quisque tincidunt interdum tortor nec consectetur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris aliquam fermentum elementum. Praesent vitae erat at dui imperdiet faucibus vitae rutrum lorem. Aliquam nunc odio, eleifend vel dignissim a, interdum id est. In ornare eleifend orci, quis suscipit quam molestie id. Cras eget nulla nec dui hendrerit aliquam. Nam id mi iaculis, facilisis mi sit amet, rhoncus ante. Integer eget lorem dignissim purus tempor imperdiet vel lobortis risus. Phasellus imperdiet mi in mattis vestibulum.
+                    .col-md-4
+                        .heading
+                            i.icon-book Sample Lead
+                        .widget-content.padded
+                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                            p In eros purus, sollicitudin sed interdum vel, dignissim hendrerit velit. Aenean sollicitudin commodo tortor eu consectetur. Mauris eu accumsan metus, ut laoreet massa. Nullam ac porta lacus. Curabitur congue sapien sed neque commodo varius. Nam justo erat, pretium eget lectus at, malesuada elementum magna. Nullam id bibendum neque, in commodo dolor. Praesent a laoreet magna. Quisque at velit viverra, dictum urna et, hendrerit sem. Mauris diam orci, sagittis sodales posuere sed, fringilla faucibus quam. Sed dapibus sem lacus, non tristique tortor lacinia at. Integer eu metus ut leo sagittis porttitor a eget sem. Integer scelerisque viverra odio non vehicula. Integer nisi quam, tincidunt non sapien nec, tempus mattis sapien. In sit amet diam rhoncus, rutrum nibh eu, hendrerit justo.
+                    .col-md-4
+                        .heading
+                            i.icon-book Sample Lead
+                        .widget-content.padded
+                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                            p Phasellus et odio sed ligula blandit semper. Curabitur feugiat lectus nec leo suscipit tristique. Nulla vestibulum risus eget egestas pretium. Sed ut justo nibh. Duis blandit eleifend sem ut venenatis. Pellentesque eget sem justo. Mauris condimentum, dolor sed blandit ultricies, lacus dui convallis dolor, vitae vehicula enim nibh ut libero.
+
