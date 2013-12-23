@@ -41,7 +41,7 @@ app.post('/ident', api.ident_create);
 app.get('/ident/:id', api.ident_by_id);
 app.get('/convergence', api.convergence);
 
-app.post('/scenario', routes.scenario_create);
+app.post('/scenario', api.scenario_create);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
