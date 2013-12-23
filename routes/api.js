@@ -3,22 +3,6 @@ var orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803"
     Chance = require('chance'),
     chance = new Chance();
 
-exports.index = function (req, res) {
-    res.render('index', { title: 'Storgie' });
-};
-
-exports.login = function (req, res) {
-    res.render('login', {title: "Login to Storgie."});
-};
-
-exports.signup = function (req, res) {
-    res.render('signup', {title: "Sign Up For Storgie."});
-};
-
-exports.status = function (req, res) {
-    res.render('status', {title: "Storgie Status & Tests"});
-};
-
 exports.storgie_stat = function (req, res) {
     res.send('Storgie Ecosystem Active.');
 };

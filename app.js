@@ -1,5 +1,6 @@
 var express = require('express');
-var routes = require('./routes');
+var site = require('./routes/site');
+var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
 
@@ -27,19 +28,18 @@ if ('development' == app.get('env')) {
 }
 
 // storgie server information
-app.get('/', routes.index);
-app.get('/login', routes.login);
-app.get('/signup', routes.signup);
-app.get('/status', routes.status);
+app.get('/', site.index);
+app.get('/login', site.login);
+app.get('/signup', site.signup);
+app.get('/status', site.status);
 
 // storgie status api information.
-app.get('/api', routes.storgie_stat);
+app.get('/api', api.storgie_stat);
 
 // storgie api services.
-app.post('/ident', routes.ident_create);
-app.get('/ident/:id', routes.ident_by_id);
-app.get('/')
-app.get('/convergence', routes.convergence);
+app.post('/ident', api.ident_create);
+app.get('/ident/:id', api.ident_by_id);
+app.get('/convergence', api.convergence);
 
 app.post('/scenario', routes.scenario_create);
 
