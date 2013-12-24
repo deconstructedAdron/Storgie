@@ -12,9 +12,7 @@ logs
 results
 
 npm-debug.log
-
-idea
-*idea
-
 node_modules
+
+.idea
 .elasticbeanstalk/
