@@ -33,10 +33,8 @@ app.get('/login', site.login);
 app.get('/signup', site.signup);
 app.get('/status', site.status);
 
-// storgie status api information.
-app.get('/api', api.storgie_stat);
-
 // storgie api services.
+app.get('/api', api.storgie_stat);
 app.post('/ident', api.ident_create);
 app.get('/ident/:id', api.ident_by_id);
 app.get('/convergence', api.convergence);
