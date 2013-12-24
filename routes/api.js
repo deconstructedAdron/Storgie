@@ -50,6 +50,5 @@ exports.scenario_create = function (req, res) {
         return res.send(error400);
     }
 
-    console.log('Scenario Created for test_one');
-
+    res.send('Scenario Created for test_one');
 };
