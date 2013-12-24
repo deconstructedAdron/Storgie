@@ -39,7 +39,6 @@ exports.ident_create = function (req, res) {
         return res.send(error400);
     }
 
-    console.log();
     console.log(req.body.value);
     res.send('Record created ' + req.body.value);
 };
@@ -50,5 +49,8 @@ exports.scenario_create = function (req, res) {
         return res.send(error400);
     }
 
-    res.send('Scenario Created for test_one');
+    var answer = new Object();
+    answer.response = 'Data generated.';
+
+    res.send(JSON.stringify(answer));
 };
