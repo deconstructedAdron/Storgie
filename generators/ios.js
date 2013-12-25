@@ -1,4 +1,8 @@
-function gen_ios_ident(matched) {
+var Chance = require('chance'),
+    chance = new Chance(),
+    ios = exports;
+
+ios.ios_ident = function (matched) {
     var data_iOS = new Object();
     data_iOS.AdId = chance.guid();
     data_iOS.VendorId = chance.guid();
@@ -9,6 +13,6 @@ function gen_ios_ident(matched) {
     data_iOS.Cookie = chance.guid();
     data_iOS.AppId = chance.guid();
     data_iOS.HashEmail = chance.guid();
-    data_iOS.HashIdent = matched;
+    data_iOS.HashIdent = chance.guid();
     return data_iOS;
 }
