@@ -1,9 +1,5 @@
-var gengie = require('chance'),
-    assert = require('assert'),
-    restify = require('restify'),
-    express = require('express'),
-
-    chance = new gengie();
+var assert = require('assert'),
+    restify = require('restify');
 
 var storgie_gen = {
 
