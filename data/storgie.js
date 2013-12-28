@@ -1,26 +1,31 @@
 var orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803"),
-    collection_idents = 'idents',
     storgie = exports;
+
+storgie.collection_idents = 'idents';
 
 storgie.put = function (collection, key, value) {
     orchestrator.put(collection, key, value)
         .then(function (result) {
-            return result;
+            res.send(result);
         })
         .fail(function (err) {
-            return err;
+            res.send(err);
         });
 }
 
 storgie.get = function (collection, key) {
-    var result = orchestrator.get(collection, key)
+    orchestrator.get(collection, key)
         .then(function (result) {
-            return result;
+
+            var body = result.body;
+
+            console.log(body);
+
+            res.send(result);
         })
         .fail(function (err) {
-            return err;
+            res.send(err);
         });
-    return result;
 }
 
 storgie.build_static_data = function () {
@@ -66,7 +71,7 @@ storgie.build_static_data = function () {
     ];
 
     for (var i = 0; i < jsonData.length; i++) {
-        storgie.put(collection_idents, i.toString(), jsonData[i]);
+        storgie.put(storgie.collection_idents, i.toString(), jsonData[i]);
     }
 
     return 'Data created.';

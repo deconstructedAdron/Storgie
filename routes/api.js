@@ -1,7 +1,7 @@
 var error400 = 'Error 400: Post syntax incorrect.',
-    fake_api = require("./fake_api");
-storgie_api = exports,
-    temporary_use = 1;
+    data_tier = require('../data/storgie'),
+    storgie_api = exports,
+    orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803");
 
 storgie_api.storgie_stat = function (req, res) {
     var stat_response = fake_storgie_stat();
@@ -10,8 +10,21 @@ storgie_api.storgie_stat = function (req, res) {
 
 storgie_api.ident_by_id = function (req, res) {
     var getby = req.params.id;
-    var arrayResult = fake_api.data_core_fake(getby);
-    return res.send(arrayResult);
+    var collection = data_tier.collection_idents;
+
+    data_tier.get(collection, getby);
+
+    console.log(req.body);
+
+//    orchestrator.get(collection, getby)
+//        .then(function (result) {
+//            console.log(result.body);
+//            res.send(result.body);
+//        })
+//        .fail(function (err) {
+//            res.send(err);
+//        });
+
 };
 
 storgie_api.convergence = function (req, res) {
@@ -22,7 +35,7 @@ storgie_api.convergence = function (req, res) {
 storgie_api.ident_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
         res.statusCode = 400;
-        return res.send(error400);
+        res.send(error400);
     }
 
     console.log(req.body.value);
@@ -32,11 +45,9 @@ storgie_api.ident_create = function (req, res) {
 storgie_api.scenario_create = function (req, res) {
     if (!req.body.hasOwnProperty('rowgen')) {
         res.statusCode = 400;
-        return res.send(error400);
+        res.send(error400);
     }
 
-    var answer = new Object();
-    answer.response = 'Data generated.';
-
-    res.send(JSON.stringify(answer));
+    var result = data_tier.build_static_data();
+    res.send(result);
 };
