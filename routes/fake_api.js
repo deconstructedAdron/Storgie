@@ -19,7 +19,8 @@ fake_api.storgie_stat = function () {
 
 fake_api.data_core_fake = function (getby) {
     var theGoods = generating_idents();
-    return theGoods[getby];
+    var result = theGoods[getby];
+    return result;
 }
 
 function generating_idents() {
@@ -57,9 +58,9 @@ function generating_idents() {
         "HashIdent": "ident2"};
 
     var theGoods = JSON.stringify([
-        { key: 'ident1', value: data_iOS},
-        { key: 'anon1', value: data_browser_anon},
-        { key: 'ident2', value: data_browser_ident2}
+        { "0": {value: data_iOS}},
+        { "1": {value: data_browser_anon}},
+        { "2": {value: data_browser_ident2}}
     ]);
     return theGoods;
 }

@@ -18,7 +18,8 @@ var data_browser_anon = {
     "IP": "101.82.1.13",
     "WebId": "4E33A7FA-8CD8-5455-871F-C75C52AE9E4E",
     "Cookie": "6E84E2B2-7796-5D3B-BBA0-162358239742",
-    "HashIdent": ""};
+    "HashEmail": "",
+    "HashIdent": "anon1"};
 
 var data_browser_ident2 = {
     "IP": "93.52.11.12",
@@ -36,18 +37,13 @@ var data_browser_ident2 = {
     "HashIdent": "ident2"};
 
 var jsonData = [
-    { "ident1": {value: data_iOS}},
-    { "anon1": {value: data_browser_anon}},
-    { "ident2": {value: data_browser_ident2}}
+    { 0: {value: data_iOS}},
+    { 1: {value: data_browser_anon}},
+    { 2: {value: data_browser_ident2}}
 ];
 
-var jsonData = data_iOS;
-
 for (var i = 0; i < jsonData.length; i++) {
-    console.log(i);
+    api.put(collection, i.toString(), jsonData[i]);
 }
-
-//api.put(collection, 'ident2', jsonData);
-
 
 console.log("finished");

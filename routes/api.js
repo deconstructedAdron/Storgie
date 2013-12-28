@@ -11,8 +11,6 @@ storgie_api.storgie_stat = function (req, res) {
 storgie_api.ident_by_id = function (req, res) {
     var getby = req.params.id;
     var arrayResult = fake_api.data_core_fake(getby);
-
-    console.log("Retrieved by " + getby + ".");
     return res.send(arrayResult);
 };
 
