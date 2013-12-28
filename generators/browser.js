@@ -1,15 +1,16 @@
 var Chance = require('chance'),
     chance = new Chance(),
+    multi_gen = require('./multi_gen'),
     browser = exports;
 
-browser.browser_ident = function () {
-    var data_browser = new Object();
-    data_browser.Referrer = chance.guid();
-    data_browser.WebId = chance.guid();
-    data_browser.AppId = chance.guid();
-    data_browser.Cookie = chance.guid();
-    data_browser.Cookie3rd = chance.guid();
-    data_browser.HashEmail = chance.guid();
-    data_browser.HashIdent = chance.guid();
-    return data_browser;
+browser.ident_generate = function () {
+    var data = new Object();
+    data.Referrer = chance.guid();
+    data.WebId = chance.guid();
+    data.AppId = chance.guid();
+    data.Cookie = chance.guid();
+    data.Cookie3rd = chance.guid();
+    data.HashEmail = chance.guid();
+    data.HashIdent = chance.guid();
+    return data;
 }

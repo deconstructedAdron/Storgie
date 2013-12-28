@@ -1,16 +1,17 @@
 var Chance = require('chance'),
     chance = new Chance(),
+    multi_gen = require('./multi_gen'),
     windows = exports;
 
-windows.windows_ident = function (matched) {
-    var data_windows = new Object();
-    data_windows.AdId = chance.guid();
-    data_windows.DevId = chance.guid();
-    data_windows.IP = chance.guid();
-    data_windows.WebId = chance.guid();
-    data_windows.Cookie = chance.guid();
-    data_windows.AppId = chance.guid();
-    data_windows.HashEmail = chance.guid();
-    data_windows.HashIdent = chance.guid();
-    return data_windows;
+windows.ident_generate = function () {
+    var data = new Object();
+    data.AdId = chance.guid();
+    data.DevId = chance.guid();
+    data.IP = chance.guid();
+    data.WebId = chance.guid();
+    data.Cookie = chance.guid();
+    data.AppId = chance.guid();
+    data.HashEmail = chance.guid();
+    data.HashIdent = chance.guid();
+    return data;
 }

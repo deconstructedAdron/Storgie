@@ -1,18 +1,23 @@
 var Chance = require('chance'),
     chance = new Chance(),
+    multi_gen = require('./multi_gen'),
     ios = exports;
 
-ios.ios_ident = function (matched) {
-    var data_iOS = new Object();
-    data_iOS.AdId = chance.guid();
-    data_iOS.VendorId = chance.guid();
-    data_iOS.UUID = chance.guid();
-    data_iOS.DevId = chance.guid();
-    data_iOS.IP = chance.guid();
-    data_iOS.WebId = chance.guid();
-    data_iOS.Cookie = chance.guid();
-    data_iOS.AppId = chance.guid();
-    data_iOS.HashEmail = chance.guid();
-    data_iOS.HashIdent = chance.guid();
-    return data_iOS;
+ios.ident_generate = function () {
+    var data = new Object();
+    data.AdId = chance.guid();
+    data.VendorId = chance.guid();
+    data.UUID = chance.guid();
+    data.DevId = chance.guid();
+    data.IP = chance.guid();
+    data.WebId = chance.guid();
+    data.Cookie = chance.guid();
+    data.AppId = chance.guid();
+    data.HashEmail = chance.guid();
+    data.HashIdent = chance.guid();
+    return data;
+}
+
+ios.idents_generate = function (count) {
+    return multi_gen.gen(count, this);
 }
