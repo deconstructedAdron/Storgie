@@ -12,19 +12,14 @@ storgie_api.ident_by_id = function (req, res) {
     var getby = req.params.id;
     var collection = data_tier.collection_idents;
 
-    data_tier.get(collection, getby);
-
-    console.log(req.body);
-
-//    orchestrator.get(collection, getby)
-//        .then(function (result) {
+    orchestrator.get(collection, getby)
+        .then(function (result) {
 //            console.log(result.body);
-//            res.send(result.body);
-//        })
-//        .fail(function (err) {
-//            res.send(err);
-//        });
-
+            res.send(result.body);
+        })
+        .fail(function (err) {
+            res.send(err);
+        });
 };
 
 storgie_api.convergence = function (req, res) {

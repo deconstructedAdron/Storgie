@@ -16,12 +16,9 @@ storgie.put = function (collection, key, value) {
 storgie.get = function (collection, key) {
     orchestrator.get(collection, key)
         .then(function (result) {
-
             var body = result.body;
-
             console.log(body);
-
-            res.send(result);
+            res.send(body);
         })
         .fail(function (err) {
             res.send(err);
