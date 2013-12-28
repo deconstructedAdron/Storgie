@@ -15,3 +15,13 @@ android.android_ident = function () {
     data_browser.HashIdent = chance.guid();
     return data_browser;
 }
+
+android.android_idents = function (count) {
+    var datas = new Array();
+
+    for (var i = 0; i < count; i++) {
+        datas[i].add(this.android_ident());
+    }
+
+    return datas;
+}
