@@ -1,5 +1,6 @@
 var Chance = require('chance'),
     chance = new Chance(),
+    multi_gen = require('./multi_gen'),
     ios = exports;
 
 ios.ident_generate = function () {
@@ -15,4 +16,8 @@ ios.ident_generate = function () {
     data.HashEmail = chance.guid();
     data.HashIdent = chance.guid();
     return data;
+}
+
+ios.idents_generate = function (count) {
+    return multi_gen.gen(count, this);
 }

@@ -1,5 +1,6 @@
 var Chance = require('chance'),
     chance = new Chance(),
+    multi_gen = require('./multi_gen'),
     browser = exports;
 
 browser.ident_generate = function () {
