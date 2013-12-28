@@ -14,7 +14,6 @@ storgie_api.ident_by_id = function (req, res) {
 
     orchestrator.get(collection, getby)
         .then(function (result) {
-//            console.log(result.body);
             res.send(result.body);
         })
         .fail(function (err) {
