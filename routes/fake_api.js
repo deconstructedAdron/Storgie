@@ -1,32 +1,29 @@
-var orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803"),
-    storgie = exports;
+var fake_api = exports;
 
-storgie.collection_idents = 'idents';
+fake_api.storgie_stat = function () {
+    var stamp = new Date();
 
-storgie.put = function (collection, key, value) {
-    orchestrator.put(collection, key, value)
-        .then(function (result) {
-            res.send(result);
-        })
-        .fail(function (err) {
-            res.send(err);
-        });
+    var sys_stat = new Object();
+    sys_stat.Compute = '0 at Peak of 70% utilization.';
+    sys_stat.Memory = 'None beyond threshold of 80% Memory utilization.';
+    sys_stat.Stamp = stamp.getTime();
+
+    var stat_response = new Object();
+    stat_response.Servers = 2;
+    stat_response.Compute = (chance.d8() * chance.d4()) + '% Average Across Servers.';
+    stat_response.Memory = (chance.d8() * chance.d4()) + '% Average Memory Consumption.';
+    stat_response.Stat = sys_stat;
+    stat_response.Stamp = stamp.getTime();
+    return stat_response;
 }
 
-storgie.get = function (collection, key) {
-    orchestrator.get(collection, key)
-        .then(function (result) {
-            var body = result.body;
-            console.log(body);
-            res.send(body);
-        })
-        .fail(function (err) {
-            res.send(err);
-        });
+fake_api.data_core_fake = function (getby) {
+    var theGoods = generating_idents();
+    var result = theGoods[getby];
+    return result;
 }
 
-storgie.build_static_data = function () {
-    // Static data to use for demo purposes.
+function generating_idents() {
     var data_iOS = {
         "AdId": "B5A877B1-5D67-5101-9B71-FF573539BBCD",
         "VendorId": "F15DE2B3-17E0-5129-B37F-1B126E3FA8AA",
@@ -43,8 +40,7 @@ storgie.build_static_data = function () {
         "IP": "101.82.1.13",
         "WebId": "4E33A7FA-8CD8-5455-871F-C75C52AE9E4E",
         "Cookie": "6E84E2B2-7796-5D3B-BBA0-162358239742",
-        "HashEmail": "",
-        "HashIdent": "anon1"};
+        "HashIdent": ""};
 
     var data_browser_ident2 = {
         "IP": "93.52.11.12",
@@ -61,15 +57,10 @@ storgie.build_static_data = function () {
         "HashEmail": "DE5F7FB4-3C3F-54EE-815C-E44461046038",
         "HashIdent": "ident2"};
 
-    var jsonData = [
-        { 0: {value: data_iOS}},
-        { 1: {value: data_browser_anon}},
-        { 2: {value: data_browser_ident2}}
-    ];
-
-    for (var i = 0; i < jsonData.length; i++) {
-        storgie.put(storgie.collection_idents, i.toString(), jsonData[i]);
-    }
-
-    return 'Data created.';
+    var theGoods = JSON.stringify([
+        { "0": {value: data_iOS}},
+        { "1": {value: data_browser_anon}},
+        { "2": {value: data_browser_ident2}}
+    ]);
+    return theGoods;
 }
