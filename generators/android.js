@@ -2,26 +2,16 @@ var Chance = require('chance'),
     chance = new Chance(),
     android = exports;
 
-android.android_ident = function () {
-    var data_browser = new Object();
-    data_browser.HashId = chance.guid();
-    data_browser.WebId = chance.guid();
-    data_browser.AppId = chance.guid();
-    data_browser.Cookie = chance.guid();
-    data_browser.HashedItem1 = chance.guid();
-    data_browser.HashedItem2 = chance.guid();
-    data_browser.HashedItem3 = chance.guid();
-    data_browser.HashEmail = chance.guid();
-    data_browser.HashIdent = chance.guid();
-    return data_browser;
-}
-
-android.android_idents = function (count) {
-    var datas = new Array();
-
-    for (var i = 0; i < count; i++) {
-        datas[i].add(this.android_ident());
-    }
-
-    return datas;
+android.ident_generate = function () {
+    var data = new Object();
+    data.HashId = chance.guid();
+    data.WebId = chance.guid();
+    data.AppId = chance.guid();
+    data.Cookie = chance.guid();
+    data.HashedItem1 = chance.guid();
+    data.HashedItem2 = chance.guid();
+    data.HashedItem3 = chance.guid();
+    data.HashEmail = chance.guid();
+    data.HashIdent = chance.guid();
+    return data;
 }
