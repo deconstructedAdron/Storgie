@@ -1,18 +1,19 @@
 var error400 = 'Error 400: Post syntax incorrect.',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
+    fake_api = require('./fake_api'),
     orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803");
 
 storgie_api.storgie_stat = function (req, res) {
-    var stat_response = fake_storgie_stat();
+    var stat_response = fake_api.storgie_stat();
     res.send(JSON.stringify(stat_response));
 };
 
 storgie_api.ident_by_id = function (req, res) {
-    var getby = req.params.id;
+    var getBy = req.params.id;
     var collection = data_tier.collection_idents;
 
-    orchestrator.get(collection, getby)
+    orchestrator.get(collection, getBy)
         .then(function (result) {
             res.send(result.body);
         })
@@ -32,7 +33,7 @@ storgie_api.ident_create = function (req, res) {
         res.send(error400);
     }
 
-    console.log(req.body.value);
+    data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
     res.send('Record created ' + req.body.value);
 };
 
