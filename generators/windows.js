@@ -15,3 +15,7 @@ windows.ident_generate = function () {
     data.HashIdent = chance.guid();
     return data;
 }
+
+windows.idents_generate = function (count) {
+    return multi_gen.gen(count, this);
+}
