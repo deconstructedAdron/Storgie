@@ -17,7 +17,7 @@ storgie_api.ident_by_id = function (req, res) {
         .then(function (result) {
             var result_message = 'id of ' + result.key + ' and content of ' + result.body;
             console.log(result_message);
-            res.send(result_message);
+            res.send(result);
         })
         .fail(function (err) {
             console.log(err);
