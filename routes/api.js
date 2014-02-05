@@ -15,9 +15,12 @@ storgie_api.ident_by_id = function (req, res) {
 
     orchestrator.get(collection, getBy)
         .then(function (result) {
-            res.send(result.body);
+            var result_message = 'id of ' + result.key + ' and content of ' + result.body;
+            console.log(result_message);
+            res.send(result_message);
         })
         .fail(function (err) {
+            console.log(err);
             res.send(err);
         });
 };
@@ -34,7 +37,10 @@ storgie_api.ident_create = function (req, res) {
     }
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
-    res.send('Record created ' + JSON.stringify(req.body.value));
+
+    var result_message = 'Record created with id ' + req.body.key + ' and content of ' + JSON.stringify(req.body.value);
+    console.log(result_message);
+    res.send(result_message);
 };
 
 storgie_api.scenario_create = function (req, res) {
@@ -44,5 +50,6 @@ storgie_api.scenario_create = function (req, res) {
     }
 
     var result = data_tier.build_static_data();
+    console.log(result);
     res.send(result);
 };
