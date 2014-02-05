@@ -1,4 +1,4 @@
-var error400 = 'Error 400: Post syntax incorrect.',
+var error400 = 'Error 400: Post syntax incorrect. Your key value stream is probably criss crossed yo!',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
@@ -34,7 +34,7 @@ storgie_api.ident_create = function (req, res) {
     }
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
-    res.send('Record created ' + req.body.value);
+    res.send('Record created ' + JSON.stringify(req.body.value));
 };
 
 storgie_api.scenario_create = function (req, res) {
