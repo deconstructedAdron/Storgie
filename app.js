@@ -33,12 +33,18 @@ app.get('/login', site.login);
 app.get('/signup', site.signup);
 app.get('/status', site.status);
 
-// storgie api services.
+// storgie api identity ident management.
 app.get('/api', api.storgie_stat);
 app.post('/ident', api.ident_create);
 app.get('/ident/:id', api.ident_by_id);
-app.get('/convergence', api.convergence);
 
+// storgie api converged data
+app.get('/convergence', api.convergence);
+app.post('/converged', api.converged_create);
+app.get('/converged/:id', api.converged_by_id);
+app.get('/converged/:query', api.converged_by_query);
+
+// storgie scenario generator
 app.post('/scenario', api.scenario_create);
 
 http.createServer(app).listen(app.get('port'), function () {

@@ -4,10 +4,18 @@ var error400 = 'Error 400: Post syntax incorrect. Your key value stream is proba
     fake_api = require('./fake_api'),
     orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803");
 
+// ****************************************
+//  Status Information API Points
+// ****************************************
+
 storgie_api.storgie_stat = function (req, res) {
     var stat_response = fake_api.storgie_stat();
     res.send(JSON.stringify(stat_response));
 };
+
+// ****************************************
+//  Identity API Points
+// ****************************************
 
 storgie_api.ident_by_id = function (req, res) {
     var getBy = req.params.id;
@@ -25,11 +33,6 @@ storgie_api.ident_by_id = function (req, res) {
         });
 };
 
-storgie_api.convergence = function (req, res) {
-    console.log('convergence status');
-    return res.send(req);
-};
-
 storgie_api.ident_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
         res.statusCode = 400;
@@ -42,6 +45,35 @@ storgie_api.ident_create = function (req, res) {
     console.log(result_message);
     res.send(result_message);
 };
+
+// ****************************************
+//  Convergence API Points
+// ****************************************
+
+storgie_api.convergence = function (req, res) {
+    console.log('convergence status');
+    // Will fill this out as engine work is done to return a rollup of values based on convergence processing.
+    return res.send(req);
+};
+
+storgie_api.converged_create = function (req, res) {
+    // stub
+    return res.send(req);
+};
+
+storgie_api.converged_by_id = function (req, res) {
+    // stub
+    return res.send(req);
+};
+
+storgie_api.converged_by_query = function (req, res) {
+    // stub
+    return res.send(req);
+};
+
+// ****************************************
+//  Testing & Scenario API Points
+// ****************************************
 
 storgie_api.scenario_create = function (req, res) {
     if (!req.body.hasOwnProperty('rowgen')) {
