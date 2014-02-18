@@ -42,7 +42,7 @@ storgie_api.ident_create = function (req, res) {
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
     var result_message = JSON.stringify(req.body.key + req.body.value);
-    
+
     console.log(result_message);
     res.send(result_message);
 };
@@ -56,7 +56,7 @@ storgie_api.convergence = function (req, res) {
     // Will fill this out as engine work is done to return a rollup of values based on convergence processing.
     return res.send(req);
 };
-e
+
 storgie_api.converged_create = function (req, res) {
     // stub
     return res.send(req);
