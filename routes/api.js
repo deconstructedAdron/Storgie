@@ -41,7 +41,7 @@ storgie_api.ident_create = function (req, res) {
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
-    var result_message = JSON.stringify(req.body.key + req.body.value);
+    var result_message = req.body.key + JSON.stringify(req.body.value);
 
     console.log(result_message);
     res.send(result_message);
