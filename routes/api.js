@@ -2,7 +2,9 @@ var error400 = 'Error 400: Post syntax incorrect. Your key value stream is proba
     data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
-    orchestrator = require('orchestrate')("1fce6199-5bfa-4750-80fb-0404bc457803");
+    orchestrate_key_holder = require("../key/orchestrate_key"),
+    key_holder = new orchestrate_key_holder(),
+    orchestrator = require('orchestrate')(key_holder.access_key);
 
 // ****************************************
 //  Status Information API Points
