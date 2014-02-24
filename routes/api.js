@@ -19,7 +19,7 @@ storgie_api.storgie_stat = function (req, res) {
 //  Identity API Points
 // ****************************************
 
-storgie_api.ident_by_id = function (req, res) {
+storgie_api.identity_by_id = function (req, res) {
     var getBy = req.params.id;
     var collection = data_tier.collection_idents;
 
@@ -35,7 +35,8 @@ storgie_api.ident_by_id = function (req, res) {
         });
 };
 
-storgie_api.ident_create = function (req, res) {
+
+storgie_api.identity_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
         res.statusCode = 400;
         res.send(error400);

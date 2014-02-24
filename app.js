@@ -34,15 +34,18 @@ app.get ('/signup', site.signup);
 app.get ('/status', site.status);
 
 // storgie api identity ident management.
-app.get ('/api', api.storgie_stat);
-app.post ('/ident', api.ident_create);
-app.get ('/ident/:id', api.ident_by_id);
+app.get('/status', api.storgie_stat);
+app.post('/identity', api.identity_create);
+app.get('/identity/:id', api.identity_by_id);
+app.get('/identity/known/:knwonid', api.identity_by_known_id);
+app.get('/identity/search/:search', api.identity_search);
 
 // storgie api converged data
 app.get ('/convergence', api.convergence);
 app.post ('/converged', api.converged_create);
 app.get ('/converged/:id', api.converged_by_id);
-app.get ('/converged/:query', api.converged_by_query);
+app.get('/converged/known/:knownid', api.converged_by_known_id);
+app.get('/converged/search/:query', api.converged_by_query);
 
 // storgie scenario generator
 app.post ('/scenario', api.scenario_create);
