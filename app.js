@@ -3,6 +3,7 @@ var site = require('./routes/site');
 var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
+var Account = require(__dirname + '/models/account');
 
 // Passport Security
 var passport = require('passport');
@@ -28,7 +29,6 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-var Account = require(__dirname + '/models/account');
 
 // storgie server information
 app.get('/', site.index);

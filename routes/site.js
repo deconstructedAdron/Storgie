@@ -7,7 +7,7 @@ exports.login = function (req, res) {
 };
 
 exports.signup = function (req, res) {
-    res.render('signup', {title: "Sign Up For Storgie."});
+    res.render('signup', {title: "Register for API Access."});
 };
 
 exports.status = function (req, res) {
