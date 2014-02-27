@@ -37,8 +37,10 @@ app.get('/signup', site.signup);
 app.get('/status', site.status);
 
 // storgie api identity ident management.
-app.get('/status', api.storgie_stat);
+app.get('/stat', api.storgie_stat);
+// curl localhost:3010/stat
 app.post('/identity', api.identity_create);
+// curl -X POST -H "Content-Type: application/json" -d '{"key":"10","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity
 app.get('/identity/:id', api.identity_by_id);
 
 // storgie api converged data
@@ -52,3 +54,4 @@ app.post('/scenario', api.scenario_create);
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
+
