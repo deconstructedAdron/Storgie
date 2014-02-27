@@ -1,3 +1,5 @@
+'use strict'
+
 exports.index = function (req, res) {
     res.render('index', { title: 'Storgie' });
 };
@@ -13,3 +15,10 @@ exports.signup = function (req, res) {
 exports.status = function (req, res) {
     res.render('status', {title: "Storgie Status & Tests"});
 };
+
+exports.signingup = function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    res.render('index', { title: 'Storgie' });
+}

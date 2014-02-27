@@ -1,3 +1,5 @@
-var Account = new Object;
+function Account(email) {
+    this._email = email;
+}
 
 module.exports = Account;

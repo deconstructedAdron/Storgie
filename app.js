@@ -35,6 +35,7 @@ app.get('/', site.index);
 app.get('/login', site.login);
 app.get('/signup', site.signup);
 app.get('/status', site.status);
+app.post('/signup', site.signingup);
 
 // storgie api identity ident management.
 app.get('/stat', api.storgie_stat);
