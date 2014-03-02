@@ -15,7 +15,9 @@
         "chance": "~0.5.3",
         "socket.io": "~0.9.16",
         "passport": "~0.2.0",
-        "passport-local": "~0.1.6"
+        "passport-local": "~0.1.6",
+        "passport-localapikey": "0.0.3",
+        "connect-flash": "0.1.x"
     },
     "devDependencies": {
         "mocha": "~1.16.2"
