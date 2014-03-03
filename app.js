@@ -72,7 +72,6 @@ passport.use(new LocalStrategy(
     }
 ));
 
-
 var app = express();
 app.set('port', process.env.PORT || 3010);
 app.set('views', path.join(__dirname, 'views'));
@@ -124,14 +123,20 @@ app.get('/converged/:id', api.converged_by_id);
 // storgie scenario generator
 app.post('/scenario', api.scenario_create);
 
+var unauthorized = '/api/unauthorized';
+var authorize = '/api/authenticate';
+//app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+//    function (req, res){
+//        api.scenario_create;
+//    })
+
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/api/authenticate
-app.post('/api/authenticate',
-    passport.authenticate('localapikey', { failureRedirect: '/api/unauthorized', failureFlash: true }),
+app.post(authorize,
+    passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
     function (req, res) {
-        res.json({ message: "Authenticated" })
+        api.convergence(req, res);
     });
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
-
