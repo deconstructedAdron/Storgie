@@ -8,7 +8,8 @@ var path = require('path');
 var passport = require('passport');
 var flash = require('connect-flash');
 var LocalStrategy = require('passport-localapikey').Strategy;
-;
+var unauthorized = '/api/unauthorized';
+var localkeyapi = 'localapikey';
 
 var users = [
     { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com', apikey: 'asdasjsdgfjkjhg' },
@@ -112,28 +113,29 @@ app.post('/signup', site.signingup);
 app.get('/stat', api.storgie_stat);
 // curl localhost:3010/stat
 app.post('/identity', api.identity_create);
-// curl -X POST -H "Content-Type: application/json" -d '{"apikey":"blagh", "key":"10","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/stat
+// curl -X POST -H "Content-Type: application/json" -d '{"apikey":"asdasjsdgfjkjhg", "key":"10","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity
 app.get('/identity/:id', api.identity_by_id);
 
 // storgie api converged data
 app.get('/convergence', api.convergence);
 app.post('/converged', api.converged_create);
-app.get('/converged/:id', api.converged_by_id);
+//app.get('/converged/:id', api.converged_by_id);
+
+//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/converged/2
+app.post('/converged/:id', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+    function (req, res) {
+        api.converged_by_id(req, res);
+    })
 
 // storgie scenario generator
-app.post('/scenario', api.scenario_create);
-
-var unauthorized = '/api/unauthorized';
-var localkeyapi = 'localapikey';
-
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/scenario
 app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
     function (req, res) {
         api.scenario_create(req, res);
     })
 
-//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/api/authenticate
-app.post('/api/authenticate',
+//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/authenticate
+app.post('/authenticate',
     passport.authenticate(localkeyapi, { failureRedirect: unauthorized, failureFlash: true }),
     function (req, res) {
         api.convergence(req, res);
