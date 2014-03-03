@@ -82,10 +82,10 @@ storgie_api.converged_by_query = function (req, res) {
 storgie_api.scenario_create = function (req, res) {
     if (!req.body.hasOwnProperty('rowgen')) {
         res.statusCode = 400;
-        res.send(error400);
+        return res.send(error400);
     }
 
     var result = data_tier.build_static_data();
     console.log(result);
-    res.send(result);
+    return res.send(result);
 };

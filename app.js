@@ -124,15 +124,17 @@ app.get('/converged/:id', api.converged_by_id);
 app.post('/scenario', api.scenario_create);
 
 var unauthorized = '/api/unauthorized';
-var authorize = '/api/authenticate';
-//app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
-//    function (req, res){
-//        api.scenario_create;
-//    })
+var localkeyapi = 'localapikey';
+
+//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/scenario
+app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+    function (req, res) {
+        api.scenario_create(req, res);
+    })
 
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/api/authenticate
-app.post(authorize,
-    passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+app.post('/api/authenticate',
+    passport.authenticate(localkeyapi, { failureRedirect: unauthorized, failureFlash: true }),
     function (req, res) {
         api.convergence(req, res);
     });
