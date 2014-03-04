@@ -6,7 +6,6 @@ var path = require('path');
 
 // Passport Security
 var passport = require('passport');
-var flash = require('connect-flash');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
 var users = [
@@ -79,9 +78,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-app.use(express.cookieParser());
-app.use(express.session({ secret: 'keyboard cat' }));
-app.use(flash());
+//app.use(express.cookieParser());
+//app.use(express.session({ secret: 'keyboard cat' }));
+//app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -115,15 +114,16 @@ app.get('/identity/:id', api.identity_by_id);
 app.get('/convergence', api.convergence);
 app.post('/converged', api.converged_create);
 
-//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/converged/2
-app.post('/converged/:id',
+// curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged/by?access_token=123456789
+// curl -v -X POST -d '{"key":"2","value":"{"knownid":"{"oneid":"1234","emailid":"blagh@blagh.com"}"}"}' http://localhost:3010/converged/by?access_token=123456789
+app.post('/converged/by',
     passport.authenticate('bearer', { session: false }),
     function (req, res) {
         api.converged_by_id(req, res);
     })
 
 // storgie scenario generator
-//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/scenario
+// curl -v -X POST -d '{"rowgen":"yes"}' http://localhost:3010/scenario?access_token=123456789
 app.post('/scenario',
     passport.authenticate('bearer', { session: false }),
     function (req, res) {

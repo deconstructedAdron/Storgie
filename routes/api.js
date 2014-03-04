@@ -65,18 +65,17 @@ storgie_api.converged_create = function (req, res) {
     // stub
 
 
-
     return res.send(req);
 };
 
 storgie_api.converged_by_id = function (req, res) {
     // stub
-    return res.send(req);
+    return res.send('success');
 };
 
 storgie_api.converged_by_query = function (req, res) {
     // stub
-    return res.send(req);
+    return res.send('success');
 };
 
 // ****************************************
