@@ -7,13 +7,13 @@ var path = require('path');
 // Passport Security
 var passport = require('passport');
 var flash = require('connect-flash');
-var LocalStrategy = require('passport-localapikey').Strategy;
-var unauthorized = '/api/unauthorized';
-var localkeyapi = 'localapikey';
+var BearerStrategy = require('passport-http-bearer').Strategy;
 
 var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com', apikey: 'asdasjsdgfjkjhg' },
-    { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com', apikey: 'gfsdgsfgsfg' }
+    { id: 1, username: 'sally', password: 'secret', email: 'bob@example.com', apikey: 'asdasjsdgfjkjhg' },
+    { id: 2, username: 'frank', password: 'birthday', email: 'joe@example.com', apikey: 'gfsdgsfgsfg' },
+    { id: 3, username: 'bob', token: '123456789', email: 'bob@example.com' },
+    { id: 4, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' }
 ];
 
 function findById(id, fn) {
@@ -25,10 +25,10 @@ function findById(id, fn) {
     }
 }
 
-function findByApiKey(apikey, fn) {
+function findByToken(token, fn) {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
-        if (user.apikey === apikey) {
+        if (user.token === token) {
             return fn(null, user);
         }
     }
@@ -45,28 +45,23 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
-// Use the LocalStrategy within Passport.
-//   Strategies in passport require a `verify` function, which accept
-//   credentials (in this case, a username and password), and invoke a callback
-//   with a user object.  In the real world, this would query a database;
-//   however, in this example we are using a baked-in set of users.
-passport.use(new LocalStrategy(
-    function (apikey, done) {
-        // asynchronous verification, for effect...
+passport.use(new BearerStrategy({
+    },
+    function (token, done) {
+        // asynchronous validation, for effect...
         process.nextTick(function () {
 
-            // Find the user by username.  If there is no user with the given
-            // username, or the password is not correct, set the user to `false` to
-            // indicate failure and set a flash message.  Otherwise, return the
-            // authenticated `user`.
-            findByApiKey(apikey, function (err, user) {
+            // Find the user by token.  If there is no user with the given token, set
+            // the user to `false` to indicate failure.  Otherwise, return the
+            // authenticated `user`.  Note that in a production-ready application, one
+            // would want to validate the token for authenticity.
+            findByToken(token, function (err, user) {
                 if (err) {
                     return done(err);
                 }
                 if (!user) {
-                    return done(null, false, { message: 'Unknown apikey : ' + apikey });
+                    return done(null, false);
                 }
-                // if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
                 return done(null, user);
             })
         });
@@ -121,14 +116,16 @@ app.get('/convergence', api.convergence);
 app.post('/converged', api.converged_create);
 
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/converged/2
-app.post('/converged/:id', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+app.post('/converged/:id',
+    passport.authenticate('bearer', { session: false }),
     function (req, res) {
         api.converged_by_id(req, res);
     })
 
 // storgie scenario generator
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/scenario
-app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
+app.post('/scenario',
+    passport.authenticate('bearer', { session: false }),
     function (req, res) {
         api.scenario_create(req, res);
     })
