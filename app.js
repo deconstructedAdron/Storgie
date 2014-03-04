@@ -119,7 +119,6 @@ app.get('/identity/:id', api.identity_by_id);
 // storgie api converged data
 app.get('/convergence', api.convergence);
 app.post('/converged', api.converged_create);
-//app.get('/converged/:id', api.converged_by_id);
 
 //   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/converged/2
 app.post('/converged/:id', passport.authenticate('localapikey', { failureRedirect: unauthorized, failureFlash: true }),
@@ -133,13 +132,6 @@ app.post('/scenario', passport.authenticate('localapikey', { failureRedirect: un
     function (req, res) {
         api.scenario_create(req, res);
     })
-
-//   curl -v -d "apikey=asdasjsdgfjkjhg" http://127.0.0.1:3010/authenticate
-app.post('/authenticate',
-    passport.authenticate(localkeyapi, { failureRedirect: unauthorized, failureFlash: true }),
-    function (req, res) {
-        api.convergence(req, res);
-    });
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));

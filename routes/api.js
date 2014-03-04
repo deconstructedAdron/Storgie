@@ -57,11 +57,15 @@ storgie_api.identity_create = function (req, res) {
 storgie_api.convergence = function (req, res) {
     console.log('convergence status convergence');
     // Will fill this out as engine work is done to return a rollup of values based on convergence processing.
+
     return res.send({"foo": "yeah"});
 };
 
 storgie_api.converged_create = function (req, res) {
     // stub
+
+
+
     return res.send(req);
 };
 
@@ -80,7 +84,10 @@ storgie_api.converged_by_query = function (req, res) {
 // ****************************************
 
 storgie_api.scenario_create = function (req, res) {
-    if (!req.body.hasOwnProperty('rowgen')) {
+
+    var rowgen = req.body.hasOwnProperty('rowgen');
+
+    if (!rowgen) {
         res.statusCode = 400;
         return res.send(error400);
     }
