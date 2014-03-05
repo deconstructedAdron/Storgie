@@ -6,6 +6,11 @@ var error400 = 'Error 400: Post syntax incorrect. Your key value stream is proba
     key_holder = new orchestrate_key_holder(),
     orchestrator = require('orchestrate')(key_holder.access_key);
 
+storgie_api.finishing = function (req, res, path, returnThis) {
+    console.log('Requested by: ' + path + JSON.stringify(req.body));
+    return res.send(returnThis);
+}
+
 // ****************************************
 //  Status Information API Points
 // ****************************************
@@ -55,24 +60,15 @@ storgie_api.identity_create = function (req, res) {
 // ****************************************
 
 storgie_api.convergence = function (req, res) {
-    console.log('convergence status');
-    // Will fill this out as engine work is done to return a rollup of values based on convergence processing.
-    return res.send(req);
+    this.finishing(req, res, '/convergence', {"foo": "yeah"});
 };
 
 storgie_api.converged_create = function (req, res) {
-    // stub
-    return res.send(req);
+    this.finishing(req, res, '/converged');
 };
 
 storgie_api.converged_by_id = function (req, res) {
-    // stub
-    return res.send(req);
-};
-
-storgie_api.converged_by_query = function (req, res) {
-    // stub
-    return res.send(req);
+    this.finishing(req, res, '/converged/by', 'id');
 };
 
 // ****************************************
@@ -80,12 +76,15 @@ storgie_api.converged_by_query = function (req, res) {
 // ****************************************
 
 storgie_api.scenario_create = function (req, res) {
-    if (!req.body.hasOwnProperty('rowgen')) {
+
+    var rowgen = req.body.hasOwnProperty('rowgen');
+
+    if (!rowgen) {
         res.statusCode = 400;
-        res.send(error400);
+        return res.send(error400);
     }
 
     var result = data_tier.build_static_data();
     console.log(result);
-    res.send(result);
+    return res.send(result);
 };
