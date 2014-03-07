@@ -64,10 +64,6 @@ storgie_api.convergence = function (req, res) {
     this.finishing(req, res, '/convergence', {"foo": "yeah"});
 };
 
-storgie_api.converged_create = function (req, res) {
-    this.finishing(req, res, '/converged');
-};
-
 storgie_api.converged_by_id = function (req, res) {
     this.finishing(req, res, '/converged/by', 'id');
 };

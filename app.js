@@ -106,13 +106,6 @@ app.get('/convergence',
         api.convergence(req, res);
     });
 
-// curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged?access_token=123456789
-app.post('/converged',
-    passport.authenticate('bearer', { session: false }),
-    function (req, res) {
-        api.converged_create(req, res);
-    });
-
 // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged/by?access_token=123456789
 // curl -v -X POST -d '{"key":"2","value":"{"knownid":"{"oneid":"1234","emailid":"blagh@blagh.com"}"}"}' http://localhost:3010/converged/by?access_token=123456789
 app.post('/converged/by',
