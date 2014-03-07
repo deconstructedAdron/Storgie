@@ -17,5 +17,5 @@ node_modules
 .idea
 .elasticbeanstalk/
 
-# this needs commited to the AWS path however.
+# See the README.md file for information about this file.
 config.json
