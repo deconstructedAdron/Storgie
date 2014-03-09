@@ -68,7 +68,6 @@ describe('The configuration file', function () {
             console.log(fd + ' ' + error);
         });
 
-
         //assert.equal('win!', result);
     })
 })
