@@ -16,3 +16,8 @@ node_modules
 
 .idea
 .elasticbeanstalk/
+
+# See the README.md file for information about this file.
+config.json
+
+key/orchestrate_key.js

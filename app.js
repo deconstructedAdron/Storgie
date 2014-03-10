@@ -9,20 +9,9 @@ var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
 var users = [
-    { id: 1, username: 'sally', password: 'secret', email: 'bob@example.com', apikey: 'asdasjsdgfjkjhg' },
-    { id: 2, username: 'frank', password: 'birthday', email: 'joe@example.com', apikey: 'gfsdgsfgsfg' },
     { id: 3, username: 'bob', token: '123456789', email: 'bob@example.com' },
     { id: 4, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' }
 ];
-
-function findById(id, fn) {
-    var idx = id - 1;
-    if (users[idx]) {
-        fn(null, users[idx]);
-    } else {
-        fn(new Error('User ' + id + ' does not exist'));
-    }
-}
 
 function findByToken(token, fn) {
     for (var i = 0, len = users.length; i < len; i++) {
@@ -58,23 +47,14 @@ app.set('port', process.env.PORT || 3010);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('name', 'storgie');
-app.use(express.favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-
-//app.use(express.cookieParser());
-//app.use(express.session({ secret: 'keyboard cat' }));
-//app.use(flash());
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-// Passport
 app.use(passport.initialize());
 
 // development only
@@ -92,27 +72,37 @@ app.post('/signup', site.signingup);
 // *********************************************************************************************************************
 // storgie api identity ident management.
 // *********************************************************************************************************************
-app.get('/stat', api.storgie_stat);
-// curl localhost:3010/stat
-app.post('/identity', api.identity_create);
-// curl -X POST -H "Content-Type: application/json" -d '{"apikey":"asdasjsdgfjkjhg", "key":"10","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity
-app.get('/identity/:id', api.identity_by_id);
+// curl -v http://localhost:3010/stat?access_token=123456789
+app.get('/stat',
+    passport.authenticate('bearer', { session: false}),
+    function (req, res) {
+        api.storgie_stat(req, res);
+    });
+
+// curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_1","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=123456789
+app.post('/identity',
+    passport.authenticate('bearer', { session: false}),
+    function (req, res) {
+        api.identity_create(req, res);
+    });
+
+// curl -X POST -H "Content-Type: application/json" -d '{"root":"the_key_1"}' http://localhost:3010/identity/by?access_token=123456789
+// curl -X POST -H "Content-Type: application/json" -d '{"knownid":"known_id_1"}' http://localhost:3010/identity/by?access_token=123456789
+app.post('/identity/by',
+    passport.authenticate('bearer', { session: false}),
+    function (req, res) {
+        api.identity_by_id(req, res);
+    });
 
 // *********************************************************************************************************************
 // storgie api converged data
 // *********************************************************************************************************************
 
 // curl -v http://localhost:3010/convergence?access_token=123456789
-app.get('/convergence', passport.authenticate('bearer', { session: false }),
-    function (req, res) {
-        api.convergence(req, res);
-    });
-
-// curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged?access_token=123456789
-app.post('/converged',
+app.get('/convergence',
     passport.authenticate('bearer', { session: false }),
     function (req, res) {
-        api.converged_create(req, res);
+        api.convergence(req, res);
     });
 
 // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged/by?access_token=123456789

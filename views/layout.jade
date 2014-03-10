@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app)
     head
         title
             | Deconstructed Dashboard Login
@@ -8,6 +8,10 @@ html
         link(href='stylesheets/font-awesome.css', media='all', rel='stylesheet', type='text/css')
         link(href='stylesheets/se7en-font.css', media='all', rel='stylesheet', type='text/css')
         link(href='stylesheets/style.css', media='all', rel='stylesheet', type='text/css')
+        link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+        link(rel='icon', href='/favicon.ico', type='image/x-icon')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js', type='text/javascript')
+        script(src='controllers/stat.js', type='text/javascript')
         script(src='http://code.jquery.com/jquery-1.10.2.min.js', type='text/javascript')
         script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js', type='text/javascript')
         script(src='javascripts/bootstrap.min.js', type='text/javascript')
@@ -83,11 +87,15 @@ html
                             li
                                 a.current(href='/')
                                     span.se7en-home(aria-hidden='true')
-                                    | Dashboard
+                                    | API Dashboard
                             li
                                 a.current(href='/status')
-                                    span.se7en-gear(aria-hidden='true')
-                                    | Ecosystem Stats
+                                    span.se7en-charts(aria-hidden='true')
+                                    | API Ecosystem Stats
+                            li
+                                a.current(href='http://docs.deconstructed.io')
+                                    span.se7en-pages(aria-hidden='true')
+                                    | API Docs
             //
                End Navigation
             block content

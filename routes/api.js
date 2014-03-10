@@ -25,10 +25,11 @@ storgie_api.storgie_stat = function (req, res) {
 // ****************************************
 
 storgie_api.identity_by_id = function (req, res) {
-    var getBy = req.params.id;
+    var getByRootKey = req.body.root;
+    //    var getByKnownKey = req.body.known;
     var collection = data_tier.collection_idents;
 
-    orchestrator.get(collection, getBy)
+    orchestrator.get(collection, getByRootKey)
         .then(function (result) {
             var result_message = 'id of ' + result.key + ' and content of ' + result.body;
             console.log(result_message);
@@ -39,7 +40,6 @@ storgie_api.identity_by_id = function (req, res) {
             res.send(err);
         });
 };
-
 
 storgie_api.identity_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
@@ -61,10 +61,6 @@ storgie_api.identity_create = function (req, res) {
 
 storgie_api.convergence = function (req, res) {
     this.finishing(req, res, '/convergence', {"foo": "yeah"});
-};
-
-storgie_api.converged_create = function (req, res) {
-    this.finishing(req, res, '/converged');
 };
 
 storgie_api.converged_by_id = function (req, res) {
