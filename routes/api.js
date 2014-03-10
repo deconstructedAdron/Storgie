@@ -49,6 +49,8 @@ storgie_api.identity_create = function (req, res) {
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
+    data_tier.consociate(req.body.key, req.body.value);
+
     var result_message = {"key": req.body.key};
 
     console.log(result_message);

@@ -28,6 +28,10 @@ storgie.get = function (collection, key) {
         });
 }
 
+storgie.consociate = function (key, value) {
+
+}
+
 storgie.build_static_data = function () {
     // Static data to use for demo purposes.
     var data_iOS = {
