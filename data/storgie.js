@@ -1,4 +1,6 @@
-var orchestrator = require('orchestrate')(''),
+var orchestrate_key_holder = require("../key/orchestrate_key"),
+    key_holder = new orchestrate_key_holder(),
+    orchestrator = require('orchestrate')(key_holder.access_key),
     storgie = exports;
 
 storgie.collection_idents = 'identity';
