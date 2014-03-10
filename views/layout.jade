@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app)
     head
         title
             | Deconstructed Dashboard Login
@@ -10,6 +10,8 @@ html
         link(href='stylesheets/style.css', media='all', rel='stylesheet', type='text/css')
         link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
         link(rel='icon', href='/favicon.ico', type='image/x-icon')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js', type='text/javascript')
+        script(src='controllers/stat.js', type='text/javascript')
         script(src='http://code.jquery.com/jquery-1.10.2.min.js', type='text/javascript')
         script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js', type='text/javascript')
         script(src='javascripts/bootstrap.min.js', type='text/javascript')
