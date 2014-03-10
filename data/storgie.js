@@ -1,7 +1,8 @@
-var orchestrator = require('orchestrate')("a88c5036-8b56-4acf-9d24-d87241f27ee5"),
+var orchestrator = require('orchestrate')(''),
     storgie = exports;
 
 storgie.collection_idents = 'identity';
+storgie.collection_converged = 'converged';
 
 storgie.put = function (collection, key, value) {
     orchestrator.put(collection, key, value)
