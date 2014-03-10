@@ -23,7 +23,7 @@ storgie_api.storgie_stat = function (req, res) {
 // ****************************************
 //  Identity API Points
 // ****************************************
-''
+
 storgie_api.identity_by_id = function (req, res) {
     var getByRootKey = req.body.root;
     //    var getByKnownKey = req.body.known;
@@ -40,7 +40,6 @@ storgie_api.identity_by_id = function (req, res) {
             res.send(err);
         });
 };
-
 
 storgie_api.identity_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
