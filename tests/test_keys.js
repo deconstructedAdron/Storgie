@@ -1,6 +1,7 @@
 /**
  * Created by adron on 3/10/14.
  * Determines if keys are available.
+ * License: Apache 2.0 =>
  */
 
 var should = require('should');
