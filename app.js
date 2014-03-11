@@ -1,3 +1,8 @@
+/**
+ * Created by Adron
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
+ */
+
 var express = require('express');
 var site = require('./routes/site');
 var api = require('./routes/api');

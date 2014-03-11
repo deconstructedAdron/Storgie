@@ -1,3 +1,9 @@
+/**
+ * Created by Adron
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
+ */
+'use strict'
+
 var Chance = require('chance'),
     chance = new Chance(),
     multi_gen = require('./multi_gen'),

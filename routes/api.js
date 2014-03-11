@@ -1,3 +1,9 @@
+/**
+ * Created by Adron
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
+ */
+'use strict'
+
 var error400 = 'Error 400: Post syntax incorrect. Your key value stream is probably criss crossed yo!',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
