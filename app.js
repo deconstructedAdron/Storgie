@@ -10,7 +10,8 @@ var BearerStrategy = require('passport-http-bearer').Strategy;
 
 var users = [
     { id: 3, username: 'bob', token: '123456789', email: 'bob@example.com' },
-    { id: 4, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' }
+    { id: 4, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' },
+    { id: 5, username: 'consociation', token: '0d1b02f9-c7e9-42c3-8518-7d744b827274', email: 'consociation@deconstructed.io'}
 ];
 
 function findByToken(token, fn) {

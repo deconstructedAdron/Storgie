@@ -29,7 +29,7 @@ storgie.get = function (collection, key) {
 }
 
 storgie.consociate = function (key, value) {
-
+    // Make call here out to consociation service.
 }
 
 storgie.build_static_data = function () {
