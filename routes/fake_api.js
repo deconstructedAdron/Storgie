@@ -2,7 +2,6 @@
  * Created by Adron
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
-'use strict'
 
 var fake_api = exports;
 

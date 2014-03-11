@@ -2,8 +2,6 @@
  * Created by Adron
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
-'use strict'
-
 
 var orchestrate_key_holder = require("../key/orchestrate_key"),
     key_holder = new orchestrate_key_holder(),
