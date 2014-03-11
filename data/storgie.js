@@ -1,7 +1,10 @@
-var orchestrator = require('orchestrate')("a88c5036-8b56-4acf-9d24-d87241f27ee5"),
+var orchestrate_key_holder = require("../key/orchestrate_key"),
+    key_holder = new orchestrate_key_holder(),
+    orchestrator = require('orchestrate')(key_holder.access_key),
     storgie = exports;
 
 storgie.collection_idents = 'identity';
+storgie.collection_converged = 'converged';
 
 storgie.put = function (collection, key, value) {
     orchestrator.put(collection, key, value)
@@ -23,6 +26,10 @@ storgie.get = function (collection, key) {
         .fail(function (err) {
             res.send(err);
         });
+}
+
+storgie.consociate = function (key, value) {
+
 }
 
 storgie.build_static_data = function () {

@@ -21,3 +21,4 @@ node_modules
 config.json
 
 key/orchestrate_key.js
+key/consociation_token.js

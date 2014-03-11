@@ -1,5 +1,4 @@
 var assert = require("assert")
-var fs = require('fs');
 
 describe('Array', function () {
     describe('#indexOf()', function () {

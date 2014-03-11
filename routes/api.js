@@ -49,6 +49,8 @@ storgie_api.identity_create = function (req, res) {
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
+    data_tier.consociate(req.body.key, req.body.value);
+
     var result_message = {"key": req.body.key};
 
     console.log(result_message);
@@ -61,6 +63,18 @@ storgie_api.identity_create = function (req, res) {
 
 storgie_api.convergence = function (req, res) {
     this.finishing(req, res, '/convergence', {"foo": "yeah"});
+};
+
+storgie_api.converged = function (req, res) {
+    var getByRootKey = req.body.root;
+    var collection = data_tier.collection_idents;
+
+    data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
+
+    var result_message = {"key": req.body.key};
+
+    console.log(result_message);
+    res.send(result_message);
 };
 
 storgie_api.converged_by_id = function (req, res) {
