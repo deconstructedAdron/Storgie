@@ -10,7 +10,8 @@ var error400 = 'Error 400: Post syntax incorrect. Your key value stream is proba
     fake_api = require('./fake_api'),
     orchestrate_key_holder = require("../key/orchestrate_key"),
     key_holder = new orchestrate_key_holder(),
-    orchestrator = require('orchestrate')(key_holder.access_key);
+    orchestrator = require('orchestrate')(key_holder.access_key),
+    Q = require('kew');
 
 storgie_api.finishing = function (req, res, path, returnThis) {
     console.log('Requested by: ' + path + JSON.stringify(req.body));
@@ -30,36 +31,55 @@ storgie_api.storgie_stat = function (req, res) {
 //  Identity API Points
 // ****************************************
 
-function getLuceneSearch(searchBody) {
-    var searchType;
+function getByKnownId(searchBody) {
+    var searchString = '';
+    var knownId = searchBody.knownid;
+    var keys = Object.keys(knownId);
 
-    if (searchBody.knownid != undefined) {
-        searchType = 'knownid';
-    } else if (req.body.rootid != undefined) {
-        searchType = 'rootid'
+    for (var i = 0; i < keys.length; i++) {
+        var property = keys[i];
+        // In the documentation for Lucene it states there should be a colon
+        // as shown in the line of code below, however that is not what actually
+        // works in production. So after troubleshooting I've shifted to removing
+        // the colon as in the actual line of code below.
+        // searchString += keys[i] + ':"' + knownId[property] + '"';
+        searchString += keys[i] + '"' + knownId[property] + '"';
+        if (keys.length > 0 && i < keys.length - 1) {
+            searchString += ' OR ';
+        }
     }
-
-    var blagh = Object.keys(searchBody.knownid);
-
-    for (var i = 0; i < blagh.length; i++) {
-        var lkasdflkjasdf = blagh[i];
-        //Do something
-    }
+    return searchString;
 }
 
-storgie_api.identity_by_id = function (req, res) {
-    var collection = data_tier.collection_idents;
-    var search = getLuceneSearch(req.body);
+function getByRootId(searchBody) {
+    var searchString = '';
+    var searchElementKeys = Object.keys(searchBody.rootid);
 
-    orchestrator.search(collection, search)
+    for (var i = 0; i < searchElementKeys.length; i++) {
+
+    }
+}
+function getLuceneSearch(searchBody) {
+    var searchStringResult = '';
+
+    if (searchBody.knownid != undefined) {
+        searchStringResult = getByKnownId(searchBody);
+    } else if (searchBody.rootid != undefined) {
+        searchStringResult = getByRootId(searchBody);
+    }
+
+    return searchStringResult;
+}
+
+storgie_api.identity_by_id = function (body) {
+    var collection = data_tier.collection_idents;
+    var search = getLuceneSearch(body);
+
+    return orchestrator.search(collection, search)
         .then(function (result) {
-            var result_message = 'id of ' + result.key + ' and content of ' + result.body;
+            var result_message = result.body;
             console.log(result_message);
-            res.send(result);
-        })
-        .fail(function (err) {
-            console.log(err);
-            res.send(err);
+            return result.body;
         })
 };
 
