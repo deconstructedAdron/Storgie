@@ -30,12 +30,28 @@ storgie_api.storgie_stat = function (req, res) {
 //  Identity API Points
 // ****************************************
 
-storgie_api.identity_by_id = function (req, res) {
-    var getByRootKey = req.body.root;
-    //    var getByKnownKey = req.body.known;
-    var collection = data_tier.collection_idents;
+function getLuceneSearch(searchBody) {
+    var searchType;
 
-    orchestrator.get(collection, getByRootKey)
+    if (searchBody.knownid != undefined) {
+        searchType = 'knownid';
+    } else if (req.body.rootid != undefined) {
+        searchType = 'rootid'
+    }
+
+    var blagh = Object.keys(searchBody.knownid);
+
+    for (var i = 0; i < blagh.length; i++) {
+        var lkasdflkjasdf = blagh[i];
+        //Do something
+    }
+}
+
+storgie_api.identity_by_id = function (req, res) {
+    var collection = data_tier.collection_idents;
+    var search = getLuceneSearch(req.body);
+
+    orchestrator.search(collection, search)
         .then(function (result) {
             var result_message = 'id of ' + result.key + ' and content of ' + result.body;
             console.log(result_message);
@@ -44,7 +60,7 @@ storgie_api.identity_by_id = function (req, res) {
         .fail(function (err) {
             console.log(err);
             res.send(err);
-        });
+        })
 };
 
 storgie_api.identity_create = function (req, res) {
