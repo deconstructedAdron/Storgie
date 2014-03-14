@@ -122,21 +122,3 @@ storgie_api.converged = function (req, res) {
 storgie_api.converged_by_id = function (req, res) {
     this.finishing(req, res, '/converged/by', 'id');
 };
-
-// ****************************************
-//  Testing & Scenario API Points
-// ****************************************
-
-storgie_api.scenario_create = function (req, res) {
-
-    var rowgen = req.body.hasOwnProperty('rowgen');
-
-    if (!rowgen) {
-        res.statusCode = 400;
-        return res.send(error400);
-    }
-
-    var result = data_tier.build_static_data();
-    console.log(result);
-    return res.send(result);
-};

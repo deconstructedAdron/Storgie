@@ -127,13 +127,6 @@ app.post('/converged/by',
 // storgie scenario generator
 // *********************************************************************************************************************
 
-// curl -v -X POST -d '{"rowgen":"yes"}' http://localhost:3010/scenario?access_token=123456789
-app.post('/scenario',
-    passport.authenticate('bearer', { session: false }),
-    function (req, res) {
-        api.scenario_create(req, res);
-    })
-
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));
 });
