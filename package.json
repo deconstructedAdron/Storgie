@@ -15,7 +15,8 @@
         "chance": "~0.5.3",
         "socket.io": "~0.9.16",
         "passport": "~0.2.0",
-        "passport-http-bearer": "~1.0.1"
+        "passport-http-bearer": "~1.0.1",
+        "kew": "~0.3.4"
     },
     "devDependencies": {
         "mocha": "~1.16.2",

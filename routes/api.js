@@ -1,10 +1,17 @@
+/**
+ * Created by Adron
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
+ */
+'use strict'
+
 var error400 = 'Error 400: Post syntax incorrect. Your key value stream is probably criss crossed yo!',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
     orchestrate_key_holder = require("../key/orchestrate_key"),
     key_holder = new orchestrate_key_holder(),
-    orchestrator = require('orchestrate')(key_holder.access_key);
+    orchestrator = require('orchestrate')(key_holder.access_key),
+    Q = require('kew');
 
 storgie_api.finishing = function (req, res, path, returnThis) {
     console.log('Requested by: ' + path + JSON.stringify(req.body));
@@ -24,21 +31,56 @@ storgie_api.storgie_stat = function (req, res) {
 //  Identity API Points
 // ****************************************
 
-storgie_api.identity_by_id = function (req, res) {
-    var getByRootKey = req.body.root;
-    //    var getByKnownKey = req.body.known;
-    var collection = data_tier.collection_idents;
+function getByKnownId(searchBody) {
+    var searchString = '';
+    var knownId = searchBody.knownid;
+    var keys = Object.keys(knownId);
 
-    orchestrator.get(collection, getByRootKey)
+    for (var i = 0; i < keys.length; i++) {
+        var property = keys[i];
+        // In the documentation for Lucene it states there should be a colon
+        // as shown in the line of code below, however that is not what actually
+        // works in production. So after troubleshooting I've shifted to removing
+        // the colon as in the actual line of code below.
+        // searchString += keys[i] + ':"' + knownId[property] + '"';
+        searchString += keys[i] + '"' + knownId[property] + '"';
+        if (keys.length > 0 && i < keys.length - 1) {
+            searchString += ' OR ';
+        }
+    }
+    return searchString;
+}
+
+function getByRootId(searchBody) {
+    var searchString = '';
+    var searchElementKeys = Object.keys(searchBody.rootid);
+
+    for (var i = 0; i < searchElementKeys.length; i++) {
+
+    }
+}
+function getLuceneSearch(searchBody) {
+    var searchStringResult = '';
+
+    if (searchBody.knownid != undefined) {
+        searchStringResult = getByKnownId(searchBody);
+    } else if (searchBody.rootid != undefined) {
+        searchStringResult = getByRootId(searchBody);
+    }
+
+    return searchStringResult;
+}
+
+storgie_api.identity_by_id = function (body) {
+    var collection = data_tier.collection_idents;
+    var search = getLuceneSearch(body);
+
+    return orchestrator.search(collection, search)
         .then(function (result) {
-            var result_message = 'id of ' + result.key + ' and content of ' + result.body;
+            var result_message = result.body;
             console.log(result_message);
-            res.send(result);
+            return result.body;
         })
-        .fail(function (err) {
-            console.log(err);
-            res.send(err);
-        });
 };
 
 storgie_api.identity_create = function (req, res) {
@@ -79,22 +121,4 @@ storgie_api.converged = function (req, res) {
 
 storgie_api.converged_by_id = function (req, res) {
     this.finishing(req, res, '/converged/by', 'id');
-};
-
-// ****************************************
-//  Testing & Scenario API Points
-// ****************************************
-
-storgie_api.scenario_create = function (req, res) {
-
-    var rowgen = req.body.hasOwnProperty('rowgen');
-
-    if (!rowgen) {
-        res.statusCode = 400;
-        return res.send(error400);
-    }
-
-    var result = data_tier.build_static_data();
-    console.log(result);
-    return res.send(result);
 };

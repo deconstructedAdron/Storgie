@@ -1,7 +1,7 @@
 Storgie
 =======
 
-License: [Apache 2.0]()
+License: [Apache 2.0](https://github.com/Deconstructed/Storgie/blob/master/LICENSE)
 
  * [Issues List](https://github.com/Deconstructed/Storgie/issues)
  * [Huboard Kanban](https://huboard.com/Deconstructed/Storgie)
