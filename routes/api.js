@@ -4,7 +4,7 @@
  */
 'use strict'
 
-var error400 = 'Error 400: Post syntax incorrect. Your key value stream is probably criss crossed yo!',
+var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
@@ -74,6 +74,11 @@ function getLuceneSearch(searchBody) {
 storgie_api.identity_by_id = function (body) {
     var collection = data_tier.collection_idents;
     var search = getLuceneSearch(body);
+
+    if (search === '') {
+        throw new Error
+        'Invalid search string.';
+    }
 
     return orchestrator.search(collection, search)
         .then(function (result) {

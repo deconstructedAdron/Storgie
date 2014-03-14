@@ -99,8 +99,9 @@ app.post('/identity/by',
             .then(function (result) {
                 res.send(result);
             })
-            .fail(function (error) {
-                res.send(error);
+            .fail(function (err) {
+                res.statusCode = 400;
+                res.send(err);
             });
     });
 
