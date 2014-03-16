@@ -19,11 +19,13 @@ var conf = convict({
         default: 3000,
         env: "PORT"
     },
-    database: {
-        host: {
-            default: "someplace:cool",
-            env: "DB_HOST"
-        }
+    data_api: {
+        doc: "The API key for the data service.",
+        default: "key_here"
+    },
+    consociation_api: {
+        doc: "The API key for the consociation service.",
+        default: "key_here"
     }
 });
 
