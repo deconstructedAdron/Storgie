@@ -21,10 +21,9 @@ storgie_api.finishing = function (req, res, path, returnThis) {
 // ****************************************
 //  Status Information API Points
 // ****************************************
+storgie_api.storgie_stat = function () {
+    return fake_api.storgie_stat();
 
-storgie_api.storgie_stat = function (req, res) {
-    var stat_response = fake_api.storgie_stat();
-    res.send(JSON.stringify(stat_response));
 };
 
 // ****************************************
