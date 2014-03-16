@@ -16,7 +16,7 @@ var conf = convict({
     port: {
         doc: "The port to bind.",
         format: "port",
-        default: 3000,
+        default: 1337,
         env: "PORT"
     },
     data_api: {

@@ -4,7 +4,7 @@
  */
 
 {
-    "port": 1337,
+    "port": 3010,
     "data_api": "real data api key goes here",
     "consociation_api": "real consociation api key goes here"
 }
