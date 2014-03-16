@@ -19,11 +19,11 @@ var conf = convict({
         default: 1337,
         env: "PORT"
     },
-    data_api: {
+    data_api_key: {
         doc: "The API key for the data service.",
         default: "key_here"
     },
-    consociation_api: {
+    consociation_api_token: {
         doc: "The API key for the consociation service.",
         default: "key_here"
     }
@@ -31,7 +31,7 @@ var conf = convict({
 
 // load environment dependent configuration
 var env = conf.get('env');
-conf.loadFile('./config/development.json');
+conf.loadFile('./config/production_secrets.json');
 
 // perform validation
 conf.validate();
