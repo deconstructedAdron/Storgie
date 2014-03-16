@@ -1,4 +1,6 @@
 extends layout
+block header
+    script(src='controllers/stat.js', type='text/javascript')
 block content
     .container-fluid.main-content
     .page-title
@@ -8,19 +10,23 @@ block content
                 .widget-container.fluid-height.clearfix
                     .col-md-3
                         .heading
-                            i.icon-power-off  #{title} Status
-                        .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec ullamcorper mauris.
-                    .col-md-3
-                        .heading
-                            i.icon-cloud  Environmental Status
-                        .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p In eros purus, sollicitudin sed interdum vel, dignissim hendrerit velit.
+                            i.icon-cloud #{title}  Environmental Status
+                        .widget-content.padded(ng-controller='Stat')
+                            p.lead Basic state of the storgie ecosystem.
+                            p
+                            ul
+                                li Server Count {{storgie_status.Servers}}
+                                li Compute Load {{storgie_status.Compute}}
+                                li Memory Load {{storgie_status.Memory}}
                     .col-md-3
                         .heading
                             i.icon-hdd  #{title} Storage
+                        .widget-content.padded
+                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                            p Put the API status here.
+                    .col-md-3
+                        .heading
+                            i.icon-power-off #{title} Status
                         .widget-content.padded
                             p.lead Information about the storage and viable status of storage requirements is stored here.
                             p#result
