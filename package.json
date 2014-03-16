@@ -16,7 +16,8 @@
         "socket.io": "~0.9.16",
         "passport": "~0.2.0",
         "passport-http-bearer": "~1.0.1",
-        "kew": "~0.3.4"
+        "kew": "~0.3.4",
+        "convict": "~0.4.2"
     },
     "devDependencies": {
         "mocha": "~1.16.2",

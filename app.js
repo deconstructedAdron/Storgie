@@ -8,6 +8,7 @@ var site = require('./routes/site');
 var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
+var config = require('./config');
 // Passport Security
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
@@ -48,7 +49,7 @@ passport.use(new BearerStrategy({
 ));
 
 var app = express();
-app.set('port', process.env.PORT || 3010);
+app.set('port', process.env.PORT || config.get('port'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('name', 'storgie');
