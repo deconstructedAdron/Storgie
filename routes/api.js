@@ -8,10 +8,11 @@ var error400 = 'Post syntax incorrect. There must be a key and value in the data
     data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
-    orchestrate_key_holder = require("../key/orchestrate_key"),
-    key_holder = new orchestrate_key_holder(),
-    orchestrator = require('orchestrate')(key_holder.access_key),
+    config = require('../config'),
     Q = require('kew');
+
+var orchestrator = require('orchestrate')(config.get('data_api_key'));
+var test = 'test;';
 
 storgie_api.finishing = function (req, res, path, returnThis) {
     console.log('Requested by: ' + path + JSON.stringify(req.body));
@@ -23,13 +24,11 @@ storgie_api.finishing = function (req, res, path, returnThis) {
 // ****************************************
 storgie_api.storgie_stat = function () {
     return fake_api.storgie_stat();
-
 };
 
 // ****************************************
-//  Identity API Points
+//  Lucene Search String Parsing
 // ****************************************
-
 function getByKnownId(searchBody) {
     var searchString = '';
     var knownId = searchBody.knownid;
@@ -51,12 +50,7 @@ function getByKnownId(searchBody) {
 }
 
 function getByRootId(searchBody) {
-    var searchString = '';
-    var searchElementKeys = Object.keys(searchBody.rootid);
-
-    for (var i = 0; i < searchElementKeys.length; i++) {
-
-    }
+    // Method not implemented yet.
 }
 function getLuceneSearch(searchBody) {
     var searchStringResult = '';
@@ -70,6 +64,9 @@ function getLuceneSearch(searchBody) {
     return searchStringResult;
 }
 
+// ****************************************
+//  Identity API Points
+// ****************************************
 storgie_api.identity_by_id = function (body) {
     var collection = data_tier.collection_idents;
     var search = getLuceneSearch(body);
@@ -81,8 +78,7 @@ storgie_api.identity_by_id = function (body) {
 
     return orchestrator.search(collection, search)
         .then(function (result) {
-            var result_message = result.body;
-            console.log(result_message);
+            console.log(result.body);
             return result.body;
         })
 };

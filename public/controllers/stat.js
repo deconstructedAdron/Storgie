@@ -15,5 +15,6 @@ function Stat($scope, $http) {
             $scope.error = data;
             $scope.status = status;
             $scope.headers = headers;
+            $scope.config = config;
         });
 }
