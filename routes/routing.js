@@ -3,11 +3,58 @@
  * Description: Routing.
  */
 
+
+// Passport Security
+var passport = require('passport');
+var BearerStrategy = require('passport-http-bearer').Strategy;
+
+// *********************************************************************************************************************
+// Temporary Users - This whole section needs ported out to the database.
+// *********************************************************************************************************************
+var users = [
+    { id: 3, username: 'adron', token: '123456789', email: 'adron@deconstructed.io' },
+    { id: 4, username: 'aaron', token: 'abcdefghi', email: 'aaron@deconstructed.io' },
+    { id: 5, username: 'consociation', token: '0d1b02f9-c7e9-42c3-8518-7d744b827274', email: 'consociation@deconstructed.io'}
+];
+
+function findByToken(token, fn) {
+    for (var i = 0, len = users.length; i < len; i++) {
+        var user = users[i];
+        if (user.token === token) {
+            return fn(null, user);
+        }
+    }
+    return fn(null, null);
+}
+
+passport.use(new BearerStrategy({
+    },
+    function (token, done) {
+        process.nextTick(function () {
+            findByToken(token, function (err, user) {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false);
+                }
+                return done(null, user);
+            })
+        });
+    }
+));
+
 var site = require('./site');
 
 module.exports = RoutingMap;
 
 function RoutingMap(app) {
+
+    // *********************************************************************************************************************
+    // Setup passport security.
+    // *********************************************************************************************************************
+    app.use(passport.initialize());
+
     // *********************************************************************************************************************
     // Site Route Mapping
     // *********************************************************************************************************************
@@ -49,8 +96,7 @@ function RoutingMap(app) {
                     res.statusCode = 400;
                     res.send(err);
                 });
-        });
-
+        })
 
     // *********************************************************************************************************************
     // Identity API Route Mapping
@@ -61,7 +107,7 @@ function RoutingMap(app) {
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
             api.convergence(req, res);
-        });
+        })
 
     // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/converged/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -v -X POST -d '{"key":"2","value":"{"knownid":"{"AnotherId":"2"}"}"}' http://localhost:3010/converged/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274

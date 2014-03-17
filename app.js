@@ -11,44 +11,6 @@ var path = require('path');
 var config = require('./config');
 // Routes Logic
 var Routes = require('./routes/routing');
-// Passport Security
-var passport = require('passport');
-var BearerStrategy = require('passport-http-bearer').Strategy;
-
-var users = [
-    { id: 3, username: 'bob', token: '123456789', email: 'bob@example.com' },
-    { id: 4, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' },
-    { id: 5, username: 'consociation', token: '0d1b02f9-c7e9-42c3-8518-7d744b827274', email: 'consociation@deconstructed.io'}
-];
-
-function findByToken(token, fn) {
-    for (var i = 0, len = users.length; i < len; i++) {
-        var user = users[i];
-        if (user.token === token) {
-            return fn(null, user);
-        }
-    }
-    return fn(null, null);
-}
-
-passport.use(new BearerStrategy({
-    },
-    function (token, done) {
-        // asynchronous validation, for effect...
-        process.nextTick(function () {
-
-            findByToken(token, function (err, user) {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    return done(null, false);
-                }
-                return done(null, user);
-            })
-        });
-    }
-));
 
 var app = express();
 app.set('port', process.env.PORT || config.get('port'));
@@ -61,7 +23,6 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
 
 // development only
 if ('development' == app.get('env')) {
