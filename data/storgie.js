@@ -3,12 +3,13 @@
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
 
-var config = require('../config');
-orchestrator = require('orchestrate')(config.get('data_api_key')),
+var config = require('../config'),
+    collections = require('./collections'),
+    orchestrator = require('orchestrate')(config.get('data_api_key')),
     storgie = exports;
 
-storgie.collection_idents = 'identity';
-storgie.collection_converged = 'converged';
+storgie.collection_idents = collections.identity;
+storgie.collection_converged = collections.converged;
 
 storgie.put = function (collection, key, value) {
     orchestrator.put(collection, key, value)
