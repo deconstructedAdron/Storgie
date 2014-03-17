@@ -12,6 +12,10 @@ exports.login = function (req, res) {
     res.render('login', {title: "Login to Storgie."});
 };
 
+exports.junk = function (req, res) {
+    res.render('junk', {title: "blagh"});
+}
+
 exports.signup = function (req, res) {
     res.render('signup', {title: "Register for API Access."});
 };
