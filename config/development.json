@@ -1,0 +1,10 @@
+/**
+ * Created by adron on 3/14/14.
+ * Description: Adding configuration for the project.
+ */
+
+{
+    "port": 3010,
+    "data_api_key": "real data api key goes here",
+    "consociation_api_token": "real consociation api key goes here"
+}

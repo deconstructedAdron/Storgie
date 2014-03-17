@@ -1,42 +1,49 @@
 extends layout
+block header
+    script(src='controllers/stat.js', type='text/javascript')
 block content
     .container-fluid.main-content
     .page-title
         h1= title
         .row
-            .col-lg-12
+            .col-lg-12(ng-controller='Stat')
                 .widget-container.fluid-height.clearfix
                     .col-md-3
                         .heading
-                            i.icon-power-off  #{title} Status
+                            i.icon-cloud #{title}  Environmental Status
                         .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec ullamcorper mauris. Pellentesque ligula justo, imperdiet sit amet vehicula id, lobortis eu ligula. Vestibulum vel massa a turpis scelerisque scelerisque. Quisque tincidunt interdum tortor nec consectetur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris aliquam fermentum elementum. Praesent vitae erat at dui imperdiet faucibus vitae rutrum lorem. Aliquam nunc odio, eleifend vel dignissim a, interdum id est. In ornare eleifend orci, quis suscipit quam molestie id. Cras eget nulla nec dui hendrerit aliquam. Nam id mi iaculis, facilisis mi sit amet, rhoncus ante. Integer eget lorem dignissim purus tempor imperdiet vel lobortis risus. Phasellus imperdiet mi in mattis vestibulum.
-                    .col-md-3
-                        .heading
-                            i.icon-cloud  Environmental Status
-                        .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p In eros purus, sollicitudin sed interdum vel, dignissim hendrerit velit. Aenean sollicitudin commodo tortor eu consectetur. Mauris eu accumsan metus, ut laoreet massa. Nullam ac porta lacus. Curabitur congue sapien sed neque commodo varius. Nam justo erat, pretium eget lectus at, malesuada elementum magna. Nullam id bibendum neque, in commodo dolor. Praesent a laoreet magna. Quisque at velit viverra, dictum urna et, hendrerit sem. Mauris diam orci, sagittis sodales posuere sed, fringilla faucibus quam. Sed dapibus sem lacus, non tristique tortor lacinia at. Integer eu metus ut leo sagittis porttitor a eget sem. Integer scelerisque viverra odio non vehicula. Integer nisi quam, tincidunt non sapien nec, tempus mattis sapien. In sit amet diam rhoncus, rutrum nibh eu, hendrerit justo.
+                            p.lead Basic state of the storgie ecosystem.
+                            b Status...
+                            ul
+                                li Server Count {{storgie_status.Servers}}
+                                li Compute Load {{storgie_status.Compute}}
+                                li Memory Load {{storgie_status.Memory}}
                     .col-md-3
                         .heading
                             i.icon-hdd  #{title} Storage
                         .widget-content.padded
+                            p.lead Sample data writte and read for profile identities.
+                            b Testing...
+                            ul
+                                li Identity written confirmed, ID: {{written_id.key}}
+                    .col-md-3
+                        .heading
+                            i.icon-power-off  #{title} Status
+                        .widget-content.padded
                             p.lead Information about the storage and viable status of storage requirements is stored here.
-                            p#result
+                            p TBD
                     .col-md-3
                         .heading
                             i.icon-archive  #{title} Archiving to Replication
                         .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p Phasellus et odio sed ligula blandit semper. Curabitur feugiat lectus nec leo suscipit tristique. Nulla vestibulum risus eget egestas pretium. Sed ut justo nibh. Duis blandit eleifend sem ut venenatis. Pellentesque eget sem justo. Mauris condimentum, dolor sed blandit ultricies, lacus dui convallis dolor, vitae vehicula enim nibh ut libero.
-    script.
-        var dataToWrite = {"uuid":"79E5591A-1E54-4562-A276-AFC266F54390","webid":"56E62C3A-D6BC-4F4F-B72A-E6CE081190B6"};
-
-        //$("#result").html(dataToWrite.uuid + dataToWrite.webid);
-
-        $.post( "/ident", function( dataToWrite ) {
-          $( "#result" ).html( dataToWrite.uuid );
-        });
-
-
+                            p.lead Under Construction
+                            p TBD
+            .col-lg-5(ng-controller='Stat')
+                .widget-container.fluid-height.clearfix
+                    .heading
+                        i.icon-bar-chart.fa.fa-bar-chart-o  #{title} Environmental Status
+                    .widget-content
+                        .col-sm-6
+                            .pie-chart1.pie-chart.pie-number(data-percent="{{storgie_status.Compute}}") {{storgie_status.Compute}}
+                        .col-sm-6
+                            .pie-chart2.pie-chart.pie-number(data-percent="{{storgie_status.Memory}}") {{storgie_status.Memory}}

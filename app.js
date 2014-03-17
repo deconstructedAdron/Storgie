@@ -8,6 +8,7 @@ var site = require('./routes/site');
 var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
+var config = require('./config');
 // Passport Security
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
@@ -48,7 +49,7 @@ passport.use(new BearerStrategy({
 ));
 
 var app = express();
-app.set('port', process.env.PORT || 3010);
+app.set('port', process.env.PORT || config.get('port'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('name', 'storgie');
@@ -79,7 +80,7 @@ app.post('/signup', site.signingup);
 app.get('/stat',
     passport.authenticate('bearer', { session: false}),
     function (req, res) {
-        api.storgie_stat(req, res);
+        res.send(JSON.stringify(api.storgie_stat()));
     });
 
 // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_1","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
@@ -99,8 +100,9 @@ app.post('/identity/by',
             .then(function (result) {
                 res.send(result);
             })
-            .fail(function (error) {
-                res.send(error);
+            .fail(function (err) {
+                res.statusCode = 400;
+                res.send(err);
             });
     });
 

@@ -11,7 +11,6 @@ html(ng-app)
         link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
         link(rel='icon', href='/favicon.ico', type='image/x-icon')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js', type='text/javascript')
-        script(src='controllers/stat.js', type='text/javascript')
         script(src='http://code.jquery.com/jquery-1.10.2.min.js', type='text/javascript')
         script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js', type='text/javascript')
         script(src='javascripts/bootstrap.min.js', type='text/javascript')
@@ -50,32 +49,13 @@ html(ng-app)
         script(src='javascripts/main.js', type='text/javascript')
         script(src='javascripts/respond.js', type='text/javascript')
         meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
+        block header
     body
         .modal-shiftfix
             //
                Navigation
             .navbar.navbar-fixed-top.scroll-hide
                 .container-fluid.top-bar
-                    .pull-right
-                        ul.nav.navbar-nav.pull-right
-                            li.dropdown.user.hidden-xs
-                                a.dropdown-toggle(data-toggle='dropdown', href='#')
-                                    img(width='34', height='34', src='images/avatar-male.jpg')
-                                    | Adron Hall
-                                    b.caret
-                                ul.dropdown-menu
-                                    li
-                                        a(href='/account')
-                                            i.icon-user
-                                            | My Account
-                                    li
-                                        a(href='/settings')
-                                            i.icon-gear
-                                            | Account Settings
-                                    li
-                                        a(href='/login')
-                                            i.icon-signout
-                                            | Logout
                     button.navbar-toggle
                         span.icon-bar
                         span.icon-bar

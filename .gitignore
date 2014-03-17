@@ -20,5 +20,4 @@ node_modules
 # See the README.md file for information about this file.
 config.json
 
-key/orchestrate_key.js
-key/consociation_token.js
+config/production_secrets.json
