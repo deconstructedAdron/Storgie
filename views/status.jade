@@ -41,8 +41,8 @@ block content
             .col-lg-5(ng-controller='Stat')
                 .widget-container.fluid-height.clearfix
                     .heading
-                        i.icon-bar-chart  #{title} Environmental Status
-                    .widget-content.padded
+                        i.icon-bar-chart.fa.fa-bar-chart-o  #{title} Environmental Status
+                    .widget-content
                         .col-sm-6
                             .pie-chart1.pie-chart.pie-number(data-percent="{{storgie_status.Compute}}") {{storgie_status.Compute}}
                         .col-sm-6

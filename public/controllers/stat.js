@@ -11,7 +11,6 @@ var parameters = '?access_token=123456789';
 
 function Stat($scope, $http) {
 
-
     $http.get(rootAPI + 'stat' + parameters).
         success(function (data) {
             $scope.storgie_status = data;
