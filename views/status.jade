@@ -13,7 +13,7 @@ block content
                             i.icon-cloud #{title}  Environmental Status
                         .widget-content.padded
                             p.lead Basic state of the storgie ecosystem.
-                            p
+                            b Status...
                             ul
                                 li Server Count {{storgie_status.Servers}}
                                 li Compute Load {{storgie_status.Compute}}
@@ -22,19 +22,28 @@ block content
                         .heading
                             i.icon-hdd  #{title} Storage
                         .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                            p.lead Sample data writte and read for profile identities.
                             b Testing...
                             ul
                                 li Identity written confirmed, ID: {{written_id.key}}
                     .col-md-3
                         .heading
-                            i.icon-power-off #{title} Status
+                            i.icon-power-off  #{title} Status
                         .widget-content.padded
                             p.lead Information about the storage and viable status of storage requirements is stored here.
-                            p#result
+                            p TBD
                     .col-md-3
                         .heading
                             i.icon-archive  #{title} Archiving to Replication
                         .widget-content.padded
-                            p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p Phasellus et odio sed ligula blandit semper. Curabitur feugiat lectus nec leo suscipit tristique.
+                            p.lead Under Construction
+                            p TBD
+            .col-lg-5(ng-controller='Stat')
+                .widget-container.fluid-height.clearfix
+                    .heading
+                        i.icon-bar-chart  #{title} Environmental Status
+                    .widget-content.padded
+                        .col-sm-6
+                            .pie-chart1.pie-chart.pie-number(data-percent="{{storgie_status.Compute}}") {{storgie_status.Compute}}
+                        .col-sm-6
+                            .pie-chart2.pie-chart.pie-number(data-percent="{{storgie_status.Memory}}") {{storgie_status.Memory}}

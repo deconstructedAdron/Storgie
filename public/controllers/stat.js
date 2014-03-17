@@ -3,14 +3,14 @@
  * Description a simple controller to get the results of the stat API service.
  */
 
-var Chance = require(chance);
-var chance = new Chance();
+
 
 //var rootAPI = 'http://api.deconstructed.io/';
 var rootAPI = 'http://localhost:3010/';
 var parameters = '?access_token=123456789';
 
 function Stat($scope, $http) {
+
 
     $http.get(rootAPI + 'stat' + parameters).
         success(function (data) {
@@ -25,7 +25,7 @@ function Stat($scope, $http) {
 
     $http.post(rootAPI + 'identity' + parameters,
         {
-            "key": chance.guid,
+            "key": '12jh34gt-hxo01',
             "value": {
                 "knownid": {
                     "Id": "1",
