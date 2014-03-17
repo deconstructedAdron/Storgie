@@ -4,6 +4,6 @@
  */
 
 exports = collections = {
-    identity: "identity",
-    converged: "converged"
+    profile_identity: "identity",
+    profile_converged: "converged"
 };

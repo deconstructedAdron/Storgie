@@ -6,12 +6,12 @@ block content
     .page-title
         h1= title
         .row
-            .col-lg-12
+            .col-lg-12(ng-controller='Stat')
                 .widget-container.fluid-height.clearfix
                     .col-md-3
                         .heading
                             i.icon-cloud #{title}  Environmental Status
-                        .widget-content.padded(ng-controller='Stat')
+                        .widget-content.padded
                             p.lead Basic state of the storgie ecosystem.
                             p
                             ul
@@ -23,7 +23,9 @@ block content
                             i.icon-hdd  #{title} Storage
                         .widget-content.padded
                             p.lead Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                            p Put the API status here.
+                            b Testing...
+                            ul
+                                li Identity written confirmed, ID: {{written_id.key}}
                     .col-md-3
                         .heading
                             i.icon-power-off #{title} Status

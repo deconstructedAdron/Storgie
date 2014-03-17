@@ -89,9 +89,9 @@ storgie_api.identity_create = function (req, res) {
         res.send(error400);
     }
 
-    data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
 
-    data_tier.consociate(req.body.key, req.body.value);
+    // Add consociation here.
 
     var result_message = {"key": req.body.key};
 
