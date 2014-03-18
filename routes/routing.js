@@ -45,6 +45,7 @@ passport.use(new BearerStrategy({
 ));
 
 var site = require('./site');
+var api = require('./api');
 
 module.exports = RoutingMap;
 
