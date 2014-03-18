@@ -4,13 +4,12 @@
  */
 
 var config = require('../config'),
-    collections = require('./collections'),
     orchestrator = require('orchestrate')(config.get('data_api_key')),
     storgie = exports;
 
 storgie.collection = {
-    identity: 'identity',
-    converged: 'converged'
+    device: 'device',
+    identity: 'identity'
 }
 
 storgie.put = function (collection, key, value) {

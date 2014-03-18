@@ -67,8 +67,8 @@ function getLuceneSearch(searchBody) {
 // ****************************************
 //  Identity API Points
 // ****************************************
-storgie_api.identity_by_id = function (body) {
-    var collection = data_tier.collection_idents;
+storgie_api.device_by = function (body) {
+    var collection = data_tier.collection.device;
     var search = getLuceneSearch(body);
 
     if (search === '') {
@@ -83,13 +83,13 @@ storgie_api.identity_by_id = function (body) {
         })
 };
 
-storgie_api.identity_create = function (req, res) {
+storgie_api.device_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
         res.statusCode = 400;
         res.send(error400);
     }
 
-    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
 
     // Add consociation here.
 
@@ -102,14 +102,13 @@ storgie_api.identity_create = function (req, res) {
 // ****************************************
 //  Convergence API Points
 // ****************************************
-
-storgie_api.convergence = function (req, res) {
-    this.finishing(req, res, '/convergence', {"foo": "yeah"});
+storgie_api.identity = function (req, res) {
+    this.finishing(req, res, '/identity', {"foo": "yeah"});
 };
 
-storgie_api.converged = function (req, res) {
+storgie_api.identity_by = function (req, res) {
     var getByRootKey = req.body.root;
-    var collection = data_tier.collection_idents;
+    var collection = data_tier.collection.identity;
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
@@ -117,8 +116,4 @@ storgie_api.converged = function (req, res) {
 
     console.log(result_message);
     res.send(result_message);
-};
-
-storgie_api.converged_by_id = function (req, res) {
-    this.finishing(req, res, '/converged/by', 'id');
 };

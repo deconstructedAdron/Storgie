@@ -17,7 +17,7 @@ describe('the search functionality', function () {
             }
         };
 
-        api.identity_by_id(req, res);
+        api.device_by(req, res);
 
 
     })
