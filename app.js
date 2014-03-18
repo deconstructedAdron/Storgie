@@ -4,13 +4,10 @@
  */
 
 var express = require('express');
-var site = require('./routes/site');
-var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
 var config = require('./config');
-// Routes Logic
-var Routes = require('./routes/routing');
+var routes = require('./routing');
 
 var app = express();
 app.set('port', process.env.PORT || config.get('port'));
@@ -29,7 +26,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-var routes = new Routes(app);
+routes.load_routes(app);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(app.get('name') + ' server listening on port ' + app.get('port'));

@@ -3,7 +3,6 @@
  * Description: Routing.
  */
 
-
 // Passport Security
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
@@ -44,13 +43,11 @@ passport.use(new BearerStrategy({
     }
 ));
 
-var site = require('./site');
-var api = require('./api');
+var site = require('./routes/site');
+var api = require('./routes/api');
+var routing = exports;
 
-module.exports = RoutingMap;
-
-function RoutingMap(app) {
-
+routing.load_routes = function (app) {
     // *********************************************************************************************************************
     // Setup passport security.
     // *********************************************************************************************************************
@@ -59,7 +56,7 @@ function RoutingMap(app) {
     // *********************************************************************************************************************
     // Site Route Mapping
     // *********************************************************************************************************************
-    app.get('/', site.index);
+    app.get('/', site.status);
     app.get('/login', site.login);
     app.get('/signup', site.signup);
     app.get('/status', site.status);
