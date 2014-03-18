@@ -72,8 +72,7 @@ storgie_api.device_by = function (body) {
     var search = getLuceneSearch(body);
 
     if (search === '') {
-        throw new Error
-        'Invalid search string.';
+        throw new Error('Invalid search string.');
     }
 
     return orchestrator.search(collection, search)
