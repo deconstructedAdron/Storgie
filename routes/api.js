@@ -46,22 +46,12 @@ function getByKnownId(searchBody) {
             searchString += ' OR ';
         }
     }
-    return searchString;
-}
 
-function getByRootId(searchBody) {
-    // Method not implemented yet.
-}
-function getLuceneSearch(searchBody) {
-    var searchStringResult = '';
-
-    if (searchBody.knownid != undefined) {
-        searchStringResult = getByKnownId(searchBody);
-    } else if (searchBody.rootid != undefined) {
-        searchStringResult = getByRootId(searchBody);
+    if (searchString === '') {
+        throw new Error('Invalid search string.');
     }
 
-    return searchStringResult;
+    return searchString;
 }
 
 // ****************************************
@@ -69,17 +59,23 @@ function getLuceneSearch(searchBody) {
 // ****************************************
 storgie_api.device_by = function (body) {
     var collection = data_tier.collection.device;
-    var search = getLuceneSearch(body);
+    var search = '';
 
-    if (search === '') {
-        throw new Error('Invalid search string.');
+    if (body.knownid != undefined) {
+        search = getByKnownId(body);
+        return orchestrator.search(collection, search)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
     }
-
-    return orchestrator.search(collection, search)
-        .then(function (result) {
-            console.log(result.body);
-            return result.body;
-        })
+    if (body.rootid != undefined) {
+        return orchestrator.get(collection, body.rootid)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
+    }
 };
 
 storgie_api.device_create = function (req, res) {

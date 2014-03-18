@@ -26,7 +26,9 @@ block content
                             b Testing...
                             ul
                                 li Identity written confirmed, ID: {{written_id.key}}
-                                li Identity retrieved confirmed: {{device}}
+                                li Identity retrieved with known ID: {{device_by_known}}
+                                li Identity retrieved with key: {{device_by_key}}
+                            p {{error}}
                     .col-md-3
                         .heading
                             i.icon-power-off  #{title} Status
