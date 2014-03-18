@@ -46,12 +46,11 @@ function Stat($scope, $http) {
             $scope.config = config;
         });
 
+    // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"AnotherId":"2","BlaghId":"42"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     $http.post(rootAPI + 'device/by' + parameters,
         {
-            "value": {
-                "knownid": {
-                    "SampleId": "324"
-                }
+            "knownid": {
+                "SampleId": "324"
             }
         }).
         success(function (data) {

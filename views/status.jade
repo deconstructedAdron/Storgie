@@ -26,7 +26,7 @@ block content
                             b Testing...
                             ul
                                 li Identity written confirmed, ID: {{written_id.key}}
-                                li Identity retrieved confirmed: {{}}
+                                li Identity retrieved confirmed: {{device}}
                     .col-md-3
                         .heading
                             i.icon-power-off  #{title} Status
@@ -39,12 +39,12 @@ block content
                         .widget-content.padded
                             p.lead Under Construction
                             p TBD
-            .col-lg-5(ng-controller='Stat')
+            .col-lg-5
                 .widget-container.fluid-height.clearfix
                     .heading
                         i.icon-bar-chart.fa.fa-bar-chart-o  #{title} Environmental Status
                     .widget-content
                         .col-sm-6
-                            .pie-chart1.pie-chart.pie-number(data-percent="{{storgie_status.Compute}}") {{storgie_status.Compute}}
+                            .pie-chart1.pie-chart.pie-number(data-percent="1") 1
                         .col-sm-6
-                            .pie-chart2.pie-chart.pie-number(data-percent="{{storgie_status.Memory}}") {{storgie_status.Memory}}
+                            .pie-chart2.pie-chart.pie-number(data-percent="1") 1
