@@ -1,6 +1,7 @@
 /**
  * Created by adron on 3/14/14.
  * Description: Adding configuration for the project.
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
 
 var convict = require('convict');
