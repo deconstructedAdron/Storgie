@@ -6,15 +6,12 @@
 // Passport Security
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
+var userManagement = require('./accounts/users');
 
 // *********************************************************************************************************************
 // Temporary Users - This whole section needs ported out to the database.
 // *********************************************************************************************************************
-var users = [
-    { id: 3, username: 'adron', token: '123456789', email: 'adron@deconstructed.io' },
-    { id: 4, username: 'aaron', token: 'abcdefghi', email: 'aaron@deconstructed.io' },
-    { id: 5, username: 'consociation', token: '0d1b02f9-c7e9-42c3-8518-7d744b827274', email: 'consociation@deconstructed.io'}
-];
+var users = userManagement.getUsers();
 
 function findByToken(token, fn) {
     for (var i = 0, len = users.length; i < len; i++) {
