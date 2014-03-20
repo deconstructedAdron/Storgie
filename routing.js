@@ -71,6 +71,13 @@ routing.load_routes = function (app) {
             res.send(JSON.stringify(api.storgie_stat()));
         });
 
+    // curl -v http://localhost:3010/guid?access_token=123456789
+    app.get('/guid',
+        passport.authenticate('bearer', {session: false}),
+        function (req, res) {
+            res.send(JSON.stringify(api.get_guid()));
+        });
+
     // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_1","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device',
         passport.authenticate('bearer', { session: false}),

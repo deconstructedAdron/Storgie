@@ -9,7 +9,9 @@ var error400 = 'Post syntax incorrect. There must be a key and value in the data
     storgie_api = exports,
     fake_api = require('./fake_api'),
     config = require('../config'),
-    Q = require('kew');
+    Q = require('kew'),
+    Chance = require('chance'),
+    chance = new Chance();
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
 var test = 'test;';
@@ -24,6 +26,10 @@ storgie_api.finishing = function (req, res, path, returnThis) {
 // ****************************************
 storgie_api.storgie_stat = function () {
     return fake_api.storgie_stat();
+};
+
+storgie_api.get_guid = function () {
+    return chance.guid;
 };
 
 // ****************************************
