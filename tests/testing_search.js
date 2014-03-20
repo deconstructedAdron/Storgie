@@ -1,6 +1,7 @@
 /**
  * Created by adron on 3/11/14.
  * Description: Testing search parameters.
+ * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
 
 var should = require('should');
@@ -17,7 +18,7 @@ describe('the search functionality', function () {
             }
         };
 
-        api.identity_by_id(req, res);
+        api.device_by(req, res);
 
 
     })

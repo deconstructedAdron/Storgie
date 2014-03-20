@@ -9,7 +9,9 @@ var error400 = 'Post syntax incorrect. There must be a key and value in the data
     storgie_api = exports,
     fake_api = require('./fake_api'),
     config = require('../config'),
-    Q = require('kew');
+    Q = require('kew'),
+    Chance = require('chance'),
+    chance = new Chance();
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
 var test = 'test;';
@@ -24,6 +26,10 @@ storgie_api.finishing = function (req, res, path, returnThis) {
 // ****************************************
 storgie_api.storgie_stat = function () {
     return fake_api.storgie_stat();
+};
+
+storgie_api.get_guid = function () {
+    return chance.guid;
 };
 
 // ****************************************
@@ -46,50 +52,45 @@ function getByKnownId(searchBody) {
             searchString += ' OR ';
         }
     }
-    return searchString;
-}
 
-function getByRootId(searchBody) {
-    // Method not implemented yet.
-}
-function getLuceneSearch(searchBody) {
-    var searchStringResult = '';
-
-    if (searchBody.knownid != undefined) {
-        searchStringResult = getByKnownId(searchBody);
-    } else if (searchBody.rootid != undefined) {
-        searchStringResult = getByRootId(searchBody);
+    if (searchString === '') {
+        throw new Error('Invalid search string.');
     }
 
-    return searchStringResult;
+    return searchString;
 }
 
 // ****************************************
 //  Identity API Points
 // ****************************************
-storgie_api.identity_by_id = function (body) {
-    var collection = data_tier.collection_idents;
-    var search = getLuceneSearch(body);
+storgie_api.device_by = function (body) {
+    var collection = data_tier.collection.device;
+    var search = '';
 
-    if (search === '') {
-        throw new Error
-        'Invalid search string.';
+    if (body.knownid != undefined) {
+        search = getByKnownId(body);
+        return orchestrator.search(collection, search)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
     }
-
-    return orchestrator.search(collection, search)
-        .then(function (result) {
-            console.log(result.body);
-            return result.body;
-        })
+    if (body.rootid != undefined) {
+        return orchestrator.get(collection, body.rootid)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
+    }
 };
 
-storgie_api.identity_create = function (req, res) {
+storgie_api.device_create = function (req, res) {
     if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
         res.statusCode = 400;
         res.send(error400);
     }
 
-    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
 
     // Add consociation here.
 
@@ -102,14 +103,13 @@ storgie_api.identity_create = function (req, res) {
 // ****************************************
 //  Convergence API Points
 // ****************************************
-
-storgie_api.convergence = function (req, res) {
-    this.finishing(req, res, '/convergence', {"foo": "yeah"});
+storgie_api.identity = function (req, res) {
+    this.finishing(req, res, '/identity', {"foo": "yeah"});
 };
 
-storgie_api.converged = function (req, res) {
+storgie_api.identity_by = function (req, res) {
     var getByRootKey = req.body.root;
-    var collection = data_tier.collection_idents;
+    var collection = data_tier.collection.identity;
 
     data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
@@ -117,8 +117,4 @@ storgie_api.converged = function (req, res) {
 
     console.log(result_message);
     res.send(result_message);
-};
-
-storgie_api.converged_by_id = function (req, res) {
-    this.finishing(req, res, '/converged/by', 'id');
 };

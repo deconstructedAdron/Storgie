@@ -5,19 +5,19 @@
 'use strict'
 
 exports.index = function (req, res) {
-    res.render('index', { title: 'Storgie' });
+    res.render('index', { title: 'Deconstructed API' });
 };
 
 exports.login = function (req, res) {
-    res.render('login', {title: "Login to Storgie."});
+    res.render('login', {title: "Login to the Deconstructed API."});
 };
 
 exports.signup = function (req, res) {
-    res.render('signup', {title: "Register for API Access."});
+    res.render('signup', {title: "Register for Deconstructed API Access."});
 };
 
 exports.status = function (req, res) {
-    res.render('status', {title: "Storgie Status & Tests"});
+    res.render('status', {title: "Deconstructed API Status & Tests"});
 };
 
 exports.signingup = function (req, res) {
