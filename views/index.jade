@@ -26,9 +26,12 @@ block content
                             p.lead Sample data writte and read for profile identities.
                             b Testing...
                             ul
-                                li Identity written confirmed, ID: {{written_id.key}}
-                                li Identity retrieved with known ID: {{device_by_known}}
-                                li Identity retrieved with key: {{device_by_key}}
+                                li Device written confirmed, ID: {{written_id.key}}
+                                li Device retrieved with known ID: {{device_by_known}}
+                                li Device retrieved with key: {{device_by_key}}
+                                li Identity retrieved with device ID: {{device_by_key}}
+
+
                             p {{error}}
                     .col-md-3
                         .heading
