@@ -9,7 +9,8 @@ var config = require('../config'),
 
 storgie.collection = {
     device: 'device',
-    identity: 'identity'
+    identity: 'identity',
+    account: 'account'
 }
 
 storgie.put = function (collection, key, value) {
