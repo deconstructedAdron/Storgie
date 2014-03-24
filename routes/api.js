@@ -29,7 +29,7 @@ storgie_api.storgie_stat = function () {
 };
 
 storgie_api.get_guid = function () {
-    return chance.guid;
+    return chance.guid();
 };
 
 // ****************************************

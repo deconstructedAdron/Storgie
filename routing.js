@@ -74,6 +74,9 @@ routing.load_routes = function (app) {
     app.get('/guid',
         passport.authenticate('bearer', {session: false}),
         function (req, res) {
+
+            var guid_val = JSON.stringify(api.get_guid());
+
             res.send(JSON.stringify(api.get_guid()));
         });
 
@@ -84,7 +87,7 @@ routing.load_routes = function (app) {
             api.device_create(req, res);
         });
 
-    // curl -X POST -H "Content-Type: application/json" -d '{"root":"the_key_1"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_1"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"AnotherId":"2","BlaghId":"42"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"AnotherId":"2","BlaghId":"42","TestableId":"1234"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device/by',

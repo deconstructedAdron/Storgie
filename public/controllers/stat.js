@@ -22,6 +22,17 @@ function Stat($scope, $http) {
             $scope.config = config;
         });
 
+    $http.get(rootAPI + 'guid' + parameters).
+        success(function (data) {
+            $scope.generated_guid = data;
+        }).
+        error(function (data, status, headers, config) {
+            $scope.error = data;
+            $scope.status = status;
+            $scope.headers = headers;
+            $scope.config = config;
+        });
+
     $http.post(rootAPI + 'device' + parameters,
         {
             "key": guid,
