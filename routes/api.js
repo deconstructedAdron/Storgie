@@ -84,20 +84,12 @@ storgie_api.device_by = function (body) {
     }
 };
 
-storgie_api.device_create = function (req, res) {
-    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-        res.statusCode = 400;
-        res.send(error400);
-    }
-
-    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
-
+storgie_api.device_create = function (body) {
+    data_tier.put(data_tier.collection.device, body.key, body.value);
     // Add consociation here.
-
-    var result_message = {"key": req.body.key};
-
+    var result_message = {"key": body.key};
     console.log(result_message);
-    res.send(result_message);
+    return result_message;
 };
 
 // ****************************************

@@ -24,8 +24,7 @@ function findByToken(token, fn) {
     return fn(null, null);
 }
 
-passport.use(new BearerStrategy({
-    },
+passport.use(new BearerStrategy({},
     function (token, done) {
         process.nextTick(function () {
             findByToken(token, function (err, user) {
@@ -84,7 +83,12 @@ routing.load_routes = function (app) {
     app.post('/device',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
-            api.device_create(req, res);
+            if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
+                res.statusCode = 400;
+                res.send(error400);
+            }
+
+            res.send(api.device_create(req.body));
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_1"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
