@@ -20,3 +20,4 @@ node_modules
 # See the README.md file for information about this file.
 config.json
 
+config/production_secrets.json
