@@ -96,27 +96,27 @@ function statTestDeviceApi($http, guid, $scope) {
 function statTestIdentityApi($http, guid, $scope) {
     $http.post(rootAPI + 'identity' + parameters,
         {
-            "key": guid,
-            "value": {
-                "key": guid,
-                "value": {
-                    "knownid": {
-                        "Id": "appended123-" + guid,
-                        "SampleId": "324",
-                        "EmailId": "blagh@blagh.com"
-                    },
-                    "next": "DELETE"
-                },
-                "key": guid,
-                "value": {
-                    "knownid": {
-                        "Id": "appended123-" + guid,
-                        "SampleId": "324",
-                        "EmailId": "blagh@blagh.com"
-                    },
-                    "next": "DELETE"
-                }
-            }
+//            "key": guid,
+//            "value": {
+//                "key": guid,
+//                "value": {
+//                    "knownid": {
+//                        "Id": "appended123-" + guid,
+//                        "SampleId": "324",
+//                        "EmailId": "blagh@blagh.com"
+//                    },
+//                    "next": "DELETE"
+//                },
+//                "key": guid,
+//                "value": {
+//                    "knownid": {
+//                        "Id": "appended123-" + guid,
+//                        "SampleId": "324",
+//                        "EmailId": "blagh@blagh.com"
+//                    },
+//                    "next": "DELETE"
+//                }
+//            }
         }).
         success(function (data) {
             $scope.written_id = data;

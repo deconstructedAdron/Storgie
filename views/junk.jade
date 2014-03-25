@@ -7,7 +7,7 @@ extends layout
         .page-title
             h1= title
             .row
-                .col-lg-12(ng-controller='Stat')
+                .col-lg-12(ng-controller='Junk')
                     .widget-container.fluid-height.clearfix
                         .col-md-12
                             .heading
@@ -16,7 +16,4 @@ extends layout
                                 p.lead Basic state of the storgie ecosystem.
                                 b Status...
                                 ul
-                                    li Server Count {{storgie_status.Servers}}
-                                    li Compute Load {{storgie_status.Compute}}
-                                    li Memory Load {{storgie_status.Memory}}
-                                    li Generated Guid {{generated_guid}}
+                                    li Server Count {{chancez.guid}}
