@@ -53,10 +53,24 @@ routing.load_routes = function (app) {
     // *********************************************************************************************************************
     // Site Route Mapping
     // *********************************************************************************************************************
-    app.get('/', site.index);
+    app.get('/', function (req, res) {
+        res.render('index', { title: 'Deconstructed API' });
+    });
+
     app.get('/login', site.login);
-    app.get('/signup', site.signup);
-    app.post('/signup', site.signingup);
+
+    app.get('/signup', function (req, res) {
+        res.render('signup', {title: "Register for Deconstructed API Access."});
+    });
+
+    app.post('/signup', function (req, res) {
+        site.signingup(req.body);
+        res.render('index', { title: 'Account Created' });
+    });
+
+    app.get('/junk', function (req, res) {
+        res.render('junk', {title: "Random Data for Testing"});
+    });
 
     // *********************************************************************************************************************
     // Device API Route Mapping
