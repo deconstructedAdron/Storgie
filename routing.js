@@ -87,9 +87,6 @@ routing.load_routes = function (app) {
     app.get('/guid',
         passport.authenticate('bearer', {session: false}),
         function (req, res) {
-
-            var guid_val = JSON.stringify(api.get_guid());
-
             res.send(JSON.stringify(api.get_guid()));
         });
 
@@ -99,7 +96,7 @@ routing.load_routes = function (app) {
         function (req, res) {
             if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
                 res.statusCode = 400;
-                res.send(error400);
+                res.send('Post syntax incorrect. There must be a key and value in the device data passed in.');
             }
 
             res.send(api.device_create(req.body));
@@ -126,10 +123,10 @@ routing.load_routes = function (app) {
     // *********************************************************************************************************************
 
     // curl -v http://localhost:3010/identity?access_token=123456789
-    app.get('/identity',
+    app.get('/identities',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
-            api.identity(req, res);
+            res.send(api.identities());
         })
 
     // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/identity/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
