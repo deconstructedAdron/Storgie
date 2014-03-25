@@ -25,6 +25,7 @@ function Stat($scope, $http) {
     $http.get(rootAPI + 'guid' + parameters).
         success(function (data) {
             $scope.generated_guid = data;
+            statTestDeviceApi($http, guid, $scope);
         }).
         error(function (data, status, headers, config) {
             $scope.error = data;
@@ -32,7 +33,9 @@ function Stat($scope, $http) {
             $scope.headers = headers;
             $scope.config = config;
         });
+}
 
+function statTestDeviceApi($http, guid, $scope) {
     $http.post(rootAPI + 'device' + parameters,
         {
             "key": guid,
