@@ -4,7 +4,8 @@
  */
 'use strict'
 
-var data_tier = require('../data/storgie'),
+var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
+    data_tier = require('../data/storgie'),
     storgie_api = exports,
     fake_api = require('./fake_api'),
     config = require('../config'),
@@ -14,6 +15,11 @@ var data_tier = require('../data/storgie'),
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
 var test = 'test;';
+
+storgie_api.finishing = function (req, res, path, returnThis) {
+    console.log('Requested by: ' + path + JSON.stringify(req.body));
+    return res.send(returnThis);
+}
 
 // ****************************************
 //  Status Information API Points
@@ -41,7 +47,7 @@ function getByKnownId(searchBody) {
         // works in production. So after troubleshooting I've shifted to removing
         // the colon as in the actual line of code below.
         // searchString += keys[i] + ':"' + knownId[property] + '"';
-        searchString += keys[i] + '"' + knownId[property] + '"';
+        searchString += keys[i] + ':"' + knownId[property] + '"';
         if (keys.length > 0 && i < keys.length - 1) {
             searchString += ' OR ';
         }
@@ -69,8 +75,8 @@ storgie_api.device_by = function (body) {
                 return result.body;
             })
     }
-    if (body.rootid != undefined) {
-        return orchestrator.get(collection, body.rootid)
+    if (body.deviceid != undefined) {
+        return orchestrator.get(collection, body.deviceid)
             .then(function (result) {
                 console.log(result.body);
                 return result.body;
@@ -78,46 +84,34 @@ storgie_api.device_by = function (body) {
     }
 };
 
-storgie_api.device_create = function (body) {
+storgie_api.device_create = function (req, res) {
+    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
+        res.statusCode = 400;
+        res.send(error400);
+    }
 
-    data_tier.put(data_tier.collection.device, body.key, body.value);
+    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
 
-    var result_message = {"key": body.key}
+    // Add consociation here.
 
-    this.device_by(body.value)
-        .then(function (result) {
-            console.log(result);
-            data_tier.put(data_tier.collection.identity, chance.guid(), result.results);
-            return result_message;
-        })
+    var result_message = {"key": req.body.key};
+
+    console.log(result_message);
+    res.send(result_message);
 };
 
 // ****************************************
 //  Convergence API Points
 // ****************************************
-storgie_api.identities = function (req, res) {
-
-    // blurgle. This needs fixed still.
-
-    storgie_api.finishing = function (req, res, path, returnThis) {
-        console.log('Requested by: ' + path + JSON.stringify(req.body));
-        return res.send(returnThis);
-    }
+storgie_api.identity = function (req, res) {
+    this.finishing(req, res, '/identity', {"foo": "yeah"});
 };
-
-storgie_api.identity_create = function (identity) {
-    data_tier.put(data_tier.collection.identity, identity.key, identity.value);
-    var result_message = {"key": identity.key};
-    console.log(result_message);
-    return result_message;
-}
-
 
 storgie_api.identity_by = function (req, res) {
     var getByRootKey = req.body.root;
     var collection = data_tier.collection.identity;
 
-    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
 
     var result_message = {"key": req.body.key};
 

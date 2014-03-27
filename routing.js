@@ -24,7 +24,8 @@ function findByToken(token, fn) {
     return fn(null, null);
 }
 
-passport.use(new BearerStrategy({},
+passport.use(new BearerStrategy({
+    },
     function (token, done) {
         process.nextTick(function () {
             findByToken(token, function (err, user) {
@@ -53,24 +54,10 @@ routing.load_routes = function (app) {
     // *********************************************************************************************************************
     // Site Route Mapping
     // *********************************************************************************************************************
-    app.get('/', function (req, res) {
-        res.render('index', { title: 'Deconstructed API' });
-    });
-
+    app.get('/', site.index);
     app.get('/login', site.login);
-
-    app.get('/signup', function (req, res) {
-        res.render('signup', {title: "Register for Deconstructed API Access."});
-    });
-
-    app.post('/signup', function (req, res) {
-        site.signingup(req.body);
-        res.render('index', { title: 'Account Created' });
-    });
-
-    app.get('/junk', function (req, res) {
-        res.render('junk', {title: "Random Data for Testing"});
-    });
+    app.get('/signup', site.signup);
+    app.post('/signup', site.signingup);
 
     // *********************************************************************************************************************
     // Device API Route Mapping
@@ -94,17 +81,12 @@ routing.load_routes = function (app) {
     app.post('/device',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
-            if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-                res.statusCode = 400;
-                res.send('Post syntax incorrect. There must be a key and value in the device data passed in.');
-            }
-
-            res.send(api.device_create(req.body));
+            api.device_create(req, res);
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_1"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
-    // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"AnotherId":"2","BlaghId":"42"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
-    // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"AnotherId":"2","BlaghId":"42","TestableId":"1234"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"Id":"1","SampleId":"324"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device/by',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
@@ -123,10 +105,10 @@ routing.load_routes = function (app) {
     // *********************************************************************************************************************
 
     // curl -v http://localhost:3010/identity?access_token=123456789
-    app.get('/identities',
+    app.get('/identity',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
-            res.send(api.identities());
+            api.identity(req, res);
         })
 
     // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/identity/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274

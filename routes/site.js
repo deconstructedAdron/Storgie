@@ -4,13 +4,21 @@
  */
 'use strict'
 
+exports.index = function (req, res) {
+    res.render('index', { title: 'Deconstructed API' });
+};
+
 exports.login = function (req, res) {
     res.render('login', {title: "Login to the Deconstructed API."});
 };
 
-exports.signingup = function (account) {
-    var email = account.email;
-    var password = account.password;
+exports.signup = function (req, res) {
+    res.render('signup', {title: "Register for Deconstructed API Access."});
+};
 
-    return true;
+exports.signingup = function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    res.render('index', { title: 'Storgie' });
 }
