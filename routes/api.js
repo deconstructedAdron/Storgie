@@ -47,7 +47,7 @@ function getByKnownId(searchBody) {
         // works in production. So after troubleshooting I've shifted to removing
         // the colon as in the actual line of code below.
         // searchString += keys[i] + ':"' + knownId[property] + '"';
-        searchString += keys[i] + '"' + knownId[property] + '"';
+        searchString += keys[i] + ':"' + knownId[property] + '"';
         if (keys.length > 0 && i < keys.length - 1) {
             searchString += ' OR ';
         }
