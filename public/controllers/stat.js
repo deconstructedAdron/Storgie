@@ -73,7 +73,7 @@ function Stat($scope, $http) {
 
     $http.post(rootAPI + 'device/by' + parameters,
         {
-            "rootid": guid
+            "deviceid": guid
         }).
         success(function (data) {
             $scope.device_by_key = data;

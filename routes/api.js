@@ -75,8 +75,8 @@ storgie_api.device_by = function (body) {
                 return result.body;
             })
     }
-    if (body.rootid != undefined) {
-        return orchestrator.get(collection, body.rootid)
+    if (body.deviceid != undefined) {
+        return orchestrator.get(collection, body.deviceid)
             .then(function (result) {
                 console.log(result.body);
                 return result.body;
