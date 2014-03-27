@@ -16,10 +16,6 @@ exports.signup = function (req, res) {
     res.render('signup', {title: "Register for Deconstructed API Access."});
 };
 
-exports.status = function (req, res) {
-    res.render('status', {title: "Deconstructed API Status & Tests"});
-};
-
 exports.signingup = function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
