@@ -16,11 +16,6 @@ var error400 = 'Post syntax incorrect. There must be a key and value in the data
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
 var test = 'test;';
 
-storgie_api.finishing = function (req, res, path, returnThis) {
-    console.log('Requested by: ' + path + JSON.stringify(req.body));
-    return res.send(returnThis);
-}
-
 // ****************************************
 //  Status Information API Points
 // ****************************************
@@ -35,7 +30,7 @@ storgie_api.get_guid = function () {
 // ****************************************
 //  Lucene Search String Parsing
 // ****************************************
-function getByKnownId(searchBody) {
+function getBySearchString(searchBody) {
     var searchString = '';
     var knownId = searchBody.knownid;
     var keys = Object.keys(knownId);
@@ -68,7 +63,7 @@ storgie_api.device_by = function (body) {
     var search = '';
 
     if (body.knownid != undefined) {
-        search = getByKnownId(body);
+        search = getBySearchString(body);
         return orchestrator.search(collection, search)
             .then(function (result) {
                 console.log(result.body);
@@ -103,18 +98,49 @@ storgie_api.device_create = function (req, res) {
 // ****************************************
 //  Convergence API Points
 // ****************************************
-storgie_api.identity = function (req, res) {
-    this.finishing(req, res, '/identity', {"foo": "yeah"});
+storgie_api.identities = function (req, res) {
+    res.send({"response": "response"});
 };
 
-storgie_api.identity_by = function (req, res) {
-    var getByRootKey = req.body.root;
-    var collection = data_tier.collection.identity;
+storgie_api.identity = function (req, res) {
+    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
+        res.statusCode = 400;
+        res.send(error400);
+    }
 
-    data_tier.put(data_tier.collection_idents, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
 
     var result_message = {"key": req.body.key};
 
     console.log(result_message);
     res.send(result_message);
+};
+
+storgie_api.identity_by = function (body) {
+    var collection = data_tier.collection.identity;
+    var search = '';
+
+    if (body.knownid != undefined) {
+        search = getBySearchString(body);
+        return orchestrator.search(collection, search)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
+    }
+    if (body.deviceid != undefined) {
+        search = getBySearchString(body);
+        return orchestrator.search(collection, search)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
+    }
+    if (body.identityid != undefined) {
+        return orchestrator.get(collection, body.deviceid)
+            .then(function (result) {
+                console.log(result.body);
+                return result.body;
+            })
+    }
 };

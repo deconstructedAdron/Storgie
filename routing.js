@@ -77,14 +77,14 @@ routing.load_routes = function (app) {
             res.send(JSON.stringify(api.get_guid()));
         });
 
-    // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_1","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
             api.device_create(req, res);
         });
 
-    // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_1"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_333"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"Id":"1","SampleId":"324"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -X POST -H "Content-Type: application/json" -d '{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device/by',
@@ -104,18 +104,25 @@ routing.load_routes = function (app) {
     // Identity API Route Mapping
     // *********************************************************************************************************************
 
-    // curl -v http://localhost:3010/identity?access_token=123456789
-    app.get('/identity',
+    // curl -v http://localhost:3010/identities?access_token=123456789
+    app.get('/identities',
+        passport.authenticate('bearer', {session: false}),
+        function (req, res) {
+            api.identities(req, res);
+        });
+
+    // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    app.post('/identity',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
             api.identity(req, res);
-        })
+        });
 
     // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/identity/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     // curl -v -X POST -d '{"key":"2","value":"{"knownid":"{"AnotherId":"2"}"}"}' http://localhost:3010/identity/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/identity/by',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
-            api.converged_by_id(req, res);
+            api.identity_by(req.body);
         })
 }

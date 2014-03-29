@@ -64,8 +64,8 @@ function statTestDeviceApi($http, guid, $scope) {
     function testingDeviceBy() {
         $http.post(rootAPI + 'device/by' + parameters,
             {
-                "knownid": {
-                    "SampleId": "324"
+                knownid: {
+                    SampleId: "324"
                 }
             }).
             success(function (data) {
@@ -79,7 +79,7 @@ function statTestDeviceApi($http, guid, $scope) {
             });
         $http.post(rootAPI + 'device/by' + parameters,
             {
-                "rootid": guid
+                deviceid: guid
             }).
             success(function (data) {
                 $scope.device_by_key = data;
