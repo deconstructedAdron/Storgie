@@ -9,18 +9,17 @@ var config = require('../config'),
 
 storgie.collection = {
     device: 'device',
-    identity: 'identity'
+    identity: 'identity',
+    account: 'account'
 }
 
 storgie.put = function (collection, key, value) {
     orchestrator.put(collection, key, value)
         .then(function (result) {
             console.log(result);
-            res.send(result);
         })
         .fail(function (err) {
             console.log(err);
-            res.send(err);
         });
 }
 
@@ -29,19 +28,16 @@ storgie.get = function (collection, key) {
         .then(function (result) {
             var body = result.body;
             console.log(body);
-            res.send(body);
         })
         .fail(function (err) {
             console.log(err);
-            res.send(err);
         });
 }
 
 storgie.search = function (collection, search) {
     orchestrator.search(collection, search)
         .then(function (result) {
-            var result_message = result.body;
-            console.log(result_message);
+            console.log(result);
         })
         .fail(function (err) {
             console.log(err);
