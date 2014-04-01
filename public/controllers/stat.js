@@ -40,11 +40,13 @@ function statTestDeviceApi($http, guid, $scope) {
             "key": guid,
             "value": {
                 "knownid": {
-                    "Id": "appended123-" + guid,
-                    "SampleId": "324",
-                    "EmailId": "blagh@blagh.com"
+                    "Id": "appended123-stuff" + guid,
+                    "SampleId": "234-23498-12435",
+                    "EmailId": "another@another.com"
                 },
-                "next": "DELETE"
+                "next": "DELETE",
+                "somestuff": "testing",
+                "morestuff": "woot"
             }
         }).
         success(function (data) {
@@ -59,34 +61,34 @@ function statTestDeviceApi($http, guid, $scope) {
             $scope.config = config;
         });
 
-    function testingDeviceBy() {
-        $http.post(rootAPI + 'device/by' + parameters,
-            {
-                knownid: {
-                    SampleId: "324"
-                }
-            }).
-            success(function (data) {
-                $scope.device_by_known = data;
-            }).
-            error(function (data, status, headers, config) {
-                $scope.error = data;
-                $scope.status = status;
-                $scope.headers = headers;
-                $scope.config = config;
-            });
-        $http.post(rootAPI + 'device/by' + parameters,
-            {
-                deviceid: guid
-            }).
-            success(function (data) {
-                $scope.device_by_key = data;
-            }).
-            error(function (data, status, headers, config) {
-                $scope.error = data;
-                $scope.status = status;
-                $scope.headers = headers;
-                $scope.config = config;
-            });
-    }
+//    function testingDeviceBy() {
+//        $http.post(rootAPI + 'device/by' + parameters,
+//            {
+//                knownid: {
+//                    SampleId: "324"
+//                }
+//            }).
+//            success(function (data) {
+//                $scope.device_by_known = data;
+//            }).
+//            error(function (data, status, headers, config) {
+//                $scope.error = data;
+//                $scope.status = status;
+//                $scope.headers = headers;
+//                $scope.config = config;
+//            });
+//        $http.post(rootAPI + 'device/by' + parameters,
+//            {
+//                deviceid: guid
+//            }).
+//            success(function (data) {
+//                $scope.device_by_key = data;
+//            }).
+//            error(function (data, status, headers, config) {
+//                $scope.error = data;
+//                $scope.status = status;
+//                $scope.headers = headers;
+//                $scope.config = config;
+//            });
+//    }
 }
