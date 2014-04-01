@@ -85,9 +85,10 @@ storgie_api.device_create = function (req, res) {
         res.send(error400);
     }
 
-    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
-
-    // Add consociation here.
+    data_tier.put(data_tier.collection.device, req.body.key, req.body.value)
+        .then(function () {
+            console.log("some stuff consociation");
+        });
 
     var result_message = {"key": req.body.key};
 

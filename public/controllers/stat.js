@@ -9,8 +9,6 @@ var parameters = '?access_token=123456789';
 
 function Stat($scope, $http) {
 
-    var guid = '12jh34gt-hxo0112jh34gt-hxo01';
-
     $http.get(rootAPI + 'stat' + parameters).
         success(function (data) {
             $scope.storgie_status = data;
