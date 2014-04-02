@@ -2,7 +2,7 @@
  * Created by Adron
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
-'use strict'
+'use strict';
 
 var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
     data_tier = require('../data/storgie'),
@@ -80,11 +80,10 @@ storgie_api.device_by = function (body) {
 };
 
 storgie_api.device_create = function (body) {
-
     return orchestrator.put(data_tier.collection.device, body.key, body.value)
         .then(function (result) {
             var result_message = {"key": body.key};
-            console.log(result_message);
+            console.log(result + result_message);
             return result_message;
         })
         .fail(function (err) {
