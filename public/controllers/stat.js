@@ -113,6 +113,9 @@ function statTestDeviceApi($http, guid, $scope) {
 }
 
 function add_device_1($http, guid, $scope) {
+
+    var guid = guid + 1;
+
     $http.post(rootAPI + 'device' + parameters,
         {
             "key": guid,
@@ -139,12 +142,15 @@ function add_device_1($http, guid, $scope) {
 }
 
 function add_device_2($http, guid, $scope) {
+
+    var guid = guid + 2;
+
     $http.post(rootAPI + 'device' + parameters,
         {
-            "key": guid + "2",
+            "key": guid,
             "value": {
                 "knownid": {
-                    "Id": guid + "2",
+                    "Id": guid,
                     "EmailId": "another@another.com"
                 },
                 "next": "DELETE",
@@ -164,12 +170,15 @@ function add_device_2($http, guid, $scope) {
 }
 
 function add_device_3($http, guid, $scope) {
+
+    var guid = guid + 3;
+
     $http.post(rootAPI + 'device' + parameters,
         {
-            "key": guid + "3",
+            "key": guid,
             "value": {
                 "knownid": {
-                    "Id": guid + "3",
+                    "Id": guid,
                     "SessionId": "90234523" + guid + "-ABD-90134252",
                     "EmailId": "another@another.com"
                 },
