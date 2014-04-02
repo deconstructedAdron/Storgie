@@ -141,10 +141,10 @@ function add_device_1($http, guid, $scope) {
 function add_device_2($http, guid, $scope) {
     $http.post(rootAPI + 'device' + parameters,
         {
-            "key": guid,
+            "key": guid + "2",
             "value": {
                 "knownid": {
-                    "Id": guid,
+                    "Id": guid + "2",
                     "EmailId": "another@another.com"
                 },
                 "next": "DELETE",
@@ -166,10 +166,10 @@ function add_device_2($http, guid, $scope) {
 function add_device_3($http, guid, $scope) {
     $http.post(rootAPI + 'device' + parameters,
         {
-            "key": guid,
+            "key": guid + "3",
             "value": {
                 "knownid": {
-                    "Id": guid,
+                    "Id": guid + "3",
                     "SessionId": "90234523" + guid + "-ABD-90134252",
                     "EmailId": "another@another.com"
                 },
