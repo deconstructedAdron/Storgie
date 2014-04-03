@@ -131,7 +131,7 @@ function add_device_1($http, guid, $scope) {
             }
         })
         .success(function (data) {
-            $scope.written_id = data;
+            $scope.written_id1 = data;
         })
         .error(function (data, status, headers, config) {
             $scope.error = data;
@@ -159,7 +159,7 @@ function add_device_2($http, guid, $scope) {
             }
         })
         .success(function (data) {
-            $scope.written_id = data;
+            $scope.written_id2 = data;
         })
         .error(function (data, status, headers, config) {
             $scope.error = data;
@@ -188,7 +188,7 @@ function add_device_3($http, guid, $scope) {
             }
         })
         .success(function (data) {
-            $scope.written_id = data;
+            $scope.written_id3 = data;
         })
         .error(function (data, status, headers, config) {
             $scope.error = data;
@@ -199,6 +199,7 @@ function add_device_3($http, guid, $scope) {
 }
 
 function testingDeviceBy($http, guid, $scope) {
+
     $http.post(rootAPI + 'device/by' + parameters,
         {
             knownid: {
@@ -214,6 +215,7 @@ function testingDeviceBy($http, guid, $scope) {
             $scope.headers = headers;
             $scope.config = config;
         });
+
     $http.post(rootAPI + 'device/by' + parameters,
         {
             deviceid: guid
