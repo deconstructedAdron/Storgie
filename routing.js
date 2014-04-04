@@ -60,6 +60,10 @@ routing.load_routes = function (app) {
     app.get('/signup', site.signup);
     app.post('/signup', site.signingup);
 
+    app.get('/mu-1234-cafe-5678-babe', function(req, res){
+        res.send('42');
+    });
+
     // *********************************************************************************************************************
     // Device API Route Mapping
     // *********************************************************************************************************************
@@ -132,6 +136,13 @@ routing.load_routes = function (app) {
     app.post('/identity/by',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
-            api.identity_by(req.body);
+            api.identity_by(req.body)
+                .then(function (result){
+                    res.send(result);
+                })
+                .fail(function(err){
+                    res.statusCode = 400;
+                    res.send(err);
+                })
         })
 }
