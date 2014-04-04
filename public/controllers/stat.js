@@ -3,8 +3,8 @@
  * Description a simple controller to get the results of the stat API service.
  */
 
-//var rootAPI = 'http://api.deconstructed.io/';
-var rootAPI = 'http://localhost:3010/';
+var rootAPI = 'http://api.deconstructed.io/';
+//var rootAPI = 'http://localhost:3010/';
 var parameters = '?access_token=123456789';
 var full_identity = {
     "count": 3,
