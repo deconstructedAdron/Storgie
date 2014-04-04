@@ -8,6 +8,7 @@
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var userManagement = require('./accounts/users');
+var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.';
 
 // *********************************************************************************************************************
 // Temporary Users - This whole section needs ported out to the database.
@@ -67,21 +68,29 @@ routing.load_routes = function (app) {
     app.get('/stat',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
-            res.send(JSON.stringify(api.storgie_stat()));
+            res.send(api.storgie_stat());
         });
 
     // curl -v http://localhost:3010/guid?access_token=123456789
     app.get('/guid',
         passport.authenticate('bearer', {session: false}),
         function (req, res) {
-            res.send(JSON.stringify(api.get_guid()));
+            res.send(api.get_guid());
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
-            api.device_create(req, res);
+            if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
+                res.statusCode = 400;
+                res.send(error400);
+            }
+
+            api.device_create(req.body)
+                .then(function (result) {
+                    res.send(result);
+                });
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"deviceid":"the_key_333"}' http://localhost:3010/device/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274

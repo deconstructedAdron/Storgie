@@ -2,7 +2,7 @@
  * Created by Adron
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
-'use strict'
+'use strict';
 
 var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
     data_tier = require('../data/storgie'),
@@ -20,7 +20,7 @@ var test = 'test;';
 //  Status Information API Points
 // ****************************************
 storgie_api.storgie_stat = function () {
-    return fake_api.storgie_stat();
+    return JSON.stringify(fake_api.storgie_stat());
 };
 
 storgie_api.get_guid = function () {
@@ -79,20 +79,17 @@ storgie_api.device_by = function (body) {
     }
 };
 
-storgie_api.device_create = function (req, res) {
-    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-        res.statusCode = 400;
-        res.send(error400);
-    }
-
-    data_tier.put(data_tier.collection.device, req.body.key, req.body.value);
-
-    // Add consociation here.
-
-    var result_message = {"key": req.body.key};
-
-    console.log(result_message);
-    res.send(result_message);
+storgie_api.device_create = function (body) {
+    return orchestrator.put(data_tier.collection.device, body.key, body.value)
+        .then(function (result) {
+            var result_message = {"key": body.key};
+            console.log(result + result_message);
+            return result_message;
+        })
+        .fail(function (err) {
+            console.log("failed to write key " + body.key);
+            return err;
+        });
 };
 
 // ****************************************
