@@ -21,3 +21,5 @@ node_modules
 config.json
 
 config/production_secrets.json
+
+# Reset
