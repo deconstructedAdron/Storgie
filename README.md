@@ -1,3 +1,6 @@
+[![Build](https://travis-ci.org/Adron/Storgie.png)](http://travis-ci.org/Adron/Storgie)
+[![Dependencies](https://david-dm.org/Adron/Storgie.png)](http://david-dm.org/Adron/Storgie)
+
 Storgie
 =======
 
