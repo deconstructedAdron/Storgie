@@ -84,6 +84,9 @@ storgie_api.device_create = function (body) {
         .then(function (result) {
             var result_message = {"key": body.key};
             console.log(result + result_message);
+
+            consociate();
+
             return result_message;
         })
         .fail(function (err) {
@@ -141,3 +144,7 @@ storgie_api.identity_by = function (body) {
             })
     }
 };
+
+function consociate() {
+    var consociate = 'consociating';
+}
