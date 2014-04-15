@@ -20,7 +20,26 @@ var test = 'test;';
 //  Status Information API Points
 // ****************************************
 storgie_api.storgie_stat = function () {
-    return JSON.stringify(fake_api.storgie_stat());
+
+    return JSON.stringify(temp_storgie_stats());
+
+    function temp_storgie_stats() {
+        // This is here until the AWS (or whatever ecosystem) environment SDK
+        // is applied and used to derive these and other statistics from the
+        // actual ecosystem.
+        var stamp = new Date();
+        var sys_stat = new Object();
+        sys_stat.Compute = '0 at Peak of 70% utilization.';
+        sys_stat.Memory = 'None beyond threshold of 80% Memory utilization.';
+        sys_stat.Stamp = stamp.getTime();
+        var stat_response = new Object();
+        stat_response.Servers = 2;
+        stat_response.Compute = (chance.d8() * chance.d4());
+        stat_response.Memory = (chance.d8() * chance.d4());
+        stat_response.Stat = sys_stat;
+        stat_response.Stamp = stamp.getTime();
+        return stat_response;
+    };
 };
 
 storgie_api.get_guid = function () {
