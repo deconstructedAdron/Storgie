@@ -27,6 +27,10 @@ var conf = convict({
     consociation_api_token: {
         doc: "The API key for the consociation service.",
         default: "key_here"
+    },
+    consociation_api: {
+        doc: "The URI Path to the consociation service.",
+        default: "http://consociation.deconstructed.io"
     }
 });
 
