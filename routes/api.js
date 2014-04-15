@@ -7,7 +7,6 @@
 var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
     data_tier = require('../data/storgie'),
     storgie_api = exports,
-    fake_api = require('./fake_api'),
     config = require('../config'),
     Q = require('kew'),
     Chance = require('chance'),
@@ -103,10 +102,10 @@ storgie_api.device_create = function (body) {
         .then(function (result) {
             var result_message = {"key": body.key};
             console.log(result + result_message);
-
-            consociate();
-
             return result_message;
+        })
+        .then(function (result) {
+            consociate(result, body.value);
         })
         .fail(function (err) {
             console.log("failed to write key " + body.key);
@@ -164,6 +163,12 @@ storgie_api.identity_by = function (body) {
     }
 };
 
-function consociate() {
-    var consociate = 'consociating';
+function consociate(device, value) {
+
+    var key = device.key;
+    var knownid = value.knownid;
+
+    //var device = {"knownid": {"Id": "1", "SampleId": "324", "EmailId": "blagh@blagh.com"}};
+
+
 }
