@@ -169,8 +169,8 @@ function consociate(device, value) {
 
     var key = device.key;
 
-    var writingThis = JSON.stringify(value);
-    var headers = getHeaders(writingThis.length);
+    var messageBody = JSON.stringify(value);
+    var headers = getHeaders(messageBody.length);
     var hostname = config.get('consociation_api');
     var path = '/consociate?access_token=' + config.get('consociation_api_token');
     var options = getOptions(headers, hostname, path);
@@ -194,7 +194,7 @@ function consociate(device, value) {
         });
     });
 
-    req.write(writingThis);
+    req.write(messageBody);
     req.end();
 }
 
