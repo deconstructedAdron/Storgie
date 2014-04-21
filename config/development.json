@@ -6,5 +6,6 @@
 {
     "port": 3010,
     "data_api_key": "real data api key goes here",
-    "consociation_api_token": "real consociation api key goes here"
+    "consociation_api_token": "real consociation api key goes here",
+    "consociation_api": "localhost:7003"
 }
