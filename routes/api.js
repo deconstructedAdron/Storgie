@@ -99,6 +99,7 @@ storgie_api.device_by = function (body) {
 };
 
 storgie_api.device_create = function (body) {
+
     return orchestrator.put(data_tier.collection.device, body.key, body.value)
         .then(function (result) {
             var result_message = {"key": body.key};
