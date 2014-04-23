@@ -16,8 +16,10 @@ users.getUsers = function getUsers() {
         { id: 8, username: 'peat', name: 'Peat Bakke', token: 'f97dbc35-dacc-4135-a335-dc1d3029b44d', email: 'peat@peat.org'},
         { id: 9, username: 'darin', name: 'Darin Glatt', token: '6dd85319-3e00-4ee8-b648-fcc7a2e1b56f', email: 'dglatt@gmail.com'},
         { id: 10, username: 'aswath', name: 'Aswath P', token: 'DF11FE19-2A83-4FF2-9A99-5E06A6C5D1B5', email: 'apremaradj@altimetrik.com'},
-        { id: 11, username: 'brandon', name: 'Brandon Wagner', token: '3BA9522B-76C8-4D04-8D21-80FDC2412618', email: 'bmwagner10@gmail.com'}
+        { id: 11, username: 'brandon', name: 'Brandon Wagner', token: '3BA9522B-76C8-4D04-8D21-80FDC2412618', email: 'bmwagner10@gmail.com'},
+        { id: 12, username: 'tory', name: 'Tory Adams', token: '90a44387-764c-4d58-8abe-ab8f8106098b', email: 'tadams@thegameclash.com'},
+        { id: 13, username: 'greg', name: 'Greg Zuro', token: '6349eae5-b8f8-4a59-a0af-784b046e89fe', email: 'greg@zuro.net'},
+        { id: 14, username: 'clive', name: 'Clive Boulton', token: '152a4576-bc33-41f3-8bf1-e252a2c1dabd', email: 'clive.boulton@gmail.com'}
     ];
-
     return users;
 }
