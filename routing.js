@@ -82,15 +82,14 @@ routing.load_routes = function (app) {
             res.send(api.get_guid());
         });
 
+    // Good Request
     // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // Bad Request
+    // curl -X POST -H "Content-Type: application/json" -d '{"key1":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/device?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/device',
         passport.authenticate('bearer', { session: false}),
         function (req, res) {
-            if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-                res.statusCode = 400;
-                res.send(error400);
-            }
-
+            validateKeyValueExists(req, res);
             api.device_create(req.body)
                 .then(function (result) {
                     res.send(result);
@@ -121,13 +120,14 @@ routing.load_routes = function (app) {
     app.get('/identities',
         passport.authenticate('bearer', {session: false}),
         function (req, res) {
-            api.identities(req, res);
+            res.send(api.identities());
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/identity',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
+            validateKeyValueExists(req, res);
             api.identity(req, res);
         });
 
@@ -145,4 +145,11 @@ routing.load_routes = function (app) {
                     res.send(err);
                 })
         })
+
+    function validateKeyValueExists(req, res) {
+        if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
+            res.statusCode = 400;
+            res.send(error400);
+        }
+    }
 }

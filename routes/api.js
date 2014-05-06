@@ -99,9 +99,8 @@ storgie_api.device_by = function (body) {
 };
 
 storgie_api.device_create = function (body) {
-
     return orchestrator.put(data_tier.collection.device, body.key, body.value)
-        .then(function (result) {
+        .then(function () {
             var result_message = {"key": body.key};
             console.log(result_message);
             return result_message;
@@ -119,15 +118,11 @@ storgie_api.device_create = function (body) {
 // ****************************************
 //  Convergence API Points
 // ****************************************
-storgie_api.identities = function (req, res) {
-    res.send({"response": "response"});
+storgie_api.identities = function () {
+    return {response: "response TBD"};
 };
 
 storgie_api.identity = function (req, res) {
-    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-        res.statusCode = 400;
-        res.send(error400);
-    }
 
     data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
 
