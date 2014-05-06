@@ -4,17 +4,16 @@
  */
 'use strict';
 
-var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
-    data_tier = require('../data/storgie'),
-    storgie_api = exports,
-    config = require('../config'),
-    Q = require('kew'),
-    http = require('http'),
-    Chance = require('chance'),
-    chance = new Chance();
+var storgie_api = exports;
+
+var data_tier = require('../data/storgie');
+var config = require('../config');
+var Q = require('kew');
+var http = require('http');
+var Chance = require('chance');
+var chance = new Chance();
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
-var test = 'test;';
 
 // ****************************************
 //  Status Information API Points
