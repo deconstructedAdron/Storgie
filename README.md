@@ -1,4 +1,5 @@
-![Codeship](https://www.codeship.io/projects/60a73140-a7e9-0131-488a-1a410b9a7696/status)
+[![Codeship](https://www.codeship.io/projects/60a73140-a7e9-0131-488a-1a410b9a7696/status)](https://www.codeship.io/projects/19080)
+
 
 [![Dependencies](https://david-dm.org/Adron/Storgie.png)](http://david-dm.org/Adron/Storgie)
 
