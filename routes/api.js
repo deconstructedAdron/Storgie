@@ -98,21 +98,8 @@ storgie_api.device_by = function (body) {
     }
 };
 
-storgie_api.device_create = function (body) {
-    return orchestrator.put(data_tier.collection.device, body.key, body.value)
-        .then(function () {
-            var result_message = {"key": body.key};
-            console.log(result_message);
-            return result_message;
-        })
-        .then(function (result) {
-            return consociate(result, body.value);
-        })
-        .fail(function (err) {
-            console.log("Failed to write key " + body.key);
-            console.log('Error: ' + err);
-            return err;
-        });
+storgie_api.device_create = function (device) {
+    return putCollectionKeyValue(device);
 };
 
 // ****************************************
@@ -147,7 +134,7 @@ storgie_api.identity_by = function (body) {
             })
     }
     if (body.identityid != undefined) {
-        return orchestrator.get(collection, body.deviceid)
+        return orchestrator.get(collection, body.identityid)
             .then(function (result) {
                 console.log(result.body);
                 return result.body;
@@ -158,15 +145,15 @@ storgie_api.identity_by = function (body) {
 function putCollectionKeyValue(collectionKeyValue) {
     return orchestrator.put(data_tier.collection.identity, collectionKeyValue.key, collectionKeyValue.value)
         .then(function () {
-            var result_message = {"key": body.key};
+            var result_message = {"key": collectionKeyValue.key};
             console.log(result_message);
             return result_message;
         })
         .then(function (result) {
-            return consociate(result, body.value);
+            return consociate(result, collectionKeyValue.value);
         })
         .fail(function (err) {
-            console.log("Failed to write key " + body.key);
+            console.log("Failed to write key " + collectionKeyValue.key);
             console.log('Error: ' + err);
             return err;
         });
