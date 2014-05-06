@@ -123,13 +123,7 @@ storgie_api.identities = function () {
 };
 
 storgie_api.identity = function (identity) {
-
-    data_tier.put(data_tier.collection.identity, identity.key, identity.value);
-
-    var result_message = {"key": identity.key};
-
-    console.log(result_message);
-    res.send(result_message);
+    return putCollectionKeyValue(identity);
 };
 
 storgie_api.identity_by = function (body) {
@@ -160,6 +154,23 @@ storgie_api.identity_by = function (body) {
             })
     }
 };
+
+function putCollectionKeyValue(collectionKeyValue) {
+    return orchestrator.put(data_tier.collection.identity, collectionKeyValue.key, collectionKeyValue.value)
+        .then(function () {
+            var result_message = {"key": body.key};
+            console.log(result_message);
+            return result_message;
+        })
+        .then(function (result) {
+            return consociate(result, body.value);
+        })
+        .fail(function (err) {
+            console.log("Failed to write key " + body.key);
+            console.log('Error: ' + err);
+            return err;
+        });
+}
 
 function consociate(device, value) {
 
