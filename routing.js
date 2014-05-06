@@ -124,11 +124,18 @@ routing.load_routes = function (app) {
         });
 
     // curl -X POST -H "Content-Type: application/json" -d '{"key":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
+    // Bad Request
+    // curl -X POST -H "Content-Type: application/json" -d '{"key2":"the_key_333","value":{"knownid":{"Id":"1","SampleId":"324","EmailId":"blagh@blagh.com"}}}' http://localhost:3010/identity?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274
     app.post('/identity',
         passport.authenticate('bearer', { session: false }),
         function (req, res) {
             validateKeyValueExists(req, res);
-            api.identity(req, res);
+            api.identity(req.body)
+                .then(function (result) {
+                    res.send(result);
+                });
+
+            //api.identity(req, res);
         });
 
     // curl -v -X POST -d '{"key":"1","value":"testing"}' http://localhost:3010/identity/by?access_token=0d1b02f9-c7e9-42c3-8518-7d744b827274

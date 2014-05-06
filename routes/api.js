@@ -122,11 +122,11 @@ storgie_api.identities = function () {
     return {response: "response TBD"};
 };
 
-storgie_api.identity = function (req, res) {
+storgie_api.identity = function (identity) {
 
-    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
+    data_tier.put(data_tier.collection.identity, identity.key, identity.value);
 
-    var result_message = {"key": req.body.key};
+    var result_message = {"key": identity.key};
 
     console.log(result_message);
     res.send(result_message);
