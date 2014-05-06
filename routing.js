@@ -6,7 +6,7 @@
 
 // Passport Security
 var passport = require('passport');
-var BearerStrategy = require('passport-http-bearer').Strategy;
+var BasicStrategy = require('passport-http').BasicStrategy;
 var userManagement = require('./accounts/users');
 var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.';
 
@@ -15,25 +15,28 @@ var error400 = 'Post syntax incorrect. There must be a key and value in the data
 // *********************************************************************************************************************
 var users = userManagement.getUsers();
 
-function findByToken(token, fn) {
+function findByUsername(username, fn) {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
-        if (user.token === token) {
+        if (user.username === username) {
             return fn(null, user);
         }
     }
     return fn(null, null);
 }
 
-passport.use(new BearerStrategy({
+passport.use(new BasicStrategy({
     },
-    function (token, done) {
+    function (username, password, done) {
         process.nextTick(function () {
-            findByToken(token, function (err, user) {
+            findByUsername(username, function (err, user) {
                 if (err) {
                     return done(err);
                 }
                 if (!user) {
+                    return done(null, false);
+                }
+                if (user.password != password) {
                     return done(null, false);
                 }
                 return done(null, user);
