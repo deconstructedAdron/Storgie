@@ -6,7 +6,6 @@
 
 var storgie_api = exports;
 
-var data_tier = require('../data/storgie');
 var config = require('../config');
 var Q = require('kew');
 var http = require('http');
@@ -14,6 +13,11 @@ var Chance = require('chance');
 var chance = new Chance();
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
+var collections = {
+    device: 'device',
+    identity: 'identity',
+    account: 'account'
+}
 
 // ****************************************
 //  Status Information API Points
@@ -77,7 +81,7 @@ function getBySearchString(searchBody) {
 //  Identity API Points
 // ****************************************
 storgie_api.device_by = function (body) {
-    var collection = data_tier.collection.device;
+    var collection = collections.device;
     var search = '';
 
     if (body.knownid != undefined) {
@@ -113,7 +117,7 @@ storgie_api.identity = function (identity) {
 };
 
 storgie_api.identity_by = function (body) {
-    var collection = data_tier.collection.identity;
+    var collection = collections.identity;
     var search = '';
 
     if (body.knownid != undefined) {
@@ -142,7 +146,7 @@ storgie_api.identity_by = function (body) {
 };
 
 function putCollectionKeyValue(collectionKeyValue) {
-    return orchestrator.put(data_tier.collection.identity, collectionKeyValue.key, collectionKeyValue.value)
+    return orchestrator.put(collections.identity, collectionKeyValue.key, collectionKeyValue.value)
         .then(function () {
             var result_message = {"key": collectionKeyValue.key};
             console.log(result_message);
