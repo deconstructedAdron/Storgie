@@ -30,7 +30,7 @@ var conf = convict({
     },
     consociation_api: {
         doc: "The URI Path to the consociation service.",
-        default: "http://consociation.deconstructed.io"
+        default: "localhost:7003"
     }
 });
 

@@ -8,23 +8,20 @@ var http = require('http');
 var path = require('path');
 var config = require('./config');
 var routes = require('./routing');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 var app = express();
 app.set('port', process.env.PORT || config.get('port'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('name', 'storgie');
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.logger('dev'));
 
-// development only
-if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-}
+app.use(morgan());
+app.use(bodyParser());
+app.use(methodOverride());
 
 routes.load_routes(app);
 

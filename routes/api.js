@@ -4,16 +4,20 @@
  */
 'use strict';
 
-var error400 = 'Post syntax incorrect. There must be a key and value in the data passed in.',
-    data_tier = require('../data/storgie'),
-    storgie_api = exports,
-    config = require('../config'),
-    Q = require('kew'),
-    Chance = require('chance'),
-    chance = new Chance();
+var storgie_api = exports;
+
+var config = require('../config');
+var Q = require('kew');
+var http = require('http');
+var Chance = require('chance');
+var chance = new Chance();
 
 var orchestrator = require('orchestrate')(config.get('data_api_key'));
-var test = 'test;';
+var collections = {
+    device: 'device',
+    identity: 'identity',
+    account: 'account'
+}
 
 // ****************************************
 //  Status Information API Points
@@ -77,7 +81,7 @@ function getBySearchString(searchBody) {
 //  Identity API Points
 // ****************************************
 storgie_api.device_by = function (body) {
-    var collection = data_tier.collection.device;
+    var collection = collections.device;
     var search = '';
 
     if (body.knownid != undefined) {
@@ -97,45 +101,23 @@ storgie_api.device_by = function (body) {
     }
 };
 
-storgie_api.device_create = function (body) {
-    return orchestrator.put(data_tier.collection.device, body.key, body.value)
-        .then(function (result) {
-            var result_message = {"key": body.key};
-            console.log(result + result_message);
-            return result_message;
-        })
-        .then(function (result) {
-            consociate(result, body.value);
-        })
-        .fail(function (err) {
-            console.log("failed to write key " + body.key);
-            return err;
-        });
+storgie_api.device_create = function (device) {
+    return putCollectionKeyValue(device);
 };
 
 // ****************************************
 //  Convergence API Points
 // ****************************************
-storgie_api.identities = function (req, res) {
-    res.send({"response": "response"});
+storgie_api.identities = function () {
+    return {response: "response TBD"};
 };
 
-storgie_api.identity = function (req, res) {
-    if (!req.body.hasOwnProperty('key') || !req.body.hasOwnProperty('value')) {
-        res.statusCode = 400;
-        res.send(error400);
-    }
-
-    data_tier.put(data_tier.collection.identity, req.body.key, req.body.value);
-
-    var result_message = {"key": req.body.key};
-
-    console.log(result_message);
-    res.send(result_message);
+storgie_api.identity = function (identity) {
+    return putCollectionKeyValue(identity);
 };
 
 storgie_api.identity_by = function (body) {
-    var collection = data_tier.collection.identity;
+    var collection = collections.identity;
     var search = '';
 
     if (body.knownid != undefined) {
@@ -155,7 +137,7 @@ storgie_api.identity_by = function (body) {
             })
     }
     if (body.identityid != undefined) {
-        return orchestrator.get(collection, body.deviceid)
+        return orchestrator.get(collection, body.identityid)
             .then(function (result) {
                 console.log(result.body);
                 return result.body;
@@ -163,12 +145,72 @@ storgie_api.identity_by = function (body) {
     }
 };
 
+function putCollectionKeyValue(collectionKeyValue) {
+    return orchestrator.put(collections.identity, collectionKeyValue.key, collectionKeyValue.value)
+        .then(function () {
+            var result_message = {"key": collectionKeyValue.key};
+            console.log(result_message);
+            return result_message;
+        })
+        .then(function (result) {
+            return consociate(result, collectionKeyValue.value);
+        })
+        .fail(function (err) {
+            console.log("Failed to write key " + collectionKeyValue.key);
+            console.log('Error: ' + err);
+            return err;
+        });
+}
+
 function consociate(device, value) {
 
     var key = device.key;
-    var knownid = value.knownid;
+
+    var messageBody = JSON.stringify(value);
+    var headers = getHeaders(messageBody.length);
+    var hostname = config.get('consociation_api');
+    var path = '/consociate?access_token=' + config.get('consociation_api_token');
+    var options = getOptions(headers, hostname, path);
+
+    // curl -X POST -H "Content-Type: application/json" -d '{"knownid": {"Id": "1", "SampleId": "324", "EmailId": "blagh@blagh.com"}}' http://consociation.deconstructed.io/consociate?access_token=1234
 
     //var device = {"knownid": {"Id": "1", "SampleId": "324", "EmailId": "blagh@blagh.com"}};
 
+    var req = http.request(options, function (res) {
+        res.setEncoding('utf-8');
+        var responseString = '';
 
+        res.on('data', function (data) {
+            responseString += data;
+            console.log(data);
+            console.log('data' + data);
+        });
+
+        res.on('end', function () {
+            console.log('end' + responseString);
+        });
+    });
+
+    req.write(messageBody);
+    req.end();
+}
+
+/***  refactored stuff ***/
+function getOptions(hdrs, optionHostname, optionPath) {
+    var options = {
+        hostname: optionHostname,
+        port: 80,
+        path: optionPath,
+        method: 'POST',
+        headers: hdrs
+    };
+    return options;
+}
+
+function getHeaders(requestLenth) {
+    var headers = {
+        'Content-Type': 'application/json',
+        'Content-Length': requestLenth
+    };
+    return headers;
 }
