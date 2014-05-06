@@ -1,6 +1,6 @@
 /**
  * Created by adron on 3/19/14.
- * Description: User model and management.
+ * Descriptione: User model and management.
  * License: Apache 2.0 => License: Apache 2.0 https://github.com/Deconstructed/Storgie/blob/master/LICENSE
  */
 
