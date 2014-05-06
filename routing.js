@@ -42,7 +42,6 @@ passport.use(new BearerStrategy({
     }
 ));
 
-var site = require('./routes/site');
 var api = require('./routes/api');
 var routing = exports;
 
@@ -55,11 +54,6 @@ routing.load_routes = function (app) {
     // *********************************************************************************************************************
     // Site Route Mapping
     // *********************************************************************************************************************
-    app.get('/', site.index);
-    app.get('/login', site.login);
-    app.get('/signup', site.signup);
-    app.post('/signup', site.signingup);
-
     app.get('/mu-41acf44f-894ab026-ac5e0f6d-75c032d0', function (req, res) {
         res.send('42');
     });
