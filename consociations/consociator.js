@@ -10,6 +10,11 @@ Consociator.consociate = function (device, value) {
     return device + value;
 }
 
+Consociator.search = function (search) {
+
+    return search;
+}
+
 
 //
 //function consociate(device, value) {
