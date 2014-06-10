@@ -1,48 +1,51 @@
 {
-    "name": "storgie",
-    "description": "This is the storage engine layer API.",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "start": "node app.js"
+    "name"           : "storgie",
+    "description"    : "This is the storage engine layer API.",
+    "version"        : "0.0.1",
+    "private"        : true,
+    "scripts"        : {
+        "start"     : "node app.js",
+        "test"      : "mocha tests",
+        "predeploy" : "echo Deploying!",
+        "postdeploy": "echo Deployed."
     },
-    "dependencies": {
-        "express": "4.1.1",
-        "jade": "*",
-        "orchestrate": "0.0.9",
-        "chance": "~0.5.3",
-        "socket.io": "~0.9.16",
-        "passport": "~0.2.0",
-        "passport-http": "~0.2.2",
-        "convict": "~0.4.2",
-        "kew": "~0.4.0",
-        "morgan": "~1.0.1",
-        "body-parser": "~1.0.2",
+    "dependencies"   : {
+        "express"        : "4.1.1",
+        "jade"           : "*",
+        "orchestrate"    : "0.0.9",
+        "chance"         : "~0.5.3",
+        "socket.io"      : "~0.9.16",
+        "passport"       : "~0.2.0",
+        "passport-http"  : "~0.2.2",
+        "convict"        : "~0.4.2",
+        "kew"            : "~0.4.0",
+        "morgan"         : "~1.0.1",
+        "body-parser"    : "~1.0.2",
         "method-override": "~1.0.0"
     },
     "devDependencies": {
-        "mocha": "~1.18.2",
+        "mocha" : "~1.18.2",
         "should": "~3.3.1",
-        "vcr": "0.0.4"
+        "vcr"   : "0.0.4"
     },
-    "repository": {
+    "repository"     : {
         "type": "git",
-        "url": "git@github.com:Adron/Storgie.git"
+        "url" : "git@github.com:Adron/Storgie.git"
     },
-    "keywords": [
+    "keywords"       : [
         "data",
         "keyvalue",
         "graph",
         "deconstructed",
         "api"
     ],
-    "author": "Adron Hall",
-    "license": "Apache 2.0",
-    "bugs": {
+    "author"         : "Adron Hall",
+    "license"        : "Apache 2.0",
+    "bugs"           : {
         "url": "https://github.com/Deconstructed/Storgie/issues"
     },
-    "homepage": "http://deconstructed.github.io/Storgie/",
-    "engines": {
+    "homepage"       : "http://deconstructed.github.io/Storgie/",
+    "engines"        : {
         "node": "0.10.x"
     }
 }
