@@ -16,7 +16,8 @@ var orchestrator = require('orchestrate')(config.get('data_api_key'));
 var collections = {
     device: 'device',
     identity: 'identity',
-    account: 'account'
+    account: 'account',
+    metadata: 'metadata'
 }
 
 // ****************************************
