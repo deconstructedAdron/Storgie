@@ -7,6 +7,16 @@ var should = require ("should");
 var luceneValidator = require ('../Lucene/luceneValidator');
 
 describe ('Lucene Validator', function () {
+
+    it ('should have the wildcard case sensitive default to true', function () {
+        luceneValidator.WildcardCaseInsensitive.should.be.true;
+    })
+
+    it ('should have the wildcard case sesnsitive set to passed value', function () {
+        luceneValidator.setWildcardCaseInsensitive (false);
+        luceneValidator.WildcardCaseInsensitive.should.be.false;
+    })
+
     it ('should remove multiple escapes', function () {
         var query = "\\* foo \\haha";
         luceneValidator.removeEscapes (query).should.eql (" foo aha");

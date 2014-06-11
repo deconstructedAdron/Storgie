@@ -3,16 +3,18 @@
  * Description: Validates Lucene Query Strings.
  */
 
-//"use strict";
+"use strict";
 
 var luceneValidator = exports;
+
+luceneValidator.WildcardCaseInsensitive = true;
 
 luceneValidator.removeEscapes = function (query) {
     return query.replace (/\\./g, "");
 };
 
 luceneValidator.setWildcardCaseInsensitive = function (bool) {
-    wildcardCaseInsensitive = bool;
+    this.WildcardCaseInsensitive = bool;
 };
 
 luceneValidator.checkAllowedCharacters = function (query) {
