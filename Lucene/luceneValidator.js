@@ -152,7 +152,7 @@ luceneValidator.doCheckLuceneQueryValue = function (query) {
         }
     }
 
-    if (wildcardCaseInsensitive) {
+    if (this.WildcardCaseInsensitive) {
         if (query.indexOf ("*") != -1) {
             var j = query.indexOf (':');
             if (j == -1) {
