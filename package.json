@@ -10,7 +10,7 @@
         "postdeploy": "echo Deployed."
     },
     "dependencies"   : {
-        "express": "4.4.2",
+        "express": "4.4.3",
         "jade"           : "*",
         "orchestrate": "0.1.2",
         "chance"         : "~0.5.3",
